@@ -203,7 +203,7 @@ function runExperiment(dataPath) {
         trialList.forEach((trial) => (trial['task']=="loss" ? lossList : rewList).push(trial));
 
         // create reward and loss timelines to get 4 chunks
-        //let loss1 = createTimeline(lossList);
+        let loss1 = createTimeline(lossList);
         let rew1 = createTimeline(rewList);
 
         // random loss and reward timelines
@@ -213,19 +213,13 @@ function runExperiment(dataPath) {
                 [array[i], array[j]] = [array[j], array[i]];
             }
         };
-        ///shuffleArray(loss1);
+        shuffleArray(loss1);
         shuffleArray(rew1);
 
         // slice loss and reward into 2 sections each
-        //let loss2 = loss1.splice(0, Math.ceil(loss1.length/2));
+        let loss2 = loss1.splice(0, Math.ceil(loss1.length/2));
         let rew2 = rew1.splice(0, Math.ceil(rew1.length/2));
-        let rew3 = rew1.splice(0, Math.ceil(rew1.length/2));
-        let rew4 = rew2.splice(0, Math.ceil(rew2.length/2));
 
-        console.log(rew1);
-        console.log(rew2);
-        console.log(rew3);
-        console.log(rew4);
 
         // TEST: Only 5 trials per run
         // loss1 = loss1.slice(0,5)
@@ -240,7 +234,7 @@ function runExperiment(dataPath) {
         // console.log(rew2);
 
         // run 2 forced choice task
-        run2FC(rew1, rew2, rew3, rew4);
+        run2FC(loss1, loss2, rew1, rew2);
     }
     xhr.send();
 
@@ -277,7 +271,7 @@ function createTimeline(trialArray) {
     return trialTimeline;
 };
 
-function run2FC(rew1, rew2, rew3, rew4) {
+function run2FC(loss1, loss2, rew1, rew2) {
 
     // input: jsPsych timeline (array)
     let timeline = [];
@@ -293,7 +287,7 @@ function run2FC(rew1, rew2, rew3, rew4) {
         stimulus: 
             `<div class="instructions">
             <h3>Welcome to part 2 of the experiment!</h3>
-            <p>In this part, you will go through four blocks of decisions. 
+            <p>As in the first part, you will go through four blocks of decisions. 
             You are free to take breaks between the blocks. 
             Once you have finished all blocks, the experiment ends.</p>
             <p>You have 10 seconds for each trial.</p>
@@ -312,22 +306,20 @@ function run2FC(rew1, rew2, rew3, rew4) {
     let order=Math.round(Math.random());
     console.log(order);
 
-    //let lossProc1 = createProcedure(loss1, "loss");
-    //let lossProc2 = createProcedure(loss2, "loss");
+    let lossProc1 = createProcedure(loss1, "loss");
+    let lossProc2 = createProcedure(loss2, "loss");
     let rewProc1 = createProcedure(rew1, "reward");
     let rewProc2 = createProcedure(rew2, "reward");
-    let rewProc3 = createProcedure(rew3, "reward");
-    let rewProc4 = createProcedure(rew4, "reward");
     // console.log(lossProc1);
 
     let trialProcedure;
     if(order==0) {
         trialProcedure={
-            timeline: [rewProc1, rewProc2, rewProc3, rewProc4]
+            timeline: [rewProc1, lossProc1, rewProc2, lossProc2]
         };
     } else {
         trialProcedure={
-            timeline: [rewProc1, rewProc2, rewProc4, rewProc3]
+            timeline: [lossProc1, rewProc1, lossProc2, rewProc2]
         };
     }
     // console.log(trialProcedure);
@@ -388,7 +380,7 @@ function saveData() {
     xhr.open('POST', 'web_API/saveExp2.php');
     xhr.setRequestHeader('Content-Type', 'application/json');
     
-    xhr.upload.onloadstart = function() {
+     xhr.upload.onloadstart = function() {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'web_API/saveExp2db.php');
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -416,14 +408,12 @@ function daysToYears(numberOfDays) {
 };
 
 // constructor function for html stimulus
-let feedbackStyle = 'style="border: thick solid  #008000;"';
-
 function constructStim(rando, immOpt, delOpt, delay, feedback) {
     // rando = randomize left/right presentation
     // if rando == 0 -> immediate left, else right
 
     // initialize styles for feedback and options
-    let feedbackStyle = 'style="border: thick solid  #008000;"';
+    let feedbackStyle = 'style="border: 5px solid  #008000; padding: 16px;"';
     let immOptColor = '#005AB5';
     let delOptColor = '#DC3220';
     let task = parseFloat(delOpt) > 0 ? 'reward' : 'loss';
@@ -458,7 +448,9 @@ function constructStim(rando, immOpt, delOpt, delay, feedback) {
 function createProcedure(tl, task) {
     let introText = {
             type: "html-keyboard-response",
-            stimulus: `<p>Press Q or P to start the next block whenever you are ready.</p>`,
+            stimulus: ` <p>In the following block of trials, you will always decide 
+                        between two <b>${task=="loss" ? 'losses' : 'wins'}</b>.
+                        <p>Press Q or P to start the next block whenever you are ready.</p>`,
             margin_vertical: '100px',
             choices: ['q', 'p']
         };

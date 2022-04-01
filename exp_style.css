@@ -231,7 +231,8 @@ margin: auto; /* this is for overflowing content */
 .option { 
     display: table-cell; 
     width: 50%; 
-    padding: 20px; 
+    padding: 20px;
+    margin: 10px;
     border: 1px solid rgb(7, 7, 7); 
 }
 

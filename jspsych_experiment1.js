@@ -4,28 +4,65 @@ uncomment console.logs for debugging
 If no data are stored, unable redirect to questionnaires.html to see php errors
 */
 
-// redirect to index if no Prolific ID is stored
-//console.log(sessionStorage.getItem('prolific_id'));
-window.onload = function() {
-    if(sessionStorage.getItem('prolific_id') === null) {
-        window.location.assign('index.html');
-    } else {
-        findFile(sessionStorage.getItem('prolific_id'));
-    }
-};
-
-// path to testfile.json
-let dataPath = "testfiles/testfile.json";
-
 // run experiment on page load
-document.addEventListener(
-    'DOMContentLoaded',
-    () => {
-        runExperiment(dataPath);
-});
+window.onload = runExperiment();
+
+/*  =========================================== MESSY CODE CONSTRUCTION SITE ======================================================= */
+// fetch(dataPath)
+//     .then(response => response.text())
+//     .then(data => preprocess(data))
+//     .then(data => console.log(data))
+
+async function fetchData() {
+    // fetch json from server
+    const  res = await fetch("stimuli/trialsPart1.json");
+    const data = await res.json();
+    return data;
+}
 
 
-function runExperiment(dataPath) {
+function roundChoices(trialObj) {
+    /* Converts JSON to array and rounds monetary choices to 2 digits */
+    // load and parse JSON
+    //const trialObj = await fetchData();
+    
+    // object to array
+    let trialList = Object.values(trialObj);
+
+    // loss to negative values
+    trialList.forEach(trial => {
+        // round trial Options to 2 digits
+        trial['immOpt'] = parseFloat(trial['immOpt']).toFixed(2);
+        trial['delOpt'] = parseFloat(trial['delOpt']).toFixed(2);
+        // correct rounding errors (4.999 -> 5)
+        if(trial['immOpt'] == trial['delOpt']) {
+            trial['immOpt'] = trial['delOpt']-0.01;
+        };
+    });
+    
+    //console.log(trialList);
+    return trialList;
+}
+
+const doEverything = async () => { 
+    const trialObject = await fetchData();
+    console.log(trialObject);
+    const trialArray = roundChoices(trialObject);
+    console.log(trialArray);
+}
+
+function negativeLosses(trial) {
+    if (trial['task'] == "loss") {
+        trial['immOpt'] = -trial['immOpt'];
+        trial['delOpt'] = -trial['delOpt'];
+    };
+    return trial;
+}
+
+
+/* ========================================= END OF MESSY CONSTRUCTION SITE ======================================================================= */
+
+function runExperiment() {
     /*
     RUN EXPERIMENT
     - loads json trial
@@ -35,12 +72,14 @@ function runExperiment(dataPath) {
 
     //console.log(dataPath);
     //console.log(sessionStorage.getItem('prolific_id'));
-    
+    let dataPath = "stimuli/trialsPart1.json";
     
     // AJAX get request
     let xhr = new XMLHttpRequest();
     xhr.open('GET', dataPath, true);
     xhr.onload = function() {
+
+        console.log(this.responseText);
 
         // load and parse JSON
         let trialObj = JSON.parse(this.responseText);
@@ -75,7 +114,7 @@ function runExperiment(dataPath) {
         trialList.forEach((trial) => (trial['task']=="loss" ? lossList : rewList).push(trial));
         
         // create reward and loss timelines to get 4 chunks
-        //let loss1 = createTimeline(lossList);
+        let loss1 = createTimeline(lossList);
         let rew1 = createTimeline(rewList);
 
         // random loss and reward timelines
@@ -85,11 +124,11 @@ function runExperiment(dataPath) {
                 [array[i], array[j]] = [array[j], array[i]];
             }
         };
-        //shuffleArray(loss1);
+        shuffleArray(loss1);
         shuffleArray(rew1);
 
         // slice loss and reward into 2 sections each
-        //let loss2 = loss1.splice(0, Math.ceil(loss1.length/2));
+        let loss2 = loss1.splice(0, Math.ceil(loss1.length/2));
         let rew2 = rew1.splice(0, Math.ceil(rew1.length/2));
 
 
@@ -105,7 +144,7 @@ function runExperiment(dataPath) {
         // console.log(rew1);
         // console.log(rew2);
         // run 2 forced choice task
-        run2FC(rew1, rew2);
+        run2FC(loss1, loss2, rew1, rew2);
 
 
     }
@@ -143,7 +182,7 @@ function createTimeline(trialArray) {
     return trialTimeline;
 };
 
-function run2FC(rew1, rew2) {
+function run2FC(loss1, loss2, rew1, rew2) {
 
     // input: jsPsych timeline (array)
     let timeline = [];
@@ -158,10 +197,13 @@ function run2FC(rew1, rew2) {
         <h3>Welcome to the experiment!</h3>
         Please read these instructions carefully.
         <p>
-        The experiment consists of two parts and will take about <b>25 minutes</b> in total.
+        The experiment consists of two parts and will take about <b>45 minutes</b> in total.
         Between the two parts, you will be asked to fill out a few questionnaires. 
-        Within each of the two parts, you will carry out <b>two blocks</b> of trials. 
+        Within each of the two parts, you will carry out <b>four blocks</b> of trials. 
         After each block, you will have the opportunity to take a short break if you wish.
+        </p>
+
+        <img id="flowchart" src="logos/flowchart.jpg" alt="Experiment Flowchart">
 
         <p>
         In each trial of the experiment, you will see two amounts of money to choose from, 
@@ -209,16 +251,32 @@ function run2FC(rew1, rew2) {
         <p>
         For each trial, you will have <b>10 seconds</b>
         to decide between the two options.<br>
+        In half of the blocks, you will choose between two <b>wins</b>, 
+        in the other half, you will choose between two <b>losses</b>.
+        </p>
+
+        <p>
+        A <b>loss trial</b> could look like this:
+            <div id='exampleStim'>
+            ${constructStim('0', '-5.00', '-7.00', '365')}
+            </div>
+        </p>
         
+        <p>
+        Here you would have to decide whether you would rather 
+        <span class="immediate">lose &pound; 5 immediately</span> or
+        <span class="delayed">lose &pound; 7 in one year</span>.
+        </p>
+
         <p>
         The <span class="immediate">immediate option</span> and the 
         <span class="delayed">delayed option</span> will be randomly 
-        presented on the <b>left</b> and <b>right</b> side. For example, the last 
-        example could also look like this:
+        presented on the <b>left</b> and <b>right</b> side. For example, the example 
+        above could also look like this:
         </p>
 
         <div id='exampleStim'>
-        ${constructStim('1', '5.00', '10.00', '7')}
+        ${constructStim('1', '-5.00', '-7.00', '365')}
         </div>
 
         <p>
@@ -234,7 +292,7 @@ function run2FC(rew1, rew2) {
 
         
         <p>
-        On the next page, you can try out the task in <b>3 test trials</b> with no time limit.
+        On the next page, you can try out the task in <b>6 test trials</b> with no time limit.
         </p>
         </div>`
 
@@ -314,7 +372,13 @@ function run2FC(rew1, rew2) {
             {   data: {immOpt: '4.00', delOpt: '6.80', delay: '30', randomize: '1'},
                 stimulus: constructStim('1', '4.00', '6.80', '30') },
             {   data: {immOpt: '3.00', delOpt: '3.40', delay: '90', randomize: '1'},
-                stimulus: constructStim('1', '3.00', '3.40', '90') }
+                stimulus: constructStim('1', '3.00', '3.40', '90') },
+            {   data: {immOpt: '-5.00', delOpt: '-10.20', delay: '7', randomize: '0'},
+                stimulus: constructStim('0', '-5.00', '-10.20', '7') },
+            {   data: {immOpt: '-10.00', delOpt: '-15.50', delay: '180', randomize: '1'},
+                stimulus: constructStim('1', '-10.00', '-15.50', '180') },
+            { data: {immOpt: '-4.00', delOpt: '-6.80', delay: '30', randomize: '0'},
+                stimulus: constructStim('0', '-4.00', '-6.80', '30') }
         ],
         randomize_order: false
     };
@@ -339,11 +403,12 @@ function run2FC(rew1, rew2) {
     // console.log(trialTimeline);
 
     // create 2 orders of stimuli: loss-rew and rew-loss
+
     let order=Math.round(Math.random());
     console.log(order);
 
-    //let lossProc1 = createProcedure(loss1, "loss");
-    //let lossProc2 = createProcedure(loss2, "loss");
+    let lossProc1 = createProcedure(loss1, "loss");
+    let lossProc2 = createProcedure(loss2, "loss");
     let rewProc1 = createProcedure(rew1, "reward");
     let rewProc2 = createProcedure(rew2, "reward");
     // console.log(lossProc1);
@@ -351,11 +416,11 @@ function run2FC(rew1, rew2) {
     let trialProcedure;
     if(order==0) {
         trialProcedure={
-            timeline: [rewProc1, rewProc2]
+            timeline: [rewProc1, lossProc1, rewProc2, lossProc2]
         };
     } else {
         trialProcedure={
-            timeline: [rewProc2, rewProc1]
+            timeline: [lossProc1, rewProc1, lossProc2, rewProc2]
         };
     }
     // console.log(trialProcedure);
@@ -435,103 +500,14 @@ function saveData() {
     xhr.send(JSON.stringify(csvparams));
 };
 
-// convert days to years for stimulus
-function daysToYears(numberOfDays) {
-    if(numberOfDays < 365){
-        let delayString = "in <b>"+numberOfDays+"</b> days";
-        return delayString;
-    } else if(numberOfDays >= 365){
-        let years = Math.floor(numberOfDays / 365);
-        if(years > 1){
-            let yearString = "in <b>"+years+"</b> years";
-            return yearString;
-        } else {
-            let yearString = "in <b>" +years+"</b> year";
-            return yearString;
-        };
-    };
-};
-
-// constructor function for html stimulus
-let feedbackStyle = 'style="border: thick solid  #008000;"';
-
-function constructStim(rando, immOpt, delOpt, delay, feedback) {
-    // rando = randomize left/right presentation
-    // if rando == 0 -> immediate left, else right
-
-    // initialize styles for feedback and options
-    let feedbackStyle = 'style="border: thick solid  #008000;"';
-    let immOptColor = '#005AB5';
-    let delOptColor = '#DC3220';
-    let task = parseFloat(delOpt) > 0 ? 'reward' : 'loss';
-    let delString = daysToYears(delay);
-
-    let stimString = `<div class = centerbox id='container'>
-    <p class = center-block-text>
-        Which amount would you prefer to 
-        ${task=='reward' ? '<b>win</b>' : '<b>lose</b>'}?
-        <br>Press
-        <strong>'q'</strong> for left
-        <strong>'p'</strong> for right:
-    </p>
-    <div class='table'>
-    <div class='row'>
-    <div class = 'option' id='leftOption' ${feedback=='left' ? feedbackStyle : null}>
-        <center><font color=${rando==0 ? immOptColor : delOptColor}>
-        <b>&pound; ${rando==0 ? immOpt : delOpt}</b>
-        <br>
-        ${rando==0 ? `<b>Today</b>` : delString}
-        </font></center></div>
-    <div class = 'option' id='rightOption' ${feedback=='right' ? feedbackStyle : null}>
-        <center><font color=${rando==0 ? delOptColor : immOptColor}>
-        <b>&pound; ${rando==0 ? delOpt : immOpt}</b>
-        <br>
-        ${rando==0 ? delString : `<b>Today</b>`}
-        </font></center></div></div></div></div>`;
-        return stimString;
-};
-
-// function to check session ID and redirect if necessary
-function findFile(id) {
-    let params = {
-        "prolific_id": id
-    };    
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'web_API/checkID.php');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    
-    xhr.onload = function(){
-        response = this.responseText;
-        console.log(response);
-        switch(response) {
-            case '0':
-                break; // stay on page if no data is available but ID is entered
-            case '1':
-                window.location.assign('questionnaires.html');
-                break;
-            case '2':
-                let outTimeline = [];
-                let usedID = {
-                    type: "html-keyboard-response",
-                    stimulus: `<p>Your ID is already used. Thank you for participating!</p>`,
-                    margin_vertical: '100px',
-                    choices: jsPsych.NO_KEYS
-                    };
-                outTimeline.push(usedID);
-                jsPsych.init({
-                    timeline: outTimeline,
-                });
-        }
-    };
-
-    xhr.send(JSON.stringify(params));
-}
 
 // function to create sub-timeline for the loss and reward blocks
 function createProcedure(tl, task) {
         let introText = {
                 type: "html-keyboard-response",
-                stimulus: `<p>Press Q or P to start the next block whenever you are ready.</p>`,
+                stimulus: ` <p>In the following block of trials, you will always decide 
+                            between two <b>${task=="loss" ? 'losses' : 'wins'}</b>.
+                            <p>Press Q or P to start the next block whenever you are ready.</p>`,
                 margin_vertical: '100px',
                 choices: ['q', 'p'],
                 on_finish: function(data) {

@@ -35,8 +35,8 @@ def optimizeModel(delay, r1, r2, a):
     pars=np.ndarray((ninits,3)) #GK update 26/10/21
     for i in range(0,ninits):
         #draw initial conditions for optimization algo:
-        betainit= np.random.uniform(low=0.001, high=2.0, size=None)
-        kappainit= np.random.uniform(low=0.0, high=1000.0, size=None)
+        betainit= np.random.uniform(low=0.0, high=100.0, size=None)
+        kappainit= np.random.uniform(low=0.0, high=10.0, size=None)
         sinit= np.random.uniform(low=0.0, high=1.0, size=None)  #GK update 26/10/21
         pars0=[betainit, kappainit, sinit] #GK update 26/10/21
             
@@ -50,7 +50,7 @@ def optimizeModel(delay, r1, r2, a):
         #betabounds=np.array([0,10])
         #bnds = optimize.Bounds(betabounds, kappabounds, keep_feasible = True)
 
-        bnds = ((0.001, 2), (0, 1000),(0,1))  #upper and lower bounds used for bounded optimization, #GK update 26/10/21
+        bnds = ((0, 100), (0, 10),(0,1))  #upper and lower bounds used for bounded optimization, #GK update 26/10/21
         result=optimize.minimize(fun=getNegLikelihoodModHyperboloid, 
                                 x0=pars0, 
                                 args=(a,r1,r2,delay), 
@@ -166,7 +166,7 @@ def generateParadigm(delays, r2s, pars):
     
     kappa, beta, s=pars #GK update 26/10/21 
 
-    prob_imm=[.1, .2, .3, .4, .5, .6, .7, .8, .9] #generated probabilites
+    prob_imm=[.3, .5, .7] #generated probs
        
     X, Y, Z=np.meshgrid(delays, r2s, prob_imm)
     X=X.flatten()
@@ -323,7 +323,7 @@ datain["choice_relabel"] = datain["choice"].replace({"immediate": 1,
                                                     "delayed": 2})
 # split in loss and reward dfs
 datain_reward = datain[datain["task"] == "reward"]
-#datain_loss = datain[datain["task"] == "loss"]
+datain_loss = datain[datain["task"] == "loss"]
 
 ### DEBUG optimizeModel ======================================================
 
@@ -376,7 +376,7 @@ def estimateParameters(df, task):
     #(note: these also define the # of trials)
     pars=[kappa, beta, s] #GK update 26/10/21
     if task == "reward":      
-        r2s=[5, 10, 20, 50, 100]          # define delayed rewards used for task B
+        r2s=[5, 10, 20, 50]          # define delayed rewards used for task B
         delays=[7, 30, 90, 180, 365]
     else:
         r2s=[-5, -10, -20, -50]
@@ -413,13 +413,16 @@ def estimateParameters(df, task):
     return outdata_df, params_df
 
 # generate params for each task
-outdata, params = estimateParameters(datain_reward, "reward")
-#outdata_loss, params_loss = estimateParameters(datain_loss, "loss")
+outdata_reward, params_reward = estimateParameters(datain_reward, "reward")
+outdata_loss, params_loss = estimateParameters(datain_loss, "loss")
 
 # convert loss values to negative
 # params_loss = params_loss.assign(immOpt = -params_loss['immOpt'])
 # params_loss = params_loss.assign(delOpt = -params_loss['delOpt'])
 
+# merge to one file
+outdata = outdata_reward.append(outdata_loss)
+params = params_reward.append(params_loss)
 
 # reassign id (unique id)
 outdata['id']=np.arange(len(outdata))+1

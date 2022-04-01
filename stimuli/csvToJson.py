@@ -31,10 +31,8 @@ def make_json(csvFilePath, jsonFilePath):
   
 # # Decide the two file paths according to your  
 # computer system 
-csvFilePath = 'C:/xampp/htdocs/rewad2_reward/testfiles/testfile.csv'
-jsonFilePath = 'C:/xampp/htdocs/rewad2_reward/testfiles/testfile.json'
-#csvFilePath = r'testfile.csv'
-#jsonFilePath = r'testfile.json'
+csvFilePath = r'testfile.csv'
+jsonFilePath = r'testfile.json'
   
 # Call the make_json function 
 make_json(csvFilePath, jsonFilePath)
