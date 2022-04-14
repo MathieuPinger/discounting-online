@@ -20,45 +20,47 @@ async function fetchData() {
     return data;
 }
 
+async function doEverything() {
+    // fetch data and create array of trials
+    // const trialArray = await fetchData()
+    //     .then(data => Object.values(data))
+    //     .then(data => await roundChoices(data))
+    //     .then(data => await correctLossSign(data))
+    //     .then(data => await randomizeOrientation(data))
 
-function roundChoices(trialObj) {
-    /* Converts JSON to array and rounds monetary choices to 2 digits */
-    // load and parse JSON
-    //const trialObj = await fetchData();
+    // return trialArray;
+    //console.log(trialArray);
+
+    // await roundChoices(trialArray);
+    // console.log(trialArray);
+    // await correctLossSign(trialArray);
+    // console.log(trialArray);
+    // await randomizeOrientation(trialArray);
+    // await shuffleArray(trialArray);
+
+    const trialArray = await fetchData().then(data => Object.values(data))
+    const trialsRounded = roundChoices(trialArray);
+    console.log(trialsRounded);
+    const trialsSign = correctLossSign(trialsRounded);
+    console.log(trialsSign);
+    const randomizedTrials = randomizeOrientation(trialsSign);
+    console.log(randomizedTrials);
+    const shuffledTrials = shuffleArray(randomizedTrials);
+    // const trialBlocks = splitTrials(shuffledTrials, 2);
+    return shuffledTrials;
+}
+
+
+// let lossList = rewList = [];
+
+
+// function splitTrials(arr, n_per_condition) {
+//     /* separates trials by condition (reward/loss) and creates n trial blocks of equal size*/
+//     const lossList = rewList = [];
+//     arr.forEach((trial) => (trial['task']=="loss" ? lossList : rewList).push(trial));
+
     
-    // object to array
-    let trialList = Object.values(trialObj);
-
-    // loss to negative values
-    trialList.forEach(trial => {
-        // round trial Options to 2 digits
-        trial['immOpt'] = parseFloat(trial['immOpt']).toFixed(2);
-        trial['delOpt'] = parseFloat(trial['delOpt']).toFixed(2);
-        // correct rounding errors (4.999 -> 5)
-        if(trial['immOpt'] == trial['delOpt']) {
-            trial['immOpt'] = trial['delOpt']-0.01;
-        };
-    });
-    
-    //console.log(trialList);
-    return trialList;
-}
-
-const doEverything = async () => { 
-    const trialObject = await fetchData();
-    console.log(trialObject);
-    const trialArray = roundChoices(trialObject);
-    console.log(trialArray);
-}
-
-function negativeLosses(trial) {
-    if (trial['task'] == "loss") {
-        trial['immOpt'] = -trial['immOpt'];
-        trial['delOpt'] = -trial['delOpt'];
-    };
-    return trial;
-}
-
+// }
 
 /* ========================================= END OF MESSY CONSTRUCTION SITE ======================================================================= */
 
@@ -112,20 +114,6 @@ function runExperiment() {
         let lossList = [];
         let rewList = [];
         trialList.forEach((trial) => (trial['task']=="loss" ? lossList : rewList).push(trial));
-        
-        // create reward and loss timelines to get 4 chunks
-        let loss1 = createTimeline(lossList);
-        let rew1 = createTimeline(rewList);
-
-        // random loss and reward timelines
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        };
-        shuffleArray(loss1);
-        shuffleArray(rew1);
 
         // slice loss and reward into 2 sections each
         let loss2 = loss1.splice(0, Math.ceil(loss1.length/2));
@@ -161,9 +149,6 @@ function createTimeline(trialArray) {
 
     // add trials to timeline: loop through trialList
     trialArray.map(trial => {
-        // create random number: 0 or 1
-        // rando == 0 -> immediate left; rando == 1 -> immediate right
-        trial.rando = Math.round(Math.random());
 
         let trialData = {
             // 

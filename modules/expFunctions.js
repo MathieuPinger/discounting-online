@@ -52,3 +52,57 @@ function daysToYears(numberOfDays) {
         };
     };
 };
+
+
+function shuffleArray(array) {
+    /* Randomize trial order */
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    console.log(array);
+    return array;
+};
+
+
+function roundChoices(arr) {
+    /* Converts JSON to array and rounds monetary choices to 2 digits */
+    arr.map(trial => {
+        // round trial Options to 2 digits
+        trial['immOpt'] = parseFloat(trial['immOpt']).toFixed(2);
+        trial['delOpt'] = parseFloat(trial['delOpt']).toFixed(2);
+        // correct rounding errors (4.999 -> 5)
+        if(trial['immOpt'] == trial['delOpt']) {
+            trial['immOpt'] = trial['delOpt']-0.01;
+        };
+    });
+    console.log(arr);
+    return arr;
+}
+
+function correctLossSign(arr) {
+    /* Convert Loss Values to negative, if necessary */
+    arr.map(trial => {
+        if (trial['task'] == "loss" && trial['immOpt'] > 0) {
+            trial['immOpt'] = -trial['immOpt'];
+            trial['delOpt'] = -trial['delOpt'];
+        };
+    });
+    console.log(arr);
+    return arr;
+}
+
+function randomizeOrientation(arr) {
+    arr.map(trial => {
+        /* Add Randomizer for Stimulus Presentation */
+        // create random number: 0 or 1
+        // rando == 0 -> immediate left; rando == 1 -> immediate right
+        trial.rando = Math.round(Math.random());
+    });
+    console.log(arr);
+    return arr;
+}
+
+function addOne(arr) {
+    arr.forEach
+}
