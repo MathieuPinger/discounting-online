@@ -1,6 +1,6 @@
 # Online Discounting Studies
 
-This is a public repository for online studies used in the TRR265 project (Losing and Regaining Control over Drug Intake).
+This is a public repository for online studies used in the project "Reward and Aversion Discounting" (RewAD) which is part of the transregional DFG project TRR265 (Losing and Regaining Control over Drug Intake).
 
 A few important notes:
 * The paper repositories contain the <b>original code</b> used for a study
