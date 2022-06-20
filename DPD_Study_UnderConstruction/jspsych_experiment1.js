@@ -355,9 +355,7 @@ function saveData() {
 function createProcedure(tl, task) {
         let introText = {
                 type: "html-keyboard-response",
-                stimulus: ` <p>In the following block of trials, you will always decide 
-                            between two <b>${task=="loss" ? 'losses' : 'wins'}</b>.
-                            <p>Press Q or P to start the next block whenever you are ready.</p>`,
+                stimulus: `<p>Press Q or P to start the next block whenever you are ready.</p>`,
                 margin_vertical: '100px',
                 choices: ['q', 'p'],
                 on_finish: function(data) {
