@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaired & Experiment Part 2</title>
+    <!-- <script src="jspsych/jspsych.js"></script>
+    <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych/plugins/jspsych-html-button-response.js"></script> -->
+    <link href="questions_style.css" rel="stylesheet">
+    <link href="exp_style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <form id="auditform">
+            <div class="survey" id="audit">
+                <!-- AUDIT Info -->
+                <div class="surveyInfo">
+                    In the following survey, we will ask you some questions about your use of alcohol.
+                    Tick the box that best describes your answer to each question.
+                    Your answers will remain confidential so please be honest.
+                </div>
+
+                <div class="questions">
+                    <!-- AUDIT 1 -->
+                    <div class="form-group">
+
+                        <div class="formQuestion">
+                            1. How often do you have a drink containing alcohol?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit1" id="audit1_1" value="0" required>
+                                <label for="audit1_1">Never</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit1" id="audit1_2" value="1">
+                                <label for="audit1_2">Monthly or less</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit1" id="audit1_3" value="2">
+                                <label for="audit1_3">2 to 4 times a month</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit1" id="audit1_4" value="3">
+                                <label for="audit1_4">2 to 3 times a week</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit1" id="audit1_5" value="4">
+                                <label for="audit1_5">4 or more times a week</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUDIT 2 -->
+                    <div class="form-group">
+                        <div class="formQuestion">
+                            2. How many drinks containing alcohol do you have on a typical day when you are drinking?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit2" id="audit2_1" value="0" required>
+                                <label for="audit2_1">1 or 2</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit2" id="audit2_2" value="1">
+                                <label for="audit2_2">3 or 4</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit2" id="audit2_3" value="2">
+                                <label for="audit2_3">5 or 6</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit2" id="audit2_4" value="3">
+                                <label for="audit2_4">7 to 9</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit2" id="audit2_5" value="4">
+                                <label for="audit2_5">10 or more</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUDIT 3 -->
+                    <div class="form-group">
+                        <div class="formQuestion">
+                            3. How often do you have 5 or more drinks on one occasion?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit3" id="audit3_1" value="0" required>
+                                <label for="audit3_1">Never</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit3" id="audit3_2" value="1">
+                                <label for="audit3_2">Less than monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit3" id="audit3_3" value="2">
+                                <label for="audit3_3">Monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit3" id="audit3_4" value="3">
+                                <label for="audit3_4">Weekly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit3" id="audit3_5" value="4">
+                                <label for="audit3_5">Daily or almost daily</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUDIT 4 -->
+                    <div class="form-group">
+                        <div class="formQuestion">
+                            4. How often during the last year have you found that you were not able to stop drinking
+                            once you had started?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit4" id="audit4_1" value="0" required>
+                                <label for="audit4_1">Never</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit4" id="audit4_2" value="1">
+                                <label for="audit4_2">Less than monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit4" id="audit4_3" value="2">
+                                <label for="audit4_3">Monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit4" id="audit4_4" value="3">
+                                <label for="audit4_4">Weekly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit4" id="audit4_5" value="4">
+                                <label for="audit4_5">Daily or almost daily</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUDIT 5 -->
+                    <div class="form-group">
+                        <div class="formQuestion">
+                            5. How often during the last year have you failed to do what was normally expected
+                            of you because of drinking?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit5" id="audit5_1" value="0" required>
+                                <label for="audit5_1">Never</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit5" id="audit5_2" value="1">
+                                <label for="audit5_2">Less than monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit5" id="audit5_3" value="2">
+                                <label for="audit5_3">Monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit5" id="audit5_4" value="3">
+                                <label for="audit5_4">Weekly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit5" id="audit5_5" value="4">
+                                <label for="audit5_5">Daily or almost daily</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUDIT 6 -->
+                    <div class="form-group">
+                        <div class="formQuestion">
+                            6. How often during the last year have you needed a first drink in the morning
+                            to get yourself going after a heavy drinking session?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit6" id="audit6_1" value="0" required>
+                                <label for="audit6_1">Never</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit6" id="audit6_2" value="1">
+                                <label for="audit6_2">Less than monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit6" id="audit6_3" value="2">
+                                <label for="audit6_3">Monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit6" id="audit6_4" value="3">
+                                <label for="audit6_4">Weekly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit6" id="audit6_5" value="4">
+                                <label for="audit6_5">Daily or almost daily</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUDIT 7 -->
+                    <div class="form-group">
+                        <div class="formQuestion">
+                            7. How often during the last year have you had a feeling of guilt or remorse
+                            after drinking?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit7" id="audit7_1" value="0" required>
+                                <label for="audit7_1">Never</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit7" id="audit7_2" value="1">
+                                <label for="audit7_2">Less than monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit7" id="audit7_3" value="2">
+                                <label for="audit7_3">Monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit7" id="audit7_4" value="3">
+                                <label for="audit7_4">Weekly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit7" id="audit7_5" value="4">
+                                <label for="audit7_5">Daily or almost daily</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUDIT 8 -->
+                    <div class="form-group">
+                        <div class="formQuestion">
+                            8. How often during the last year have you been unable to remember what happened the night
+                            before because of your drinking?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit8" id="audit8_1" value="0" required>
+                                <label for="audit8_1">Never</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit8" id="audit8_2" value="1">
+                                <label for="audit8_2">Less than monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit8" id="audit8_3" value="2">
+                                <label for="audit8_3">Monthly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit8" id="audit8_4" value="3">
+                                <label for="audit8_4">Weekly</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit8" id="audit8_5" value="4">
+                                <label for="audit8_5">Daily or almost daily</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUDIT 9 -->
+                    <div class="form-group">
+                        <div class="formQuestion">
+                            9. Have you or someone else been injured because of your drinking?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit9" id="audit9_1" value="0" required>
+                                <label for="audit9_1">No</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit9" id="audit9_2" value="2">
+                                <label for="audit9_2">Yes, but not in the last year</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit9" id="audit9_3" value="4">
+                                <label for="audit9_3">Yes, during the last year</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUDIT 10 -->
+                    <div class="form-group">
+                        <div class="formQuestion">
+                            10. Has a relative, friend, doctor, or other health care worker been concerned about
+                            your drinking or suggested you cut down?
+                        </div>
+                        <div class="formOptions">
+                            <div>
+                                <input type="radio" name="audit10" id="audit10_1" value="0" required>
+                                <label for="audit10_1">No</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit10" id="audit10_2" value="2">
+                                <label for="audit10_2">Yes, but not in the last year</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="audit10" id="audit10_3" value="4">
+                                <label for="audit10_3">Yes, during the last year</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-box">
+                    <button type="submit" id="toBisBtn">Next</button>
+                </div>
+            </div>
+        </form>
+
+        <form id="QFform">
+            <div class="survey" id="QF">
+                <!-- Daily Drinking Questionnaire Info -->
+                <div class="surveyInfo">
+                    Please estimate the average amount of alcoholic drinks you had on the given weekdays within the past 3
+                    months.
+                </div>
+
+                <div class="form-table">
+                    <div class="tableRow">
+                        <div class="tableQuestion"></div>
+                        <div class="tableCell">Zero</div>
+                        <div class="tableCell">One</div>
+                        <div class="tableCell">Two</div>
+                        <div class="tableCell">Three</div>
+                        <div class="tableCell">Four</div>
+                        <div class="tableCell">Five</div>
+                        <div class="tableCell">Six</div>
+                        <div class="tableCell">Seven</div>
+                        <div class="tableCell">Eight</div>
+                        <div class="tableCell">Nine</div>
+                        <div class="tableCell">Ten</div>
+                        <div class="tableCell">Eleven</div>
+                        <div class="tableCell">Twelwe</div>
+                        <div class="tableCell">More than twelwe</div>
+                    </div>
+                    <!-- DDQ Monday -->
+                    <div class="tableRow">
+                        <div class="tableQuestion">Monday</div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_1" value="0" required>
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_2" value="1">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_3" value="2">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_4" value="3">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_5" value="4">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_6" value="5">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_7" value="6">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_8" value="7">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_9" value="8">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_10" value="9">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_11" value="10">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_12" value="11">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_13" value="12">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF1" id="QF1_14" value="13">
+                        </div>
+
+
+                    </div>
+                    <!-- DDQ Tuesday -->
+                    <div class="tableRow">
+                        <div class="tableQuestion">Tuesday</div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_1" value="0" required>
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_2" value="1">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_3" value="2">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_4" value="3">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_5" value="4">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_6" value="5">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_7" value="6">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_8" value="7">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_9" value="8">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_10" value="9">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_11" value="10">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_12" value="11">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_13" value="12">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF2" id="QF2_14" value="13">
+                        </div>
+
+
+                    </div>
+                    <!-- DDQ Wednesday -->
+                    <div class="tableRow">
+                        <div class="tableQuestion">Wednesday</div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_1" value="0" required>
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_2" value="1">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_3" value="2">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_4" value="3">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_5" value="4">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_6" value="5">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_7" value="6">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_8" value="7">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_9" value="8">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_10" value="9">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_11" value="10">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_12" value="11">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_13" value="12">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF3" id="QF3_14" value="13">
+                        </div>
+                    </div>
+                    <!-- DDQ Thrusday -->
+                    <div class="tableRow">
+                        <div class="tableQuestion">Thursday</div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_1" value="0" required>
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_2" value="1">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_3" value="2">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_4" value="3">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_5" value="4">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_6" value="5">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_7" value="6">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_8" value="7">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_9" value="8">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_10" value="9">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_11" value="10">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_12" value="11">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_13" value="12">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF4" id="QF4_14" value="13">
+                        </div>
+                    </div>
+                    <!-- DDQ Friday -->
+                    <div class="tableRow">
+                        <div class="tableQuestion">Friday</div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_1" value="0" required>
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_2" value="1">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_3" value="2">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_4" value="3">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_5" value="4">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_6" value="5">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_7" value="6">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_8" value="7">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF9_9" value="8">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_10" value="9">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_11" value="10">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_12" value="11">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_13" value="12">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF5" id="QF5_14" value="13">
+                        </div>
+                    </div>
+                    <!-- DDQ Saturday -->
+                    <div class="tableRow">
+                        <div class="tableQuestion">Saturday</div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_1" value="0" required>
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_2" value="1">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_3" value="2">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_4" value="3">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_5" value="4">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_6" value="5">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_7" value="6">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_8" value="7">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_9" value="8">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_10" value="9">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_11" value="10">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_12" value="11">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_13" value="12">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF6" id="QF6_14" value="13">
+                        </div>
+                    </div>
+                    <!-- DDQ Sunday -->
+                    <div class="tableRow">
+                        <div class="tableQuestion">Sunday</div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_1" value="0" required>
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_2" value="1">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_3" value="2">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_4" value="3">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_5" value="4">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_6" value="5">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_7" value="6">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_8" value="7">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_9" value="8">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_10" value="9">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_11" value="10">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_12" value="11">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_13" value="12">
+                        </div>
+                        <div class="tableCell">
+                            <input type="radio" name="QF7" id="QF7_14" value="13">
+                        </div>
+                    </div>
+
+                </div>
+
+</body>
+
+
+
+<form id="educationform">
+    <div class="survey" id="education">
+        <!-- Education Info -->
+        <div class="surveyInfo">
+            In the following survey, we will ask you some questions about your educational and economic background. Tick
+            the box that best describes your answer to each question. Your answers will remain confidential so please be
+            honest.
+        </div>
+
+        <div class="questions">
+            <!-- Education 1 -->
+            <div class="form-group">
+
+                <div class="formQuestion">
+                    1. Please state your highest level of education.
+                </div>
+                <div class="formOptions">
+                    <div>
+                        <input type="radio" name="edu1" id="edu1_1" value="0" required>
+                        <label for="edu1_1">No formal qualification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="edu1" id="edu1_2" value="1">
+                        <label for="edu1_2">Lower secondary qualification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="edu1" id="edu1_3" value="2">
+                        <label for="edu1_3">Upper secondary qualification without university access</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="edu1" id="edu1_4" value="3">
+                        <label for="edu1_4">University entry qualification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="edu1" id="edu1_5" value="4">
+                        <label for="edu1_5">Post-secondary below bachelor's level</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="edu1" id="edu1_6" value="5">
+                        <label for="edu1_6">Bachelor's level</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="edu1" id="edu1_7" value="6">
+                        <label for="edu1_7">Master's level and above</label>
+                    </div>
+                </div>
+            </div>
+
+        
+            <!-- Income 1 -->
+            <div class="form-group">
+
+                <div class="formQuestion">
+                    2. How many people does your household consist of?
+                </div>
+                <div class="formOptions">
+                    <div>
+                        <input type="radio" name="household1" id="household1_1" value="0" required>
+                        <label for="household1_1">1</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="household1" id="household1_2" value="1">
+                        <label for="household1_2">2</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="household1" id="household_3" value="2">
+                        <label for="household1_3">3</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="household1" id="household1_4" value="3">
+                        <label for="household1_4">4</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="household1" id="household1_5" value="4">
+                        <label for="household1_5">5</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="household1" id="household1_6" value="5">
+                        <label for="household1_6">6</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="household1" id="household1_7" value="6">
+                        <label for="household1_7">more than 6</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formQuestion">
+                3. Please state the combined income of your household in the past 12 months. Please include money
+                from jobs, net income from business, farm or rent, pensions, dividends, welfare, social security
+                payments and any other monetary income recived by you or any member of your household before taxes.
+            </div>
+            <div class="formOptions">
+                <div> <input type="text" name="incomeopen" id="incomeopen1_1" <div>
+
+                </div>
+                <input type="radio" name="incomena" id="incomena1_1" value="0">
+                <label for="incomena1_1">Don't know</label>
+            </div>
+
+            <!-- </div> -->
+        </div>
+
+        <!-- <form id="familySESform"> -->
+        <!-- <div class="survey" id="familySES"> -->
+        <!-- Family SES Info -->
+        <div class="surveyInfo">
+            In the following survey, we will ask you some questions on your family's educational and financial
+            situation during your adolescence. Please tick the answer that best describes your situation during the ages 14 to 18. If there have been major shifts during this time, please chose the answer that best describes most of your adolescense. Your answers will remain confidential so please be honest. 
+        </div>
+
+        <div class="questions">
+            <!-- Parental Education 1 -->
+            <div class="form-group">
+
+                <div class="formQuestion">
+                    1. Please state the highest educational qualification of your main caregiver (e.g. mother, father,
+                    stepparent) during the ages 14 to 18
+                </div>
+                <div class="formOptions">
+                    <div>
+                        <input type="radio" name="parentedum1" id="parentedum_1" value="0" required>
+                        <label for="parentedum1_1">No formal qualification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedum1" id="parentedum1_2" value="1">
+                        <label for="parentedum1_2">Lower secondary qualification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedum1" id="parentedum1_3" value="2">
+                        <label for="parentedum1_3">Upper secondary qualification without university
+                            access</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedum1" id="parentedum1_4" value="3">
+                        <label for="parentedum1_4">University entry qualification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedum1" id="parentedum1_5" value="4">
+                        <label for="parentedum1_5">Post-secondary below bachelor's level</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedum1" id="parentedum1_6" value="5">
+                        <label for="parentedum1_6">Bachelor's level</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedum1" id="parentedum1_7" value="6">
+                        <label for="parentedum1_7">Master's level and above</label>
+                    </div>
+                </div>
+
+
+                <div class="formQuestion">
+                    2. Please state the highest educational qualification of your secondary caregiver (e.g. mother, father,
+                    stepparent) during the ages 14 to 18
+                </div>
+                <div class="formOptions">
+                    <div>
+                        <input type="radio" name="parentedus1" id="parentedus_1" value="0" required>
+                        <label for="parentedus1_1">No formal qualification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedus1" id="parentedus1_2" value="1">
+                        <label for="parentedus1_2">Lower secondary qualification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedus1" id="parentedus1_3" value="2">
+                        <label for="parentedus1_3">Upper secondary qualification without university access</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedus1" id="parenteduedus1_4" value="3">
+                        <label for="parentedus1_4">University entry qualification</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedus1" id="parentedus1_5" value="4">
+                        <label for="parentedus1_5">Post-secondary below bachelor's level</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedus1" id="parentedus1_6" value="5">
+                        <label for="parentedus1_6">Bachelor's level</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedus1" id="parentedus1_7" value="6">
+                        <label for="parentedus1_7">Master's level and above</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="parentedus1" id="parentedus1_8" value="99">
+                        <label for="parentedus1_8">Was raised in a single parent household</label>
+                    </div>
+                </div>
+            </div>
+
+
+            
+
+            <div class="formQuestion">
+                3. Please rate your family's financial wellbeing during your adolescence
+            </div>
+            <div class="formOptions">
+                <div>
+                    <input type="radio" name="familiyincome1" id="familyincome_1" value="0" required>
+                    <label for="familyincome1_1">Not at all well-off</label>
+                </div>
+                <div>
+                    <input type="radio" name="familyincome1" id="familyincome1_2" value="1">
+                    <label for="familyincome1_2">Not very well-off</label>
+                </div>
+                <div>
+                    <input type="radio" name="familyincome1" id="familyincome1_3" value="2">
+                    <label for="familyincome1_3">Average</label>
+                </div>
+                <div>
+                    <input type="radio" name="familyincome1" id="familyincome1_4" value="3">
+                    <label for="familyincome1_4">Somewhat well-off</label>
+                </div>
+                <div>
+                    <input type="radio" name="familyincome1" id="familyincome1_5" value="4">
+                    <label for="familyincome1_5">Very well off</label>
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+
+
+        <div class="btn-box">
+            <button type="submit" id="toBisBtn">Next</button>
+        </div>
+       
+
+            <!-- <div class="survey" id="QF"> -->
+                <form id="educationform">
+                    <div class="survey" id="education">
+                        <!-- SSS -->
+                        <div class="surveyInfo">
+                            This ladder represents where people stand in society. At the top of the ladder are the
+                            people who are the best off, those who have the most money, highest education, and the best
+                            jobs. At the bottom are the people who are the worst off, those who have the least money,
+                            least education, worst jobs, or no job. Please tick the rung you think represents best where
+                            you stand on the ladder.
+                        </div>
+                        <table>
+                            <colgroup>
+                                <col width="60%" <col width="40%">
+                            <tr>
+                                <td>
+                                    <div class="formOptions">
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_10" value="10" required>
+                                            <label for="SSS1_10">10</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_9" value="9">
+                                            <label for="SSS1_9">9</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_8" value="8">
+                                            <label for="SSS1_8">8</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_7" value="7">
+                                            <label for="SSS1_7">7</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_6" value="6">
+                                            <label for="SSS1_6">6</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_5" value="5">
+                                            <label for="SSS1_5">5</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_4" value="4">
+                                            <label for="SSS1_4">4</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_3" value="3">
+                                            <label for="SSS1_3">3</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_2" value="2">
+                                            <label for="SSS1_2">2</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="SSS1" id="SSS1_1" value="1">
+                                            <label for="SSS1_1">1</label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><img src="leiter_sss.png" height="297px" width="215px"></td>
+                            </tr>
+                            </colgroup>
+
+                        </table>
+
+                    </div>
+                </form>
+          
+
+            <!-- OLD BUTTON:
+        <button type="button" id="continue" disabled>Continue to part 2</button>
+    -->
+
+            <script>
+            </script>
+            </body>
+
+</html>
