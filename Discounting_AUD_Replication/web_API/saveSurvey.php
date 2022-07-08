@@ -31,6 +31,13 @@ $audit7 = $data['audit7'];
 $audit8 = $data['audit8'];
 $audit9 = $data['audit9'];
 $audit10 = $data['audit10'];
+$qf1= $data['QF1'];
+$qf2= $data['QF2'];
+$qf3= $data['QF3'];
+$qf4= $data['QF4'];
+$qf5= $data['QF5'];
+$qf6= $data['QF6'];
+$qf7= $data['QF7'];
 $bis1 = $data['bis1'];
 $bis2 = $data['bis2'];
 $bis3 = $data['bis3'];
@@ -55,11 +62,12 @@ try {
 
     $sql = "INSERT INTO $table_data(`new_id`, `date`, `time`,
     `audit1`,`audit2`,`audit3`,`audit4`,`audit5`,`audit6`,`audit7`,`audit8`,`audit9`,
-    `audit10`,
+    `audit10`, `qf1`, `qf2`, `qf3`, `qf4`, `qf5`, `qf6`, `qf7`,
     `bis1`,`bis2`,`bis3`,`bis4`,`bis5`,`bis6`,`bis7`,`bis8`,`bis9`,`bis10`,
     `bis11`,`bis12`,`bis13`,`bis14`,`bis15`) VALUES ('$id', '$date', '$time',
     '$audit1','$audit2','$audit3','$audit4','$audit5','$audit6','$audit7','$audit8',
     '$audit9','$audit10',
+    '$qf1', '$qf2', '$qf3', '$qf4', '$qf5', '$qf6', '$qf7',
     '$bis1','$bis2','$bis3','$bis4','$bis5','$bis6','$bis7','$bis8','$bis9','$bis10',
     '$bis11','$bis12','$bis13','$bis14','$bis15')";
 

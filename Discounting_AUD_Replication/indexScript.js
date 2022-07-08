@@ -26,7 +26,7 @@ function showTab(n) {
   let infoBlocks = document.getElementsByClassName("info");
   infoBlocks[n].style.display = "block";
   // ... and fix the Previous/Next buttons:
-  if (n == 0 | n == 1 | n == 6) {
+  if (n == 0 | n == 1 ) {
     document.getElementById("prevBtn").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
@@ -47,8 +47,6 @@ function nextPrev(n) {
     } else if (currentTab == 5 && n == 1) {
        //...the form gets submitted:
       submitConsent();
-    } else if (currentTab == 6 && n == 1) {
-      submitDemographics();
     } else {
        // Hide the current tab:
       infoBlocks[currentTab].style.display = "none";
@@ -147,78 +145,6 @@ function submitID() {
       // Display the next tab:
       showTab(currentTab);
   }
-}
-
-function submitDemographics() {
- // get demographics form element to check validity
-  let form = document.forms['demographics'];
-
-  // checkValidity returns false if any item is invalid
-  let formCheck = form.checkValidity();
-
-  if(!formCheck) {
-      // show error messages for invalid items
-      form.reportValidity();
-  } else {
-      // create FormData object
-      let formData = new FormData(form);
-      //console.log(Array.from(formData));
-      let formJSON = Object.fromEntries(formData.entries());
-      
-      // get date and time for storage
-      let jsdate = new Date();
-      let date = jsdate.toLocaleDateString();
-      let time = jsdate.toLocaleTimeString();
-      formJSON['date'] = date;
-      formJSON['time'] = time;
-
-      //console.log(formJSON);
-
-      // AJAX to save data and redirect
-      saveSurvey(formJSON);
-      //window.location.assign("rewad_part1.html");
-
-  }
-}
-
-// DEMOGRAPHICS: text input fields required if respective radio buttons are checked
-Array.from(document.getElementsByName('gender')).
-forEach(function(item) {
-    item.addEventListener('click', function(){
-        let optionalRadio = document.getElementById("gender_selfdescribe");
-        let optionalText = document.getElementById("gender_text");
-        optionalText.required = optionalRadio.checked;
-        optionalText.disabled = !optionalRadio.checked;
-    })
-});
-
-Array.from(document.getElementsByName('employment')).
-forEach(function(item) {
-    item.addEventListener('click', function(){
-        let optionalRadio = document.getElementById("employment_selfdescribe");
-        let optionalText = document.getElementById("employment_text");
-        optionalText.required = optionalRadio.checked;
-        optionalText.disabled = !optionalRadio.checked;
-    })
-});
-
-function saveSurvey(data) {
-  // creates object with prolific id and experiment data
-  // sends json-object to php for storage
-  let params = {
-      //"prolific_id": prolific_id,
-      "prolific_id": sessionStorage.getItem('prolific_id'),
-      "data": data
-  };    
-  let xhr = new XMLHttpRequest();
-  xhr.open('POST', 'web_API/saveDemographics.php');
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  
-  xhr.onload = function(){
-    window.location.assign("rewad_part1.html");
-  };
-
-  xhr.send(JSON.stringify(params));
 };
 
 function saveConsent(data) {
@@ -228,11 +154,15 @@ function saveConsent(data) {
   let xhr = new XMLHttpRequest();
   xhr.open('POST', 'web_API/saveConsent.php');
   xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function(){
+    window.location.assign("rewad_part1.html");
+  };
+
 
   xhr.send(JSON.stringify(params));
 };
 
 // random ID to replace prolific ID
 function randomID() {
-  return Math.random().toString(36).substr(2, 9);
+  return Math.random().toString(36).substring(2, 9);
 };

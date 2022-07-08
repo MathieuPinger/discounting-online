@@ -27,6 +27,13 @@ $gender = $save_data['gender'];
 $education = $save_data['education'];
 $employment = $save_data['employment'];
 $country = $save_data['country'];
+$household = $save_data['household'];
+$income_household = $save_data['income_household'];
+$income_personal = $save_data['income_personal'];
+$SSS = $save_data['SSS'];
+$parentedum = $save_data['parentedum'];
+$parentedus = $save_data['parentedus'];
+$familyincome = $save_data['familyincome'];
 $date = $save_data['date'];
 $time = $save_data['time'];
 
@@ -36,8 +43,11 @@ try {
 
     $sql = "INSERT INTO $table_data(`new_id`, 
     `age`, `gender`, 
-    `education`, `employment`, `country`, `date`, `time`) VALUES ('$id',
+    `education`, `employment`, `country`,
+    `household`, `income_household`, `income_personal`, `SSS`, `parentedum`, `parentedus`, `familyincome`,
+    `date`, `time`) VALUES ('$id',
     '$age','$gender','$education', '$employment',
+    '$household', '$income_household', '$income_personal', '$SSS', '$parentedum', '$parentedus', '$familyincome',
     '$country', '$date', '$time')";
 
 

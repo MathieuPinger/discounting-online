@@ -35,8 +35,8 @@ def optimizeModel(delay, r1, r2, a):
     pars=np.ndarray((ninits,3)) #GK update 26/10/21
     for i in range(0,ninits):
         #draw initial conditions for optimization algo:
-        betainit= np.random.uniform(low=0.001, high=2.0, size=None)
-        kappainit= np.random.uniform(low=0.0, high=1000.0, size=None)
+        betainit= np.random.uniform(low=0.0, high=100.0, size=None)
+        kappainit= np.random.uniform(low=0.0, high=10.0, size=None)
         sinit= np.random.uniform(low=0.0, high=1.0, size=None)  #GK update 26/10/21
         pars0=[betainit, kappainit, sinit] #GK update 26/10/21
             
@@ -50,7 +50,7 @@ def optimizeModel(delay, r1, r2, a):
         #betabounds=np.array([0,10])
         #bnds = optimize.Bounds(betabounds, kappabounds, keep_feasible = True)
 
-        bnds = ((0.001, 2), (0, 1000),(0,1))  #upper and lower bounds used for bounded optimization, #GK update 26/10/21
+        bnds = ((0, 100), (0, 10),(0,1))  #upper and lower bounds used for bounded optimization, #GK update 26/10/21
         result=optimize.minimize(fun=getNegLikelihoodModHyperboloid, 
                                 x0=pars0, 
                                 args=(a,r1,r2,delay), 
@@ -166,7 +166,7 @@ def generateParadigm(delays, r2s, pars):
     
     kappa, beta, s=pars #GK update 26/10/21 
 
-    prob_imm=[.1, .2, .3, .4, .5, .6, .7, .8, .9] #generated probabilites
+    prob_imm=[.3, .5, .7] #generated probs
        
     X, Y, Z=np.meshgrid(delays, r2s, prob_imm)
     X=X.flatten()
@@ -289,6 +289,8 @@ def generateParadigm(delays, r2s, pars):
 # input and output paths
 rootpath = "../data/"
 inputfile= f"{id}_exp1.csv"
+outputfile=f"{id}_params_exp2.json"
+outputfile2=f"{id}_params_exp2_z.csv"
 paramsfile=f"{id}_kappa.csv"
 paramsjsonfile=f"{id}_kappa.json"
 
@@ -301,6 +303,8 @@ filein= rootpath + inputfile
 #filein = inputfile
 
 # output files
+outputjson= rootpath + outputfile
+outputxlsx= rootpath + outputfile2
 outputparams = rootpath + paramsfile
 paramsjson = rootpath + paramsjsonfile
 
@@ -368,6 +372,35 @@ def estimateParameters(df, task):
     beta, kappa, s, LL=optimizeModel(delay, r1, r2, a) #GK update 26/10/21
     print("inferred params: beta="+np.str(beta)+ ", kappa="+np.str(kappa)+ ", s="+np.str(s)+ ", logL=" + np.str(LL)) #GK update 26/10/21
     
+    # generate paradigm B based on these params and given delays and rewards
+    #(note: these also define the # of trials)
+    pars=[kappa, beta, s] #GK update 26/10/21
+    if task == "reward":      
+        r2s=[5, 10, 20, 50]          # define delayed rewards used for task B
+        delays=[7, 30, 90, 180, 365]
+    else:
+        r2s=[-5, -10, -20, -50]
+        delays=[30, 90, 180, 365, 1095]
+    delay_B, r1_B, r2_B, p_imm = generateParadigm(delays, r2s, pars)
+    
+    
+    # generate id for trials
+    trials_id = list(range(1, len(delay_B)+1))
+    
+    # pandas dataframe to json
+    delay_B = delay_B.flatten().tolist()
+    r1_B = r1_B.flatten().tolist()
+    r2_B = r2_B.flatten().tolist()
+    p_imm = p_imm.flatten().tolist()
+    
+    outdata_df = pd.DataFrame(
+        {'id': trials_id,
+        'immOpt': r1_B,
+        'delOpt': r2_B,
+        'delay': delay_B,
+        'task': task,
+        'p_imm': p_imm})
+    
     params_df = pd.DataFrame(
         {'subject': id,
         'task': task,
@@ -377,12 +410,37 @@ def estimateParameters(df, task):
         'LL': float(LL)},
         index=[0]
     )
-    return params_df
+    return outdata_df, params_df
 
 # generate params for each task
-params_reward = estimateParameters(datain_reward, "reward")
-params_loss = estimateParameters(datain_loss, "loss")
+outdata_reward, params_reward = estimateParameters(datain_reward, "reward")
+outdata_loss, params_loss = estimateParameters(datain_loss, "loss")
+
+# convert loss values to negative
+# params_loss = params_loss.assign(immOpt = -params_loss['immOpt'])
+# params_loss = params_loss.assign(delOpt = -params_loss['delOpt'])
+
+# merge to one file
+outdata = outdata_reward.append(outdata_loss)
 params = params_reward.append(params_loss)
+
+# reassign id (unique id)
+outdata['id']=np.arange(len(outdata))+1
+outdata = outdata.set_index('id')
+
+# json format (exclude probabilites for json)
+json_outdata = outdata.drop(['p_imm'], axis = 1)
+json_outdata = outdata.to_json(orient = "index")
+json_outdata = json.loads(json_outdata)
+
+# Open a json writer, and use the json.dumps()
+# function to dump data 
+with open(outputjson, 'w', encoding='utf-8') as jsonf: 
+    jsonf.write(json.dumps(json_outdata, indent=4)) 
+    json.dumps(json_outdata, indent=4)  
+
+# write csv with added probabilites
+outdata.to_csv(outputxlsx)
 
 # params to json
 json_params = params.to_json(orient = "records")

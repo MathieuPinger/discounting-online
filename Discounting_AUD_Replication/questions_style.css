@@ -72,6 +72,10 @@ body{
 	text-align: center;
 }
 
+.survey-tab{
+	display:none;
+}
+
 button:enabled{
 	width: 100px;
 	height:40px;
@@ -148,9 +152,9 @@ button:enabled{
 	margin-bottom:15px;
 }
 
-#BIS{
+/* #BIS{
 	display: none;
-}
+} */
 
 .surveyInfo{
 	padding-bottom:15px;
@@ -200,4 +204,16 @@ button:enabled{
 
 #prolific{
 	text-align:center;
+}
+
+#debrief{
+	background-color: rgba(235, 235, 235, 0.9);
+	/* scrollbar inside window */
+	height:90%;
+	overflow: auto;
+	margin: 0 auto;
+	padding: 1em;
+	border: 1px solid #CCC;
+	border-radius: 1em;
+	margin-bottom:15px;
 }

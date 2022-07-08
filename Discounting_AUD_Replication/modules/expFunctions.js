@@ -1,16 +1,14 @@
-
 // constructor function for html stimulus
-function constructStim(rando, immOpt, delOpt, delay, prob, feedback) {
+function constructStim(rando, immOpt, delOpt, delay, feedback) {
     // rando = randomize left/right presentation
     // if rando == 0 -> immediate left, else right
 
     // initialize styles for feedback and options
-    let feedbackStyle = 'style="border: 5px solid  #008000; padding: 5px;"';
+    let feedbackStyle = 'style="border: 5px solid  #008000; padding: 16px;"';
     let immOptColor = '#005AB5';
     let delOptColor = '#DC3220';
     let task = parseFloat(delOpt) > 0 ? 'reward' : 'loss';
     let delString = daysToYears(delay);
-    let probString = 'with <b>'+prob+'%</b> probability'
 
     let stimString = `<div class = centerbox id='container'>
     <p class = center-block-text>
@@ -23,17 +21,17 @@ function constructStim(rando, immOpt, delOpt, delay, prob, feedback) {
     <div class='table'>
     <div class='row'>
     <div class = 'option' id='leftOption' ${feedback=='left' ? feedbackStyle : null}>
-        <font color=${rando==0 ? immOptColor : delOptColor}>
-        <div class = 'option-row'><b>&pound; ${rando==0 ? immOpt : delOpt}</b></div>
-        <div class = 'option-row'>${rando==0 ? `<b>Today</b>` : delString}</div>
-        <div class = 'option-row'>${rando==0 ? `with <b>100%</b> probability` : probString}</div>
-        </font></div>
+        <center><font color=${rando==0 ? immOptColor : delOptColor}>
+        <b>&pound; ${rando==0 ? immOpt : delOpt}</b>
+        <br>
+        ${rando==0 ? `<b>Today</b>` : delString}
+        </font></center></div>
     <div class = 'option' id='rightOption' ${feedback=='right' ? feedbackStyle : null}>
-        <font color=${rando==0 ? delOptColor : immOptColor}>
-        <div class = 'option-row'><b>&pound; ${rando==0 ? delOpt : immOpt}</b></div>
-        <div class = 'option-row'>${rando==0 ? delString : `<b>Today</b>`}</div>
-        <div class = 'option-row'>${rando==0 ? probString : `with <b>100%</b> probability`}</div>
-        </font></div></div></div></div>`;
+        <center><font color=${rando==0 ? delOptColor : immOptColor}>
+        <b>&pound; ${rando==0 ? delOpt : immOpt}</b>
+        <br>
+        ${rando==0 ? delString : `<b>Today</b>`}
+        </font></center></div></div></div></div>`;
         return stimString;
 };
 
@@ -120,7 +118,7 @@ function createTimeline(trialArray) {
 
         let trialData = {
             // 
-            stimulus: constructStim(trial.rando, trial.immOpt, trial.delOpt, trial.delay, trial.probability),
+            stimulus: constructStim(trial.rando, trial.immOpt, trial.delOpt, trial.delay),
 
             data: {
                 trialID: trial.id,
@@ -128,8 +126,6 @@ function createTimeline(trialArray) {
                 delOpt: trial.delOpt,
                 delay: trial.delay,
                 task: trial.task,
-                prob: trial.probability,
-                odds: trial.odds,
                 randomize: trial.rando
             }
         }

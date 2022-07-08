@@ -1,0 +1,1346 @@
+[
+  {
+    "id": 1,
+    "immOpt": 4.999650024,
+    "delOpt": 5,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 2,
+    "immOpt": 9.999300049,
+    "delOpt": 10,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 3,
+    "immOpt": 19.9986001,
+    "delOpt": 20,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 4,
+    "immOpt": 49.99650024,
+    "delOpt": 50,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 5,
+    "immOpt": 4.99850045,
+    "delOpt": 5,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 6,
+    "immOpt": 9.9970009,
+    "delOpt": 10,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 7,
+    "immOpt": 19.9940018,
+    "delOpt": 20,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 8,
+    "immOpt": 49.9850045,
+    "delOpt": 50,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 9,
+    "immOpt": 4.995504046,
+    "delOpt": 5,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 10,
+    "immOpt": 9.991008093,
+    "delOpt": 10,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 11,
+    "immOpt": 19.98201619,
+    "delOpt": 20,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 12,
+    "immOpt": 49.95504046,
+    "delOpt": 50,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 13,
+    "immOpt": 4.991016171,
+    "delOpt": 5,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 14,
+    "immOpt": 9.982032342,
+    "delOpt": 10,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 15,
+    "immOpt": 19.96406468,
+    "delOpt": 20,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 16,
+    "immOpt": 49.91016171,
+    "delOpt": 50,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 17,
+    "immOpt": 4.98181637,
+    "delOpt": 5,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 18,
+    "immOpt": 9.96363274,
+    "delOpt": 10,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 19,
+    "immOpt": 19.92726548,
+    "delOpt": 20,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 20,
+    "immOpt": 49.8181637,
+    "delOpt": 50,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 21,
+    "immOpt": 4.945843019,
+    "delOpt": 5,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 22,
+    "immOpt": 9.891686038,
+    "delOpt": 10,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 23,
+    "immOpt": 19.78337208,
+    "delOpt": 20,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 24,
+    "immOpt": 49.45843019,
+    "delOpt": 50,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 25,
+    "immOpt": 4.965243297,
+    "delOpt": 5,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 26,
+    "immOpt": 9.930486594,
+    "delOpt": 10,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 27,
+    "immOpt": 19.86097319,
+    "delOpt": 20,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 28,
+    "immOpt": 49.65243297,
+    "delOpt": 50,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 29,
+    "immOpt": 4.854368932,
+    "delOpt": 5,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 30,
+    "immOpt": 9.708737864,
+    "delOpt": 10,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 31,
+    "immOpt": 19.41747573,
+    "delOpt": 20,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 32,
+    "immOpt": 48.54368932,
+    "delOpt": 50,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 33,
+    "immOpt": 4.587155963,
+    "delOpt": 5,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 34,
+    "immOpt": 9.174311927,
+    "delOpt": 10,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 35,
+    "immOpt": 18.34862385,
+    "delOpt": 20,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 36,
+    "immOpt": 45.87155963,
+    "delOpt": 50,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 37,
+    "immOpt": 4.237288136,
+    "delOpt": 5,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 38,
+    "immOpt": 8.474576271,
+    "delOpt": 10,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 39,
+    "immOpt": 16.94915254,
+    "delOpt": 20,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 40,
+    "immOpt": 42.37288136,
+    "delOpt": 50,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 41,
+    "immOpt": 3.663003663,
+    "delOpt": 5,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 42,
+    "immOpt": 7.326007326,
+    "delOpt": 10,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 43,
+    "immOpt": 14.65201465,
+    "delOpt": 20,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 44,
+    "immOpt": 36.63003663,
+    "delOpt": 50,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 45,
+    "immOpt": 2.386634845,
+    "delOpt": 5,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 46,
+    "immOpt": 4.77326969,
+    "delOpt": 10,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 47,
+    "immOpt": 9.546539379,
+    "delOpt": 20,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 48,
+    "immOpt": 23.86634845,
+    "delOpt": 50,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 49,
+    "immOpt": 4.672897196,
+    "delOpt": 5,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 50,
+    "immOpt": 9.345794393,
+    "delOpt": 10,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 51,
+    "immOpt": 18.69158879,
+    "delOpt": 20,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 52,
+    "immOpt": 46.72897196,
+    "delOpt": 50,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 53,
+    "immOpt": 3.846153846,
+    "delOpt": 5,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 54,
+    "immOpt": 7.692307692,
+    "delOpt": 10,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 55,
+    "immOpt": 15.38461538,
+    "delOpt": 20,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 56,
+    "immOpt": 38.46153846,
+    "delOpt": 50,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 57,
+    "immOpt": 2.631578947,
+    "delOpt": 5,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 58,
+    "immOpt": 5.263157895,
+    "delOpt": 10,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 59,
+    "immOpt": 10.52631579,
+    "delOpt": 20,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 60,
+    "immOpt": 26.31578947,
+    "delOpt": 50,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 61,
+    "immOpt": 1.785714286,
+    "delOpt": 5,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 62,
+    "immOpt": 3.571428571,
+    "delOpt": 10,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 63,
+    "immOpt": 7.142857143,
+    "delOpt": 20,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 64,
+    "immOpt": 17.85714286,
+    "delOpt": 50,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 65,
+    "immOpt": 1.075268817,
+    "delOpt": 5,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 66,
+    "immOpt": 2.150537634,
+    "delOpt": 10,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 67,
+    "immOpt": 4.301075269,
+    "delOpt": 20,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 68,
+    "immOpt": 10.75268817,
+    "delOpt": 50,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 69,
+    "immOpt": 0.418410042,
+    "delOpt": 5,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 70,
+    "immOpt": 0.836820084,
+    "delOpt": 10,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 71,
+    "immOpt": 1.673640167,
+    "delOpt": 20,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 72,
+    "immOpt": 4.184100418,
+    "delOpt": 50,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 73,
+    "immOpt": 0.961538462,
+    "delOpt": 5,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 74,
+    "immOpt": 1.923076923,
+    "delOpt": 10,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 75,
+    "immOpt": 3.846153846,
+    "delOpt": 20,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 76,
+    "immOpt": 9.615384615,
+    "delOpt": 50,
+    "delay": 7,
+    "task": "loss"
+  },
+  {
+    "id": 77,
+    "immOpt": 0.263157895,
+    "delOpt": 5,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 78,
+    "immOpt": 0.526315789,
+    "delOpt": 10,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 79,
+    "immOpt": 1.052631579,
+    "delOpt": 20,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 80,
+    "immOpt": 2.631578947,
+    "delOpt": 50,
+    "delay": 30,
+    "task": "loss"
+  },
+  {
+    "id": 81,
+    "immOpt": 0.090909091,
+    "delOpt": 5,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 82,
+    "immOpt": 0.181818182,
+    "delOpt": 10,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 83,
+    "immOpt": 0.363636364,
+    "delOpt": 20,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 84,
+    "immOpt": 0.909090909,
+    "delOpt": 50,
+    "delay": 90,
+    "task": "loss"
+  },
+  {
+    "id": 85,
+    "immOpt": 0.04587156,
+    "delOpt": 5,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 86,
+    "immOpt": 0.091743119,
+    "delOpt": 10,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 87,
+    "immOpt": 0.183486239,
+    "delOpt": 20,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 88,
+    "immOpt": 0.458715596,
+    "delOpt": 50,
+    "delay": 180,
+    "task": "loss"
+  },
+  {
+    "id": 89,
+    "immOpt": 0.022727273,
+    "delOpt": 5,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 90,
+    "immOpt": 0.045454545,
+    "delOpt": 10,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 91,
+    "immOpt": 0.090909091,
+    "delOpt": 20,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 92,
+    "immOpt": 0.227272727,
+    "delOpt": 50,
+    "delay": 365,
+    "task": "loss"
+  },
+  {
+    "id": 93,
+    "immOpt": 0.007598784,
+    "delOpt": 5,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 94,
+    "immOpt": 0.015197568,
+    "delOpt": 10,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 95,
+    "immOpt": 0.030395137,
+    "delOpt": 20,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 96,
+    "immOpt": 0.075987842,
+    "delOpt": 50,
+    "delay": 1095,
+    "task": "loss"
+  },
+  {
+    "id": 97,
+    "immOpt": 4.999650024,
+    "delOpt": 5,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 98,
+    "immOpt": 9.999300049,
+    "delOpt": 10,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 99,
+    "immOpt": 19.9986001,
+    "delOpt": 20,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 100,
+    "immOpt": 49.99650024,
+    "delOpt": 50,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 101,
+    "immOpt": 4.99850045,
+    "delOpt": 5,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 102,
+    "immOpt": 9.9970009,
+    "delOpt": 10,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 103,
+    "immOpt": 19.9940018,
+    "delOpt": 20,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 104,
+    "immOpt": 49.9850045,
+    "delOpt": 50,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 105,
+    "immOpt": 4.995504046,
+    "delOpt": 5,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 106,
+    "immOpt": 9.991008093,
+    "delOpt": 10,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 107,
+    "immOpt": 19.98201619,
+    "delOpt": 20,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 108,
+    "immOpt": 49.95504046,
+    "delOpt": 50,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 109,
+    "immOpt": 4.991016171,
+    "delOpt": 5,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 110,
+    "immOpt": 9.982032342,
+    "delOpt": 10,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 111,
+    "immOpt": 19.96406468,
+    "delOpt": 20,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 112,
+    "immOpt": 49.91016171,
+    "delOpt": 50,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 113,
+    "immOpt": 4.98181637,
+    "delOpt": 5,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 114,
+    "immOpt": 9.96363274,
+    "delOpt": 10,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 115,
+    "immOpt": 19.92726548,
+    "delOpt": 20,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 116,
+    "immOpt": 49.8181637,
+    "delOpt": 50,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 117,
+    "immOpt": 4.945843019,
+    "delOpt": 5,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 118,
+    "immOpt": 9.891686038,
+    "delOpt": 10,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 119,
+    "immOpt": 19.78337208,
+    "delOpt": 20,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 120,
+    "immOpt": 49.45843019,
+    "delOpt": 50,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 121,
+    "immOpt": 4.965243297,
+    "delOpt": 5,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 122,
+    "immOpt": 9.930486594,
+    "delOpt": 10,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 123,
+    "immOpt": 19.86097319,
+    "delOpt": 20,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 124,
+    "immOpt": 49.65243297,
+    "delOpt": 50,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 125,
+    "immOpt": 4.854368932,
+    "delOpt": 5,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 126,
+    "immOpt": 9.708737864,
+    "delOpt": 10,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 127,
+    "immOpt": 19.41747573,
+    "delOpt": 20,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 128,
+    "immOpt": 48.54368932,
+    "delOpt": 50,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 129,
+    "immOpt": 4.587155963,
+    "delOpt": 5,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 130,
+    "immOpt": 9.174311927,
+    "delOpt": 10,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 131,
+    "immOpt": 18.34862385,
+    "delOpt": 20,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 132,
+    "immOpt": 45.87155963,
+    "delOpt": 50,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 133,
+    "immOpt": 4.237288136,
+    "delOpt": 5,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 134,
+    "immOpt": 8.474576271,
+    "delOpt": 10,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 135,
+    "immOpt": 16.94915254,
+    "delOpt": 20,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 136,
+    "immOpt": 42.37288136,
+    "delOpt": 50,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 137,
+    "immOpt": 3.663003663,
+    "delOpt": 5,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 138,
+    "immOpt": 7.326007326,
+    "delOpt": 10,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 139,
+    "immOpt": 14.65201465,
+    "delOpt": 20,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 140,
+    "immOpt": 36.63003663,
+    "delOpt": 50,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 141,
+    "immOpt": 2.386634845,
+    "delOpt": 5,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 142,
+    "immOpt": 4.77326969,
+    "delOpt": 10,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 143,
+    "immOpt": 9.546539379,
+    "delOpt": 20,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 144,
+    "immOpt": 23.86634845,
+    "delOpt": 50,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 145,
+    "immOpt": 4.672897196,
+    "delOpt": 5,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 146,
+    "immOpt": 9.345794393,
+    "delOpt": 10,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 147,
+    "immOpt": 18.69158879,
+    "delOpt": 20,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 148,
+    "immOpt": 46.72897196,
+    "delOpt": 50,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 149,
+    "immOpt": 3.846153846,
+    "delOpt": 5,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 150,
+    "immOpt": 7.692307692,
+    "delOpt": 10,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 151,
+    "immOpt": 15.38461538,
+    "delOpt": 20,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 152,
+    "immOpt": 38.46153846,
+    "delOpt": 50,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 153,
+    "immOpt": 2.631578947,
+    "delOpt": 5,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 154,
+    "immOpt": 5.263157895,
+    "delOpt": 10,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 155,
+    "immOpt": 10.52631579,
+    "delOpt": 20,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 156,
+    "immOpt": 26.31578947,
+    "delOpt": 50,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 157,
+    "immOpt": 1.785714286,
+    "delOpt": 5,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 158,
+    "immOpt": 3.571428571,
+    "delOpt": 10,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 159,
+    "immOpt": 7.142857143,
+    "delOpt": 20,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 160,
+    "immOpt": 17.85714286,
+    "delOpt": 50,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 161,
+    "immOpt": 1.075268817,
+    "delOpt": 5,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 162,
+    "immOpt": 2.150537634,
+    "delOpt": 10,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 163,
+    "immOpt": 4.301075269,
+    "delOpt": 20,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 164,
+    "immOpt": 10.75268817,
+    "delOpt": 50,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 165,
+    "immOpt": 0.418410042,
+    "delOpt": 5,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 166,
+    "immOpt": 0.836820084,
+    "delOpt": 10,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 167,
+    "immOpt": 1.673640167,
+    "delOpt": 20,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 168,
+    "immOpt": 4.184100418,
+    "delOpt": 50,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 169,
+    "immOpt": 0.961538462,
+    "delOpt": 5,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 170,
+    "immOpt": 1.923076923,
+    "delOpt": 10,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 171,
+    "immOpt": 3.846153846,
+    "delOpt": 20,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 172,
+    "immOpt": 9.615384615,
+    "delOpt": 50,
+    "delay": 7,
+    "task": "reward"
+  },
+  {
+    "id": 173,
+    "immOpt": 0.263157895,
+    "delOpt": 5,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 174,
+    "immOpt": 0.526315789,
+    "delOpt": 10,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 175,
+    "immOpt": 1.052631579,
+    "delOpt": 20,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 176,
+    "immOpt": 2.631578947,
+    "delOpt": 50,
+    "delay": 30,
+    "task": "reward"
+  },
+  {
+    "id": 177,
+    "immOpt": 0.090909091,
+    "delOpt": 5,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 178,
+    "immOpt": 0.181818182,
+    "delOpt": 10,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 179,
+    "immOpt": 0.363636364,
+    "delOpt": 20,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 180,
+    "immOpt": 0.909090909,
+    "delOpt": 50,
+    "delay": 90,
+    "task": "reward"
+  },
+  {
+    "id": 181,
+    "immOpt": 0.04587156,
+    "delOpt": 5,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 182,
+    "immOpt": 0.091743119,
+    "delOpt": 10,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 183,
+    "immOpt": 0.183486239,
+    "delOpt": 20,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 184,
+    "immOpt": 0.458715596,
+    "delOpt": 50,
+    "delay": 180,
+    "task": "reward"
+  },
+  {
+    "id": 185,
+    "immOpt": 0.022727273,
+    "delOpt": 5,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 186,
+    "immOpt": 0.045454545,
+    "delOpt": 10,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 187,
+    "immOpt": 0.090909091,
+    "delOpt": 20,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 188,
+    "immOpt": 0.227272727,
+    "delOpt": 50,
+    "delay": 365,
+    "task": "reward"
+  },
+  {
+    "id": 189,
+    "immOpt": 0.007598784,
+    "delOpt": 5,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 190,
+    "immOpt": 0.015197568,
+    "delOpt": 10,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 191,
+    "immOpt": 0.030395137,
+    "delOpt": 20,
+    "delay": 1095,
+    "task": "reward"
+  },
+  {
+    "id": 192,
+    "immOpt": 0.075987842,
+    "delOpt": 50,
+    "delay": 1095,
+    "task": "reward"
+  }
+]
