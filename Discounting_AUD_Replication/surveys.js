@@ -110,7 +110,13 @@ function showTab(n) {
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
+  } else if (n == 3) {
+    document.getElementById("prevBtn").disabled = true;
+  } else if (n == 6) {
+    document.getElementById("prevBtn").disabled = true;
+    document.getElementById("nextBtn").style.display = "none";
   } else {
+    document.getElementById("prevBtn").disabled = false;
     document.getElementById("prevBtn").style.display = "inline";
   }
   // ... and run a function that displays the correct step indicator:

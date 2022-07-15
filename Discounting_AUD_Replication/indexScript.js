@@ -69,7 +69,7 @@ function fixStepIndicator(n) {
 
 function submitConsent() {
   let consentForm = document.forms['consentform'];
-  let messageField = document.querySelector('#message');
+  let messageField = document.querySelector('.message');
 
   // create FormData object for validity check and AJAX
   const consentData = new FormData(consentForm);
@@ -88,7 +88,11 @@ function submitConsent() {
                               You did not consent to proceed.`;
   } else {
     // delete error message if still present
-    messageField.style.display = "none";
+    //messageField.style.display = "none";
+    messageField.style.display = "block";
+    messageField.classList.replace("message", "waitingMessage");
+    messageField.innerHTML = `You will be automatically redirected. This may take a few seconds.`;
+
     // convert FormData to JSON
     let consentJSON = Object.fromEntries(consentData.entries());
 
@@ -109,15 +113,6 @@ function submitConsent() {
     
     //console.log(consentJSON);
     saveConsent(consentJSON);
-
-    // save consent and move to next tab
-    let infoBlocks = document.getElementsByClassName("info");
-    // Hide the current tab:
-    infoBlocks[currentTab].style.display = "none";
-      // Increase or decrease the current tab by 1:
-      currentTab = currentTab + 1;
-      // Display the next tab:
-      showTab(currentTab);
   }
 }
 

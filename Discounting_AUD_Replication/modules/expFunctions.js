@@ -70,6 +70,14 @@ function roundChoices(arr) {
         // round trial Options to 2 digits
         trial['immOpt'] = parseFloat(trial['immOpt']).toFixed(2);
         trial['delOpt'] = parseFloat(trial['delOpt']).toFixed(2);
+    });
+    console.log(arr);
+    return arr;
+}
+
+function correctRounding(arr) {
+    /* Converts JSON to array and rounds monetary choices to 2 digits */
+    arr.map(trial => {
         // correct rounding errors (4.999 -> 5)
         if(trial['immOpt'] == trial['delOpt']) {
             trial['immOpt'] = trial['delOpt']-0.01;

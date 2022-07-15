@@ -27,15 +27,19 @@
 
                     <!-- Age -->
                     <div class="form-group">
-                        <label for="age">What is your age?</label>
-                        <input type="number" id="age" name="age" placeholder="Enter your age here"
-                        min="16" max="99" required>
+                        <div class="formQuestion">
+                            <label for="age">What is your <b>age?</b></label>
+                        </div>
+                        <div class="formOptions">
+                            <input type="number" id="age" name="age" placeholder="Enter your age here"
+                            min="16" max="99" required>
+                        </div>
                     </div>
 
                     <!-- Gender -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            What is your gender?
+                            What is your <b>gender</b>?
                         </div>
                         <div class="formOptions">
                             <div>
@@ -61,7 +65,7 @@
                     <!-- Education -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            What is your highest level of education completed?
+                            What is your highest level of <b>education</b> completed?
                         </div>
                         <div class="formOptions">
                             <div>
@@ -102,7 +106,7 @@
                     <!-- Employment Status -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            What is your current employment status?
+                            What is your current <b>employment status</b>?
                         </div>
                         <div class="formOptions">
                             <div>
@@ -136,7 +140,7 @@
                     <!-- Residency -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            What is your country of permanent residency?
+                            What is your country of <b>permanent residency</b>?
                         </div>
                         <select class= "formOptions" id="country" name="country" required>
                             <option value="" selected="selected">Select a country...</option>
@@ -403,36 +407,36 @@
                     <div class="form-group">
 
                         <div class="formQuestion">
-                            1. How many people does your household consist of?
+                            1. How many people does your <b>household</b> consist of?
         
                         </div>
                         <div class="formOptions">
                             <div>
-                                <input type="radio" name="household" id="household_1" value="0" required>
+                                <input type="radio" name="household" id="household_1" value="1  " required>
                                 <label for="household_1">1</label>
                             </div>
                             <div>
-                                <input type="radio" name="household" id="household_2" value="1">
+                                <input type="radio" name="household" id="household_2" value="2">
                                 <label for="household_2">2</label>
                             </div>
                             <div>
-                                <input type="radio" name="household" id="household_3" value="2">
+                                <input type="radio" name="household" id="household_3" value="3">
                                 <label for="household_3">3</label>
                             </div>
                             <div>
-                                <input type="radio" name="household" id="household_4" value="3">
+                                <input type="radio" name="household" id="household_4" value="4">
                                 <label for="household_4">4</label>
                             </div>
                             <div>
-                                <input type="radio" name="household" id="household_5" value="4">
+                                <input type="radio" name="household" id="household_5" value="5">
                                 <label for="household_5">5</label>
                             </div>
                             <div>
-                                <input type="radio" name="household" id="household_6" value="5">
+                                <input type="radio" name="household" id="household_6" value="6">
                                 <label for="household_6">6</label>
                             </div>
                             <div>
-                                <input type="radio" name="household" id="household_7" value="6">
+                                <input type="radio" name="household" id="household_7" value="7">
                                 <label for="household_7">more than 6</label>
                             </div>
                         </div>
@@ -443,18 +447,18 @@
                         <div class="formQuestion">
                             2. Please estimate the <b>total annual income of your household</b>, before tax and deductions, 
                             including money from jobs, business, farm or rent, pensions, dividends, welfare, social security
-                            payments and any other monetary income recived by you or any member of your household.
+                            payments and any other monetary income received by <b>you or any member of your household</b>.
                         </div>
-                        <div class="formOptions">
-                            <div>
+                        <div class="formOptions income-list">
+                            <div class="income">
                                 <input type="radio" name="income_household" id="income_household_1" value="0-10k" required>
                                 <label for="income_household_1">£0 - £9,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_household" id="income_household_2" value="10-20k">
                                 <label for="income_household_2">£10,000 - £19,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_household" id="income_household_3" value="20-30k">
                                 <label for="income_household_3">£20,000 - £29,999</label>
                             </div>
@@ -514,74 +518,76 @@
                         <div class="formQuestion">
                             3. Please estimate your <b>personal annual income</b>, before tax and deductions, 
                             including money from jobs, business, farm or rent, pensions, dividends, welfare, social security
-                            payments and any other monetary income recived by you or any member of your household.
+                            payments and any other monetary income.
                         </div>
-                            <div class="formOptions">
+                        <div class="formOptions income-list">
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_1" value="0-10k" required>
                                 <label for="income_personal_1">£0 - £9,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_2" value="10-20k">
                                 <label for="income_personal_2">£10,000 - £19,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_3" value="20-30k">
                                 <label for="income_personal_3">£20,000 - £29,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_4" value="30-40k">
                                 <label for="income_personal_4">£30,000 - £39,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_5" value="40-50k">
                                 <label for="income_personal_5">£40,000 - £49,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_6" value="50-60k">
                                 <label for="income_personal_6">£50,000 - £59,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_7" value="60-70k">
                                 <label for="income_personal_7">£60,000 - £69,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_8" value="70-80k">
                                 <label for="income_personal_8">£70,000 - £79,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_9" value="80-90k">
                                 <label for="income_personal_9">£80,000 - £89,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_10" value="90-100k">
                                 <label for="income_personal_10">£90,000 - £99,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_11" value="100-150k">
                                 <label for="income_personal_11">£100,000 - £149,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_12" value="150-200k">
                                 <label for="income_personal_12">£150,000 - £199,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_13" value="200-250k">
                                 <label for="income_personal_13">£200,000 - £249,999</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_14" value=">250k">
                                 <label for="income_personal_14">more than £250,000</label>
                             </div>
-                            <div>
+                            <div class="income">
                                 <input type="radio" name="income_personal" id="income_personal_15" value="no_answer">
                                 <label for="income_personal_15">prefer not to answer</label>
                             </div>
                         </div>
+                    </div>
 
                     <!-- SSS -->
                     <div class="form-group">
                         <div class="surveyInfo">
-                            4. This ladder represents where people stand in society. At the top of the ladder are the
+                            4. This ladder represents <b>where people stand in society</b>. At the top of the ladder are the
                             people who are the best off, those who have the most money, highest education, and the best
                             jobs. At the bottom are the people who are the worst off, those who have the least money,
                             least education, worst jobs, or no job. Please tick the rung you think represents best where
@@ -589,57 +595,57 @@
                         </div>
                         <table>
                             <colgroup>
-                                <col width="60%" <col width="40%">
+                                <col width="30%">
 
                             <tr>
                                 <td>
                                     <div class="formOptions">
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_10" value="10" required>
                                             <label for="SSS_10">10</label>
                                         </div>
 
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_9" value="9">
                                             <label for="SSS_9">9</label>
                                         </div>
 
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_8" value="8">
                                             <label for="SSS_8">8</label>
                                         </div>
 
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_7" value="7">
                                             <label for="SSS_7">7</label>
                                         </div>
 
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_6" value="6">
                                             <label for="SSS_6">6</label>
                                         </div>
 
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_5" value="5">
                                             <label for="SSS_5">5</label>
                                         </div>
 
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_4" value="4">
                                             <label for="SSS_4">4</label>
                                         </div>
 
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_3" value="3">
                                             <label for="SSS_3">3</label>
                                         </div>
 
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_2" value="2">
                                             <label for="SSS_2">2</label>
                                         </div>
 
-                                        <div>
+                                        <div class="SSS">
                                             <input type="radio" name="SSS" id="SSS_1" value="1">
                                             <label for="SSS_1">1</label>
                                         </div>
@@ -674,8 +680,9 @@
                     <!-- Education Main Caregiver -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            1. Please state the highest educational qualification of your main caregiver (e.g. mother, father,
-                            stepparent) when you were between 10 and 19 years old.
+                            1. Please state the highest educational qualification of your <b>main caregiver (e.g. mother, father,
+                            stepparent)</b> when you were between 10 and 19 years old. If both of your parents contributed equally, 
+                            choose either one as your "main" caregiver and the other as your "secondary" caregiver.
                         </div>
                         <div class="formOptions">
                             <div>
@@ -721,8 +728,9 @@
                     <!-- Education Secondary Caregiver -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            2. Please state the highest educational qualification of your secondary caregiver (e.g. mother, father,
-                            stepparent) when you were between 10 and 19 years old
+                            2. Please state the highest educational qualification of your <b>secondary caregiver</b> (e.g. mother, father,
+                            stepparent) when you were between 10 and 19 years old. If both of your parents contributed equally, 
+                            choose either one as your "main" caregiver and the other as your "secondary" caregiver.
                         </div>
                         <div class="formOptions">
                             <div>
@@ -771,7 +779,7 @@
                     <!-- Family Well-Being -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            3. Please rate your family's or household's financial wellbeing during your adolescence
+                            3. Please rate your family's or household's <b>financial wellbeing during your adolescence</b>.
                         </div>
                         <div class="formOptions">
                             <div>
@@ -814,11 +822,11 @@
                                 <img class="logo" src='logos/alcohol_units.png'></img>
                             </div>
 
-                            In the following survey, we will ask you some questions about your use of alcohol. 
+                            In the following survey, we will ask you some questions about <b>your use of alcohol</b>. 
                             Tick the box that best describes your answer to each question. 
                             Your answers will remain confidential so please be honest.
 
-                            Please use the reference above to determine the units of alcohol you usually drink:
+                            Please use the <b>reference above</b> to determine the units of alcohol you usually drink:
                     </div>
         
                     <div class="questions">
@@ -1126,9 +1134,13 @@
                         <div class="header">
                             <img class="logo" src='logos/alcohol_units.png'></img>
                         </div> 
-                        Please estimate the average amount of alcoholic drinks you had on the given weekdays within the past 3
-                        months.
-                        Please use the reference above to determine the units of alcohol you usually drink:
+                        Please <b>estimate the average amount of alcohol units</b> you had on the given weekdays <b>within the past 3
+                        months</b>. If you find it difficult to estimate your average consumption for each weekday, imagine a typical week 
+                        during the last 3 months and tick how much you would drink during that week. If your alcohol consumption drastically changed 
+                        within the past 3 months, tick the boxes that match your current drinking behaviour.
+                        Please use the <b>reference above to determine the units of alcohol</b> you usually drink. For example, a pint of standard beer 
+                        contains 2 units of alcohol. If you usually drink one pint of beer every day, tick '2' for every day. If  you drink between 
+                        1 and 2 pints every day, you could alternate between '2' and '4'.
                     </div>
                     <div class="form-table">
                         <div class="tableRow">

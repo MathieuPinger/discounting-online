@@ -46,9 +46,9 @@ try {
     `education`, `employment`, `country`,
     `household`, `income_household`, `income_personal`, `SSS`, `parentedum`, `parentedus`, `familyincome`,
     `date`, `time`) VALUES ('$id',
-    '$age','$gender','$education', '$employment',
+    '$age','$gender','$education', '$employment', '$country',
     '$household', '$income_household', '$income_personal', '$SSS', '$parentedum', '$parentedus', '$familyincome',
-    '$country', '$date', '$time')";
+    '$date', '$time')";
 
 
     $insertstmt = $conn->prepare($sql);

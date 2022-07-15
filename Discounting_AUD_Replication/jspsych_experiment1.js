@@ -25,7 +25,9 @@ async function runExperiment() {
 
     const trialList = await fetchData().then(data => Object.values(data))
     .then(data => roundChoices(data))
+    .then(data => correctRounding(data))
     .then(data => correctLossSign(data))
+    .then(data => roundChoices(data)) // second rounding for correct negative values!
     .then(data => createTimeline(data))
     .then(data => randomizeOrientation(data))
     .then(data => shuffleArray(data))
@@ -38,6 +40,14 @@ async function runExperiment() {
     // slice loss and reward into 2 sections each
     let loss2 = loss1.splice(0, Math.ceil(loss1.length/2));
     let rew2 = rew1.splice(0, Math.ceil(rew1.length/2));
+
+    // // debug: only 5 trials
+    // loss1 = loss1.slice(0,5)
+    // console.log(loss1);
+    // loss2 = loss2.slice(0,5)
+    // rew1 = rew1.slice(0,5)
+    // console.log(rew1);
+    // rew2 = rew2.slice(0,5)
 
     // run 2 forced choice task
     run2FC(loss1, loss2, rew1, rew2);
@@ -348,7 +358,8 @@ function saveData() {
         xhr.open('POST', 'web_API/saveExp1db.php');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function(){
-            window.location.assign('rewad_part2.html');
+            //console.log(xhr.responseText);
+            window.location.assign('rewad_surveys.html');
         };
         xhr.send(jsonfile)
 

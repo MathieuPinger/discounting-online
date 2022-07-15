@@ -89,11 +89,21 @@ button:enabled{
 	cursor: pointer;
 }
 
-/*button:disabled{
-	background:#CCC;
-}*/
+#prevBtn:disabled{
+	width: 100px;
+	height:40px;
+	margin: 0 10 px;
+	border-radius: 20px;
+	background: #1c4966;
+	/*background: #e21c1c;*/
+	border:0;
+	outline: none;
+	color: #fff;
+	cursor: not-allowed;
+	opacity: 0.5;
+}
 
-#message {
+.message {
 	text-align: center;
 	display: none;
 	margin: 10px 0;
@@ -101,7 +111,17 @@ button:enabled{
 	border-radius: 3px 3px 3px 3px;
 	color: #D8000C;
 	background-color: #FFBABA;
-  }
+}
+
+.waitingMessage {
+	text-align: center;
+	display: none;
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 3px 3px 3px 3px;
+	color: #1c32db;
+	background-color: #aab9fc;
+}
 
 #prolific_id{
 	padding:10px;
@@ -138,13 +158,14 @@ button:enabled{
 	padding-left: 30px;
 }
 
+
 .survey{
 	/* background: semi-transparent for background image */
 	background-color: rgba(235, 235, 235, 0.9);
+	max-width:800px;
 	display: block;
-	/* scrollbar inside window */
 	height:90%;
-	overflow: auto;
+	/*overflow: auto;*/
 	margin: 0 auto;
 	padding: 1em;
 	border: 1px solid #CCC;
@@ -200,10 +221,28 @@ button:enabled{
 .formOptions{
     position: relative;
     left:20px;
+	margin: 10px 0px 0px 0px;
+}
+
+.income-list{
+	column-count:2;
+	column-gap: 40px;
+	max-width: 400px;
+}
+
+.SSS{
+	width: 100px;
 }
 
 #prolific{
 	text-align:center;
+}
+
+#age{
+	width: 200px;
+	padding: 5px 8px;
+	margin: 8px 0;
+	box-sizing: border-box;
 }
 
 #debrief{
