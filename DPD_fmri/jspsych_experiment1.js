@@ -167,7 +167,7 @@ function run2FC(loss1, loss2, loss3, loss4) {
 
         
         <p>
-        On the next page, you can try out the task in <b>3 test trials</b> with no time limit.
+        On the next page, you can try out the task in <b>5 test trials</b> with no time limit.
         </p>
         </div>`
 
@@ -243,12 +243,16 @@ function run2FC(loss1, loss2, loss3, loss4) {
               },
         ],
         timeline_variables: [
-            {   data: {immOpt: '-5.00', delOpt: '-10.20', delay: '365', prob: '50', randomize: '0'},
-                stimulus: constructStim('0', '-5.00', '-10.20', '365', '50') },
-            {   data: {immOpt: '-4.00', delOpt: '-6.80', delay: '30', prob: '90', randomize: '1'},
-                stimulus: constructStim('1', '-4.00', '-6.80', '30', '90') },
+            {   data: {immOpt: '5.00', delOpt: '10.20', delay: '365', prob: '50', randomize: '0'},
+                stimulus: constructStim('0', '5.00', '10.20', '365', '50') },
+            {   data: {immOpt: '-4.00', delOpt: '-8.80', delay: '30', prob: '90', randomize: '1'},
+                stimulus: constructStim('1', '-4.00', '-8.80', '30', '90') },
+            {   data: {immOpt: '3.00', delOpt: '3.40', delay: '90', prob: '25', randomize: '1'},
+                stimulus: constructStim('1', '3.00', '3.40', '90', '25') },
             {   data: {immOpt: '-3.00', delOpt: '-3.40', delay: '90', prob: '25', randomize: '1'},
-                stimulus: constructStim('1', '-3.00', '-3.40', '90', '25') }
+                stimulus: constructStim('1', '-3.00', '-3.40', '90', '25') },
+            {   data: {immOpt: '-3.00', delOpt: '-12.00', delay: '90', prob: '10', randomize: '1'},
+                stimulus: constructStim('1', '-3.00', '-12.00', '90', '10') }
         ],
         randomize_order: false
     };

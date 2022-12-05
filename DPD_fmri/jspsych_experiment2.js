@@ -88,3 +88,78 @@ function saveSurvey(data) {
     xhr.send(JSON.stringify(params));
 };
 
+/// Experiment 2
+// redirect to index if no Prolific ID is stored
+//console.log(sessionStorage.getItem('prolific_id'));
+window.onload = function() {
+    if(sessionStorage.getItem('prolific_id') === null) {
+        window.location.assign('index.html');
+    } else {
+        let prolific_id = sessionStorage.getItem('prolific_id');
+        startPython(prolific_id);
+    }
+};
+
+function startPython(id) {
+    let params = {
+        "prolific_id": id
+    };    
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'web_API/startPython.php');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function(){
+    };
+    xhr.send(JSON.stringify(params));
+};
+
+// ugly way to save kappa/beta to DB: load params from server and send to php
+function getKappa(kappaPath) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', kappaPath, true);
+    xhr.onload = function() {
+        let kappabeta = JSON.parse(this.responseText);
+        saveKappa(kappabeta);
+    };
+    xhr.send()
+}
+
+function saveKappa(file) {
+    console.log(JSON.stringify(file));
+    console.log(file);
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'web_API/saveKappa.php');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        console.log(this.responseText);
+    };
+    xhr.send(JSON.stringify(file))
+}
+
+/*
+ENABLE PART2 WHEN PARAMS ARE FOUND
+*/
+
+// path to param data
+const dataPath = `data/${prolific_id}_params_exp2.json`;
+
+// check for params file every 3 seconds and enable/disable button
+searchFile = setInterval(function() {
+
+    let xhr = new XMLHttpRequest();
+    // HEAD request: look for file without loading
+    xhr.open('HEAD', dataPath, true);
+    xhr.onload = function() {
+        console.log(xhr.status);
+        if (xhr.status == "404") {
+            continueButton.disabled = true;
+        } else {
+            continueButton.disabled = false;
+            clearInterval(searchFile);
+
+            // load kappa/beta and hand them over to php
+            const kappaPath = `data/${prolific_id}_kappa.json`;
+            getKappa(kappaPath);
+        };
+    }
+    xhr.send();
+}, 3000);
