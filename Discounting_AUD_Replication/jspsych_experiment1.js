@@ -75,7 +75,7 @@ function run2FC(loss1, loss2, rew1, rew2) {
         After each block, you will have the opportunity to take a short break if you wish.
 
         <p>
-        In each trial of the experiment, you will see two hypothetical monetary losses to choose from, 
+        In each trial of the experiment, you will see two hypothetical monetary wins or losses to choose from, 
         one <span class="immediate">smaller value</span> 
         and one <span class="delayed">larger value</span>, like in this example:
         </p>
@@ -86,9 +86,9 @@ function run2FC(loss1, loss2, rew1, rew2) {
         </div>
         
         <div class="instructions">
-        You can also see that each loss is attached to a <b>delay</b>.
-        The <b>delay</b> informs you <b>when</b> you would lose the money. In this example, you could choose between 
-        <span class="immediate">&pound; 5 immediately</span> and 
+        You can also see that each win is attached to a <b>delay</b>.
+        The <b>delay</b> informs you <b>when</b> you would receive/lose the money. In this example, you could choose between 
+        receiving <span class="immediate">&pound; 5 immediately</span> and 
         <span class="delayed">&pound; 10 in one week</span>.
         Your task is to choose between these options by <b>pressing 'q' for the left 
         option and 'p' for the right option</b>. (Note: This doesn't work in this example)
