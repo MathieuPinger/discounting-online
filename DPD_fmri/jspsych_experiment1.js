@@ -87,10 +87,10 @@ function run2FC(loss1, loss2, loss3, loss4) {
         der Gewinn/Verlust sicher. 
         Liegt die Wahrscheinlichkeit unter 100%, besteht eine <b>Chance, kein Geld zu gewinnen/zu verlieren</b>. 
         <br>In diesem Beispiel könnten Sie sich entweder für einen Gewinn von
-        <span class="immediate">&pound; 5 immediately</span> mit <span class="immediate">100% Wahrscheinlichkeit</span> entscheiden, 
+        <span class="immediate">5 &euro; sofort</span> mit <span class="immediate">100% Wahrscheinlichkeit</span> entscheiden, 
         <b>oder</b> einen Gewinn von
-        <span class="delayed">&pound; 10 in einem Monat</span>, aber nur mit <span class="delayed">70% Wahrscheinlichkeit</span>.
-        Das bedeutet, Sie haben eine 70%ige Chance, in einem Monat &pound; 10 zu gewinnen, aber auch eine 30%ige Chance, gar nichts 
+        <span class="delayed">10 &euro; in einem Monat</span>, aber nur mit <span class="delayed">70% Wahrscheinlichkeit</span>.
+        Das bedeutet, Sie haben eine Chance von 70%, in einem Monat 10 &euro; zu gewinnen, aber auch eine Chance von 30%, gar nichts 
         zu gewinnen.
         Ihre Aufgabe ist es, zwischen diesen Optionen zu wählen, indem Sie <b>"q" für die linke Option und "p" für die rechte Option 
         drücken.</b>. (Hinweis: Dies ist nur ein Beispiel, das Drücken der Tasten funktioniert hier nicht.)
@@ -109,8 +109,8 @@ function run2FC(loss1, loss2, loss3, loss4) {
         <p>
         Sobald Sie <b>p</b> oder <b>q</b> drücken, wird die von Ihnen gewählte Option hervorgehoben.
         Wenn Sie zum Beispiel lieber 
-        <span class="immediate">sofort &pound; 5 mit einer Wahrscheinlichkeit von 100%</span> gewinnen möchten als 
-        <span class="delayed">&pound; 10 in einem Monat mit einer Wahrscheinlichkeit von 70%</span>, drücken Sie auf <b>q</b> 
+        <span class="immediate">sofort 5 &euro; mit einer Wahrscheinlichkeit von 100%</span> gewinnen möchten als 
+        <span class="delayed">10 &euro; in einem Monat mit einer Wahrscheinlichkeit von 70%</span>, drücken Sie auf <b>q</b> 
         und sehen dann Folgendes:
         </p>
             <div id='exampleStim'>
@@ -125,32 +125,31 @@ function run2FC(loss1, loss2, loss3, loss4) {
         let instructionsText2 = `
         <div class="instructions">
         <p>
-        For each trial, you will have <b>10 seconds</b>
-        to decide between the two options.<br>
-        In half of the blocks, you will choose between two <b>wins</b>, 
-        in the other half, you will choose between two <b>losses</b>.
+        Bei jedem Versuch haben Sie <b>10 Sekunden Zeit</b>, um sich zwischen den
+        beiden Optionen zu entscheiden.<br>
+        In der Hälfte der Blöcke wählen Sie zwischen zwei <b>Gewinnen</b>, 
+        in der anderen Hälfte zwischen zwei <b>Verlusten</b>.
         </p>
 
         <p>
-        A <b>loss trial</b> could look like this:
+        Ein <b>Versuch mit Verlusten</b> könnte so aussehen:
             <div id='exampleStim'>
             ${constructStim('0', '-5.00', '-10.00', '30', '70',)}
             </div>
         </p>
         
         <p>
-        Here you would have to decide whether you would rather 
-        <span class="immediate">lose &pound; 5 immediately</span>, with 100% probability, 
-        or <span class="delayed">lose &pound; 10 in one month</span>, but with only 70% probability. 
-        In other words, if you pick the right option, you have a 30% chance of not losing anything, 
-        but also a 70% chance of losing &pound; 10 in one month.
+        In diesem Fall könnten sie sich entweder für einen Verlust von 
+        <span class="immediate">5 &euro; sofort</span> mit 100% Wahrscheinlichkeit
+        oder von <span class="delayed">10 &euro; in einem Monat</span> mit 70% Wahrscheinlichkeit entscheiden. 
+        Mit anderen Worten: Wenn Sie die rechte Option wählen, haben Sie eine Chance von 30%, nichts zu verlieren, aber auch eine 
+        Chance von 70%, in einem Monat 10 &euro; zu verlieren. 
         </p>
 
         <p>
-        The <span class="immediate">smaller option</span> and the 
-        <span class="delayed">larger option</span> will be randomly 
-        presented on the <b>left</b> and <b>right</b> side. For example, the last 
-        example could also look like this:
+        Die <span class="immediate">kleinere Variante</span> und die 
+        <span class="delayed">größere Variante</span> werden nach dem Zufallsprinzip auf der 
+        <b>linken</b> und <b>rechten</b> Seite angezeigt. Das letzte Beispiel könnte beispielsweise auch wie folgt aussehen: 
         </p>
 
         <div id='exampleStim'>
@@ -158,19 +157,18 @@ function run2FC(loss1, loss2, loss3, loss4) {
         </div>
 
         <p>
-        Note: All choices are <b>imaginary</b>, i.e. <b>your reimbursement 
-        for this experiment will not depend on your decisions</b>. You will not lose any money.
-        However, please choose between the losses 
-        <b>as if the choices were real</b>. There is no correct or false answer. 
-        Please select the option that you would prefer as if you would lose the money 
-        in the corresponding timeframe and probability. 
-        Each trial stands on its own, 
-        please treat every decision independently.
+        Hinweis: Alle Wahlmöglichkeiten sind <b>fiktiv</b>, d.h. <b>Ihre Vergütung für dieses Experiment wird nicht von Ihren 
+        Entscheidungen abhängen</b>. Sie werden kein Geld verlieren.
+        Bitte wählen Sie dennoch zwischen den Verlusten, 
+        <b>als ob die Möglichkeiten real wären</b>. Es gibt keine richtige oder falsche Antwort. 
+        Bitte wählen Sie die Option, die Sie bevorzugen würden, als ob Sie das Geld in dem entsprechenden Zeitrahmen und mit der 
+        entsprechenden Wahrscheinlichkeit verlieren würden. Jeder Versuch steht für sich allein, bitte behandeln Sie jede Entscheidung 
+        unabhängig.
         </p>
 
         
         <p>
-        On the next page, you can try out the task in <b>5 test trials</b> with no time limit.
+        Auf der nächsten Seite können Sie die Aufgabe in <b>5 Testversuchen</b> ohne Zeitlimit ausprobieren.
         </p>
         </div>`
 
