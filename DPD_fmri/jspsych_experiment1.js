@@ -61,18 +61,18 @@ function run2FC(loss1, loss2, loss3, loss4) {
     */
     let instructionsText1 =
         `<div class="instructions">
-        <h3>Welcome to the experiment!</h3>
-        Please read these instructions carefully.
+        <h3>Willkommen zu dem Experiment!</h3>
+        Bitte lesen Sie diese Anweisungen sorgfältig durch.
         <p>
-        The experiment consists of two parts and will take about <b>45 minutes</b> in total.
-        Between the two parts, you will be asked to fill out a few questionnaires. 
-        Within each of the two parts, you will carry out <b>four blocks</b> of trials. 
-        After each block, you will have the opportunity to take a short break if you wish.
+        Das Experiment besteht aus zwei Teilen und wird insgesamt etwa <b>45 Minuten</b> in Anspruch nehmen.
+        Zwischen den beiden Teilen werden Sie gebeten, einige Fragebögen auszufüllen. 
+        In jedem der beiden Teile werden Sie <b>vier Blöcke</b> von Versuchen durchführen. 
+        Nach jedem Block haben Sie die Möglichkeit, eine kurze Pause einzulegen, wenn Sie dies möchten.
 
         <p>
-        In each trial of the experiment, you will see two hypothetical monetary wins or losses to choose from, 
-        one <span class="immediate">smaller value</span> 
-        and one <span class="delayed">larger value</span>, like in this example:
+        Bei jedem Versuch des Experiments haben Sie die Wahl zwischen zwei hypothetischen Geldgewinnen oder -verlusten, 
+        einem <span class="immediate">geringeren Betrag</span> 
+        und einem <span class="delayed">größeren Betrag</span>, wie in diesem Beispiel:
         </p>
         </div>
 
@@ -81,41 +81,44 @@ function run2FC(loss1, loss2, loss3, loss4) {
         </div>
         
         <div class="instructions">
-        You can see that each win is attached to a <b>delay</b> and a <b>probability</b>.
-        The <b>delay</b> informs you <b>when</b> you would win/lose the money. The <b>probability</b> informs 
-        you about the likelihood of the chosen win/loss. If the probability is 100%, the win/loss will be certain. 
-        If the probability is below 100%, there is a <b>chance of not winning/losing any money</b>. 
-        <br>In this example, you could either choose a win of
-        <span class="immediate">&pound; 5 immediately</span> with <span class="immediate">100% probability</span>, <b>or</b> a win of
-        <span class="delayed">&pound; 10 in one month</span>, but with only <span class="delayed">70% probability</span>.
-        That means that you have a 70% chance of winning &pound; 10 in one month, but also a 30% chance of not winning anything.
-        Your task is to choose between these options by <b>pressing 'q' for the left 
-        option and 'p' for the right option</b>. (Note: This is only an example, pressing a button will not work here)
+        Sie können sehen, dass jeder Gewinn mit einer <b>Verzögerung</b> und einer <b>Wahrscheinlichkeit</b> verbunden ist.
+        Die <b>Verzögerung</b> informiert Sie darüber, <b>wann</b> Sie das Geld gewinnen/verlieren würden. Die <b>Wahrscheinlichkeit</b> 
+        gibt Ihnen Auskunft über die Wahrscheinlichkeit des gewählten Gewinns/Verlusts. Wenn die Wahrscheinlichkeit 100% beträgt, ist 
+        der Gewinn/Verlust sicher. 
+        Liegt die Wahrscheinlichkeit unter 100%, besteht eine <b>Chance, kein Geld zu gewinnen/zu verlieren</b>. 
+        <br>In diesem Beispiel könnten Sie sich entweder für einen Gewinn von
+        <span class="immediate">&pound; 5 immediately</span> mit <span class="immediate">100% Wahrscheinlichkeit</span> entscheiden, 
+        <b>oder</b> einen Gewinn von
+        <span class="delayed">&pound; 10 in einem Monat</span>, aber nur mit <span class="delayed">70% Wahrscheinlichkeit</span>.
+        Das bedeutet, Sie haben eine 70%ige Chance, in einem Monat &pound; 10 zu gewinnen, aber auch eine 30%ige Chance, gar nichts 
+        zu gewinnen.
+        Ihre Aufgabe ist es, zwischen diesen Optionen zu wählen, indem Sie <b>"q" für die linke Option und "p" für die rechte Option 
+        drücken.</b>. (Hinweis: Dies ist nur ein Beispiel, das Drücken der Tasten funktioniert hier nicht.)
 
         <p>
-        Each trial will have different amounts of money to choose from. 
-        The <span class="immediate">smaller amount</span> would always be won/lost 
-        <span class="immediate">immediately</span> and <span class="immediate">with 100% probability</span>, 
-        while the delay for winning/losing the
-        <span class="delayed">larger amount</span> will vary between 
-        <span class="delayed">0, 30, 90, 180 days, 1 year, and 3 years</span>. The probability for winning/losing
-        the <span class="delayed">larger amount</span> will vary between 
-        <span class="delayed">100, 90, 75, 50, 25 and 10 percent.</span>
+        Bei jedem Versuch stehen unterschiedliche Geldbeträge zur Auswahl. 
+        Der <span class="immediate">geringere Betrag</span> würde immer 
+        <span class="immediate">sofort</span> und <span class="immediate">mit 100% Wahrscheinlichkeit</span> gewonnen/verloren werden, 
+        während die Verzögerung für den Gewinn/Verlust des
+        <span class="delayed">größeren Betrags</span> zwischen 
+        <span class="delayed">0, 30, 90, 180 Tagen, 1 Jahr, und 3 Jahren</span> variiert. Die Wahrscheinlichkeit, den
+        <span class="delayed">größeren Betrag</span> zu gewinnen/verlieren, variiert zwischen 
+        <span class="delayed">100, 90, 75, 50, 25 und 10 Prozent.</span>
         </p>
         
         <p>
-        Once you press <b>p</b> or <b>q</b>, the option you have chosen will be highlighted.
-        For example, if you would rather like to win 
-        <span class="immediate">&pound; 5 immediately, with 100% probability</span> than 
-        <span class="delayed">&pound; 10 in one month, with 70% probability</span>, you would press <b>q</b> 
-        and then see the following:
+        Sobald Sie <b>p</b> oder <b>q</b> drücken, wird die von Ihnen gewählte Option hervorgehoben.
+        Wenn Sie zum Beispiel lieber 
+        <span class="immediate">sofort &pound; 5 mit einer Wahrscheinlichkeit von 100%</span> gewinnen möchten als 
+        <span class="delayed">&pound; 10 in einem Monat mit einer Wahrscheinlichkeit von 70%</span>, drücken Sie auf <b>q</b> 
+        und sehen dann Folgendes:
         </p>
             <div id='exampleStim'>
             ${constructStim('0', '5.00', '10.00', '30', '70', 'left')}
             </div>
-        The next trial would then be presented a few seconds later.
+        Der nächste Versuch würde dann ein paar Sekunden später präsentiert werden.
 
-        You will see more instructions on the next page.
+        Weitere Anweisungen finden Sie auf der nächsten Seite.
         </div>
         `
 
