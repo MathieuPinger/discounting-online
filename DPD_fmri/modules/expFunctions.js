@@ -1,3 +1,11 @@
+// fetch data
+async function fetchData(path) {
+    // fetch json from server
+    const  res = await fetch(path);
+    const data = await res.json();
+    return data;
+};
+
 
 // constructor function for html stimulus
 function constructStim(rando, immOpt, delOpt, delay, prob, feedback) {
@@ -35,6 +43,23 @@ function constructStim(rando, immOpt, delOpt, delay, prob, feedback) {
         <div class = 'option-row'>${rando==0 ? probString : `with <b>100%</b> probability`}</div>
         </font></div></div></div></div>`;
         return stimString;
+};
+
+// function to create sub-timeline for the loss and reward blocks
+function createProcedure(trials) {
+    let trialProcedure = {
+    timeline: [
+        trialBlock,
+        trialfeedback,
+        fixation
+    ],
+    timeline_variables: trials,
+    randomize_order: true
+    };
+let blockProcedure = {
+    timeline: [blockIntro, trialProcedure]
+};
+return blockProcedure;
 };
 
 // convert days to years for stimulus
