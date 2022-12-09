@@ -309,13 +309,12 @@ const finishInstructions = {
     type: "html-keyboard-response",
     stimulus: 
         `<div class="instructions">
-        <p>The experiment can now begin!
-        From now on, you have <b>10 seconds</b> for each decision.
-        After four blocks of trials, you will be asked to fill out 
-        a few questionnaires.</p>
-        <p>Please place your <b>left index finger on Q</b>, 
-        and your <b>right index finger on P</b>.</p>
-        <p>Then press Q or P to continue to the experiment.</p>
+        <p>Das Experiment kann jetzt beginnen!
+        Von nun an haben Sie für jede Entscheidung <b>10 Sekunden</b> Zeit.
+        Nach vier Versuchsblöcken werden Sie gebeten, einige Fragebögen auszufüllen.</p>
+        <p>Bitte legen Sie Ihren <b>linken Zeigefinger auf Q</b>, 
+        und Ihren <b>rechten Zeigefinger auf P</b>.</p>
+        <p>Drücken Sie dann Q oder P, um mit dem Experiment fortzufahren.</p>
         </div>`,
     choices: ['q', 'p'],
     margin_vertical: '100px',
@@ -323,12 +322,12 @@ const finishInstructions = {
 
 const debriefPart1 = {
     type: "html-keyboard-response",
-    stimulus: `<p>You have finished the first part.</p>
-                <p><b>Please don't close this browser window.</b>
-                <p>You will be automatically redirected to the second part.</p>
-                <p>The second part will start with two surveys.</p>
-                <p>Depending on your internet connection, the redirect may take a few seconds or minutes.</p>
-                <p>If you are not being redirected after a few minutes, please contact us via Prolific.</p>`,
+    stimulus: `<p>Sie haben den erste Teil beendet.</p>
+                <p><b>Bitte schließen sie nicht dieses Browserfenster.</b>
+                <p>Sie werden automatisch zum zweiten Teil weitergeleitet.</p>
+                <p>Der zweite Teil wird mit zwei Fragebögen beginnen.</p>
+                <p>Je nach Ihrer Internetverbindung kann die Weiterleitung ein paar Sekunden oder Minuten dauern.</p>
+                <p>Wenn Sie nach ein paar Minuten nicht weitergeleitet werden, kontaktieren Sie uns bitte über Prolific.</p>`,
                 // If you are not redirected, please click 
                 // <a target="_self" href="https://clox.zi-mannheim.de/rewad2/rewad2_server/rewad_part2.html" >here</a>`,
     margin_vertical: '100px',
@@ -340,7 +339,7 @@ const debriefPart1 = {
 
 const blockIntro = {
     type: "html-keyboard-response",
-    stimulus: `<p>Press Q or P to start the next block whenever you are ready.</p>`,
+    stimulus: `<p>Drücken Sie Q oder P, wenn Sie bereit sind, den nächsten Block zu starten.</p>`,
     margin_vertical: '100px',
     choices: ['q', 'p'],
     on_finish: function(data) {
