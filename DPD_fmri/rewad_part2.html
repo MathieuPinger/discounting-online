@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionnaired & Experiment Part 2</title>
+    <title>Fragebogen & Experiment Teil 2</title>
     <script src="jspsych/jspsych.js"></script>
     <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jspsych/plugins/jspsych-html-button-response.js"></script>
@@ -21,9 +21,9 @@
             <div class="survey" id="audit">
             <!-- AUDIT Info -->
                 <div class="surveyInfo">
-                        In the following survey, we will ask you some questions about your use of alcohol. 
-                        Tick the box that best describes your answer to each question. 
-                        Your answers will remain confidential so please be honest.
+                    In der folgenden Umfrage werden wir Ihnen einige Fragen zu Ihrem Alkoholkonsum stellen. 
+                    Kreuzen Sie das Kästchen an, das Ihre Antwort auf die einzelnen Fragen am besten beschreibt. 
+                    Ihre Antworten werden vertraulich behandelt, also seien Sie bitte ehrlich.
                 </div>
     
                 <div class="questions">
@@ -31,29 +31,29 @@
                     <div class="form-group">
                     
                         <div class="formQuestion">
-                            1. How often do you have a drink containing alcohol?
+                            1. Wie oft trinken Sie Alkohol?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit1" id="audit1_1" value="0"
                                 required>
-                                <label for="audit1_1">Never</label>
+                                <label for="audit1_1">Nie</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit1" id="audit1_2" value="1">
-                                <label for="audit1_2">Monthly or less</label>
+                                <label for="audit1_2">Etwa 1 mal pro Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit1" id="audit1_3" value="2">
-                                <label for="audit1_3">2 to 4 times a month</label>
+                                <label for="audit1_3">2-4 mal pro Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit1" id="audit1_4" value="3">
-                                <label for="audit1_4">2 to 3 times a week</label>
+                                <label for="audit1_4">2-3 mal pro Woche</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit1" id="audit1_5" value="4">
-                                <label for="audit1_5">4 or more times a week</label>
+                                <label for="audit1_5">4 mal oder öfter pro Woche</label>
                             </div>
                         </div>
                     </div>
@@ -61,29 +61,30 @@
                     <!-- AUDIT 2 -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            2. How many drinks containing alcohol do you have on a typical day when you are drinking?
+                            2. Wenn Sie an einem Tag Alkohol trinken, wie viel alkoholhaltige Getränke trinken
+                            Sie dann typischerweise?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit2" id="audit2_1" value="0"
                                 required>
-                                <label for="audit2_1">1 or 2</label>
+                                <label for="audit2_1">1 oder 2</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit2" id="audit2_2" value="1">
-                                <label for="audit2_2">3 or 4</label>
+                                <label for="audit2_2">3 oder 4</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit2" id="audit2_3" value="2">
-                                <label for="audit2_3">5 or 6</label>
+                                <label for="audit2_3">5 oder 6</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit2" id="audit2_4" value="3">
-                                <label for="audit2_4">7 to 9</label>
+                                <label for="audit2_4">7 oder 9</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit2" id="audit2_5" value="4">
-                                <label for="audit2_5">10 or more</label>
+                                <label for="audit2_5">10 oder mehr</label>
                             </div>
                         </div>
                     </div>
@@ -91,29 +92,30 @@
                     <!-- AUDIT 3 -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            3. How often do you have 5 or more drinks on one occasion?
+                            3. Wie oft haben Sie an einem Tag mehr als 6
+                            alkoholische Getränke getrunken?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit3" id="audit3_1" value="0" 
                                 required>
-                                <label for="audit3_1">Never</label>
+                                <label for="audit3_1">Nie</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit3" id="audit3_2" value="1">
-                                <label for="audit3_2">Less than monthly</label>
+                                <label for="audit3_2">Seltener als einmal pro Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit3" id="audit3_3" value="2">
-                                <label for="audit3_3">Monthly</label>
+                                <label for="audit3_3">Einmal im Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit3" id="audit3_4" value="3">
-                                <label for="audit3_4">Weekly</label>
+                                <label for="audit3_4">Einmal pro Woche</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit3" id="audit3_5" value="4">
-                                <label for="audit3_5">Daily or almost daily</label>
+                                <label for="audit3_5">Täglich oder fast täglich</label>
                             </div>
                         </div>
                     </div>
@@ -121,30 +123,31 @@
                     <!-- AUDIT 4 -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            4. How often during the last year have you found that you were not able to stop drinking
-                            once you had started?
+                            4. Wie oft haben Sie im letzten Jahr festgestellt,
+                            dass Sie mehr getrunken haben, als Sie
+                            eigentlich wollten?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit4" id="audit4_1" value="0" 
                                 required>
-                                <label for="audit4_1">Never</label>
+                                <label for="audit4_1">Nie</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit4" id="audit4_2" value="1">
-                                <label for="audit4_2">Less than monthly</label>
+                                <label for="audit4_2">Seltener als einmal pro Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit4" id="audit4_3" value="2">
-                                <label for="audit4_3">Monthly</label>
+                                <label for="audit4_3">Einmal im Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit4" id="audit4_4" value="3">
-                                <label for="audit4_4">Weekly</label>
+                                <label for="audit4_4">Einmal pro Woche</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit4" id="audit4_5" value="4">
-                                <label for="audit4_5">Daily or almost daily</label>
+                                <label for="audit4_5">Täglich oder fast täglich</label>
                             </div>
                         </div>
                     </div>
@@ -152,30 +155,32 @@
                     <!-- AUDIT 5 -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            5. How often during the last year have you failed to do what was normally expected 
-                            of you because of drinking?
+                            5. Wie oft haben Sie im letzten Jahr im
+                            Zusammenhang mit dem Alkoholtrinken eine
+                            Aufgabe nicht erledigt, die man eigentlich von
+                            Ihnen erwartet hatte?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit5" id="audit5_1" value="0" 
                                 required>
-                                <label for="audit5_1">Never</label>
+                                <label for="audit5_1">Nie</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit5" id="audit5_2" value="1">
-                                <label for="audit5_2">Less than monthly</label>
+                                <label for="audit5_2">Seltener als einmal pro Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit5" id="audit5_3" value="2">
-                                <label for="audit5_3">Monthly</label>
+                                <label for="audit5_3">Einmal im Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit5" id="audit5_4" value="3">
-                                <label for="audit5_4">Weekly</label>
+                                <label for="audit5_4">Einmal pro Woche</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit5" id="audit5_5" value="4">
-                                <label for="audit5_5">Daily or almost daily</label>
+                                <label for="audit5_5">Täglich oder fast täglich</label>
                             </div>
                         </div>
                     </div>
@@ -183,30 +188,30 @@
                     <!-- AUDIT 6 -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            6. How often during the last year have you needed a first drink in the morning 
-                            to get yourself going after a heavy drinking session?
+                            6. Wie oft haben Sie im letzten Jahr morgens
+                            Alkohol getrunken, um in Schwung zu kommen?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit6" id="audit6_1" value="0" 
                                 required>
-                                <label for="audit6_1">Never</label>
+                                <label for="audit6_1">Nie</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit6" id="audit6_2" value="1">
-                                <label for="audit6_2">Less than monthly</label>
+                                <label for="audit6_2">Seltener als einmal pro Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit6" id="audit6_3" value="2">
-                                <label for="audit6_3">Monthly</label>
+                                <label for="audit6_3">Einmal im Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit6" id="audit6_4" value="3">
-                                <label for="audit6_4">Weekly</label>
+                                <label for="audit6_4">Einmal pro Woche</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit6" id="audit6_5" value="4">
-                                <label for="audit6_5">Daily or almost daily</label>
+                                <label for="audit6_5">Täglich oder fast täglich</label>
                             </div>
                         </div>
                     </div>
@@ -214,30 +219,31 @@
                     <!-- AUDIT 7 -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            7. How often during the last year have you had a feeling of guilt or remorse 
-                            after drinking?
+                            7. Wie oft fühlten Sie sich im letzten Jahr
+                            schuldig oder hatten ein schlechtes Gewissen
+                            aufgrund Ihres Alkoholtrinkens ?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit7" id="audit7_1" value="0" 
                                 required>
-                                <label for="audit7_1">Never</label>
+                                <label for="audit7_1">Nie</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit7" id="audit7_2" value="1">
-                                <label for="audit7_2">Less than monthly</label>
+                                <label for="audit7_2">Seltener als einmal pro Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit7" id="audit7_3" value="2">
-                                <label for="audit7_3">Monthly</label>
+                                <label for="audit7_3">Einmal im Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit7" id="audit7_4" value="3">
-                                <label for="audit7_4">Weekly</label>
+                                <label for="audit7_4">Einmal pro Woche</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit7" id="audit7_5" value="4">
-                                <label for="audit7_5">Daily or almost daily</label>
+                                <label for="audit7_5">Täglich oder fast täglich</label>
                             </div>
                         </div>
                     </div>
@@ -245,30 +251,31 @@
                     <!-- AUDIT 8 -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            8. How often during the last year have you been unable to remember what happened the night 
-                            before because of your drinking?
+                            8. Wie oft im letzten Jahr waren Sie aufgrund
+                            des Alkoholtrinkens nicht in der Lage, sich an
+                            Ereignisse der letzten Nacht zu erinnern?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit8" id="audit8_1" value="0" 
                                 required>
-                                <label for="audit8_1">Never</label>
+                                <label for="audit8_1">Nie</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit8" id="audit8_2" value="1">
-                                <label for="audit8_2">Less than monthly</label>
+                                <label for="audit8_2">Seltener als einmal pro Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit8" id="audit8_3" value="2">
-                                <label for="audit8_3">Monthly</label>
+                                <label for="audit8_3">Einmal im Monat</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit8" id="audit8_4" value="3">
-                                <label for="audit8_4">Weekly</label>
+                                <label for="audit8_4">Einmal pro Woche</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit8" id="audit8_5" value="4">
-                                <label for="audit8_5">Daily or almost daily</label>
+                                <label for="audit8_5">Täglich oder fast täglich</label>
                             </div>
                         </div>
                     </div>
@@ -276,21 +283,22 @@
                     <!-- AUDIT 9 -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            9. Have you or someone else been injured because of your drinking?
+                            9. Wurden Sie oder jemand anders schon einmal
+                            verletzt, weil Sie Alkohol getrunken hatten?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit9" id="audit9_1" value="0" 
                                 required>
-                                <label for="audit9_1">No</label>
+                                <label for="audit9_1">Nein</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit9" id="audit9_2" value="2">
-                                <label for="audit9_2">Yes, but not in the last year</label>
+                                <label for="audit9_2">Ja, aber nicht im letzten Jahr</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit9" id="audit9_3" value="4">
-                                <label for="audit9_3">Yes, during the last year</label>
+                                <label for="audit9_3">Ja, im letzten Jahr</label>
                             </div>
                         </div>
                     </div>
@@ -298,22 +306,24 @@
                     <!-- AUDIT 10 -->
                     <div class="form-group">
                         <div class="formQuestion">
-                            10. Has a relative, friend, doctor, or other health care worker been concerned about 
-                            your drinking or suggested you cut down?
+                            10. Hat sich schon einmal ein Verwandter, ein
+                            Freund, ein Arzt oder jemand anderes über Ihr
+                            Alkoholtrinken Sorgen gemacht oder Ihnen
+                            vorgeschlagen, weniger zu trinken ?
                         </div>
                         <div class="formOptions">
                             <div>
                                 <input type="radio" name="audit10" id="audit10_1" value="0" 
                                 required>
-                                <label for="audit10_1">No</label>
+                                <label for="audit10_1">Nein</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit10" id="audit10_2" value="2">
-                                <label for="audit10_2">Yes, but not in the last year</label>
+                                <label for="audit10_2">Ja, aber nicht im letzten Jahr</label>
                             </div>
                             <div>
                                 <input type="radio" name="audit10" id="audit10_3" value="4">
-                                <label for="audit10_3">Yes, during the last year</label>
+                                <label for="audit10_3">Ja, im letzten Jahr</label>
                             </div>
                         </div>
                     </div>
@@ -330,23 +340,22 @@
             <div class="survey" id="BIS">
             <!-- BIS15 Info -->
                 <div class="surveyInfo">
-                    People differ in the ways they act and think in different situations. This is a test
-                    to measure some of the ways in which you act and think. Read each statement and tick
-                    the appropriate circle on the right side of this page. Do not spend too much time on any
-                    statement. Answer quickly and honestly.
+                    Menschen handeln und denken in verschiedenen Situationen unterschiedlich. Dies ist ein Test, mit dem Sie einige 
+                    Ihrer Handlungs- und Denkweisen messen können. Lesen Sie jede Aussage und kreuzen Sie den entsprechenden Kreis 
+                    auf der rechten Seite an. Nehmen Sie sich nicht zu viel Zeit für eine Aussage. Antworten Sie schnell und ehrlich.
                 </div>
                 
                 <div class="form-table">
                     <div class="tableRow">
                         <div class="tableQuestion"></div>
-                        <div class="tableCell">Never/Rarely</div>
-                        <div class="tableCell">Sometimes</div>
-                        <div class="tableCell">Often</div>
-                        <div class="tableCell">Always</div>
+                        <div class="tableCell">Nie/Selten</div>
+                        <div class="tableCell">Manchmal</div>
+                        <div class="tableCell">Oft</div>
+                        <div class="tableCell">Immer</div>
                     </div>
                     <!-- BIS1 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I plan tasks carefully.</div>
+                        <div class="tableQuestion">Ich plane, was zu tun ist.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis1" id="bis1_1" value="1"
                             required>
@@ -363,7 +372,7 @@
                     </div>
                     <!-- BIS2 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I do things without thinking.</div>
+                        <div class="tableQuestion">Ich erledige Dinge, ohne darüber nachzudenken.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis2" id="bis2_1" value="1" 
                             required>
@@ -380,7 +389,7 @@
                     </div>
                     <!-- BIS3 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I don’t "pay attention."</div>
+                        <div class="tableQuestion">Ich bin unaufmerksam.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis3" id="bis3_1" value="1" 
                             required>
@@ -397,7 +406,7 @@
                     </div>
                     <!-- BIS4 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I concentrate easily.</div>
+                        <div class="tableQuestion">Ich kann mich leicht konzentrieren.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis4" id="bis4_1" value="1" 
                             required>
@@ -414,7 +423,7 @@
                     </div>
                     <!-- BIS5 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I save regularly.</div>
+                        <div class="tableQuestion">Ich bin ein Sparer.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis5" id="bis5_1" value="1" 
                             required>
@@ -431,7 +440,7 @@
                     </div>
                     <!-- BIS6 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I "squirm" at plays or lectures.</div>
+                        <div class="tableQuestion">Ich kann nicht ruhig sitzen im Kino oder in der Schule.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis6" id="bis6_1" value="1" 
                             required>
@@ -448,7 +457,7 @@
                     </div>
                     <!-- BIS7 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I am a careful thinker.</div>
+                        <div class="tableQuestion">Ich denke gerne sorgfältig über Dinge nach.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis7" id="bis7_1" value="1" 
                             required>
@@ -465,7 +474,7 @@
                     </div>
                     <!-- BIS8 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I plan for job security.</div>
+                        <div class="tableQuestion">Ich mache Pläne für meine Zukunft.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis8" id="bis8_1" value="1" 
                             required>
@@ -482,7 +491,7 @@
                     </div>
                     <!-- BIS9 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I say things without thinking.</div>
+                        <div class="tableQuestion">Ich sage Dinge ohne nachzudenken.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis9" id="bis9_1" value="1" 
                             required>
@@ -499,7 +508,7 @@
                     </div>
                     <!-- BIS10 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I act "on impulse."</div>
+                        <div class="tableQuestion">Ich handle spontan.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis10" id="bis10_1" value="1" 
                             required>
@@ -516,7 +525,8 @@
                     </div>
                     <!-- BIS11 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I get easily bored when solving thought problems.</div>
+                        <div class="tableQuestion">Ich langweile mich schnell, wenn ich lange über eine Aufgabe nachdenken
+                            muß.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis11" id="bis11_1" value="1" 
                             required>
@@ -533,7 +543,7 @@
                     </div>
                     <!-- BIS12 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I act on the spur of the moment.</div>
+                        <div class="tableQuestion">Ich denke nicht lange nach, sondern tue es einfach.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis12" id="bis12_1" value="1" 
                             required>
@@ -550,7 +560,7 @@
                     </div>
                     <!-- BIS13 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I buy things on impulse.</div>
+                        <div class="tableQuestion">Ich kaufe einfach nur so, weil mir danach ist.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis13" id="bis13_1" value="1" 
                             required>
@@ -567,7 +577,7 @@
                     </div>
                     <!-- BIS14 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I am restless at the theater or lectures.</div>
+                        <div class="tableQuestion">Ich bin unruhig im Kino oder in der Schule.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis14" id="bis14_1" value="1" 
                             required>
@@ -584,7 +594,7 @@
                     </div>
                     <!-- BIS15 -->
                     <div class="tableRow">
-                        <div class="tableQuestion">I am future oriented.</div>
+                        <div class="tableQuestion">Ich interessiere mich für die Zukunft.</div>
                         <div class="tableCell">
                             <input type="radio" name="bis15" id="bis15_1" value="1" 
                             required>
@@ -608,9 +618,9 @@
             </div>
         </form>
         <div id="debrief">
-            <p>You have finished the experiment.</p>
-            <p>Thank you for participating!</p>
-            <p>Please click on the link below to get back to Prolific:</p>
+            <p>Sie haben das Experiment beendet.</p>
+            <p>Vielen Dank für Ihre Teilnahme!</p>
+            <p>Bitte klicken Sie auf den unten stehenden Link, um zu Prolific zurückzukehren:</p>
             <a href="https://app.prolific.co/submissions/complete?cc=314880B1"> https://app.prolific.co/submissions/complete?cc=314880B1 </a>
         </div>
     </div>
