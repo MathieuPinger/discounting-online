@@ -11,8 +11,9 @@ from IPython.core.debugger import set_trace #debugging
 import pandas as pd                         #import data
 #import math
 
-#id = sys.argv[1]
-id = "trs6pd1ut"
+id = sys.argv[1]
+#id = "0ko4o6yky"
+#id = "example"
 
 # define necessary functions
 #------------------------------------------------------------------------------
@@ -27,7 +28,7 @@ def optimizeModel(odds, r1, r2, a):
     for i in range(0,ninits):
         #draw initial conditions for optimization algo:
         betainit= np.random.uniform(low=0.0, high=2.0, size=None)
-        hinit= np.random.uniform(low=0.0, high=1000.0, size=None) #GK check boundaries
+        hinit= np.random.uniform(low=0.0, high=100.0, size=None) #GK check boundaries
 
         pars0=[betainit, hinit]
                
@@ -110,7 +111,9 @@ def generateParadigm(pocc, r1s, pars):
     
     beta,hh=pars
 
-    prob_cert=[.1, .3, .5, .7, .9] #generated probs for certain choice
+    # Probability of choosing the certain option:
+        # .1 and .9 create more problemtic trials (more extreme values)
+    prob_cert=[.3, .4, .5, .6, .7] #generated probs for certain choice
        
     X, Y, Z=np.meshgrid(pocc, r1s, prob_cert)
     X=X.flatten()
@@ -124,18 +127,40 @@ def generateParadigm(pocc, r1s, pars):
     r2=np.ndarray((ntrials,1))
     odd=np.ndarray((ntrials,1))
     occp=np.ndarray((ntrials,1))
+    flag=np.ndarray((ntrials,1))
     for i in range(ntrials):
-        occpt=trials[i,0]*100
+        occpt=trials[i,0]
         oddst=(1-occpt)/occpt
-        
+        prob=occpt*100
         r1t=trials[i,1]
         p1t=trials[i,2]
-#        r2t=discountfun(oddst,hh)*r1t + (np.log(p1t/(1-p1t)))/beta
         r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
         
-        p1[i], r1[i], r2[i], odd[i], occp[i]=p1t, r1t, r2t, oddst, occpt
+        # correct problematic trials
+        # Reward
+        if r1t > 0:
+            if r2t <= r1t:
+                # flag trial als problematic
+                flagt = 1
+                # correct
+                r2t = r1t + 0.01
+            else:
+                # flag trial als fine
+                flagt = 0
+        # Loss
+        if r1t < 0:
+            if r2t >= r1t:
+                # flag trial als problematic
+                flagt = 1
+                # correct
+                r2t = r1t - 0.01
+            else:
+                # flag trial als fine
+                flagt = 0
         
-    return r1, r2, p1, odd, occp
+        p1[i], r1[i], r2[i], odd[i], occp[i], flag[i] = p1t, r1t, r2t, oddst, prob, flagt
+        
+    return r1, r2, p1, odd, occp, flag
 
 #---------------------------------MAIN-----------------------------------------
 # input and output paths
@@ -188,17 +213,17 @@ def estimateParameters(df, task):
     
     # optimize model and return best param estimates
     beta, hh, LL=optimizeModel(odd, r1, r2, a) #GK 05/12/2022
-    print("inferred params: beta="+np.str(beta)+ ", h="+ np.str(hh)+", logL=" + np.str(LL) + np.str(task))
+    print("inferred params: beta="+str(beta)+ ", h="+ str(hh)+", logL=" + str(LL) + str(task))
 
     # Trial Generation
-    pars=[beta, hh] #GK update 26/10/21
+    pars=[beta, hh]
     if task == "reward":      
         r1s=[1, 5, 10, 20]          # define delayed rewards used for task B
     else:
         r1s=[-1, -5, -10, -20]          # define uncertain rewards used for task B
-    p_occ = np.array([.1, .25, .5, .75, .9])
+    p_occ = np.array([.1, .25, .5, .57, .9])
     odds = [1-p_occ]/p_occ          # define odds for task B  
-    r1_B, r2_B, p_cert, odds_B, occp_B = generateParadigm(p_occ, r1s, pars)
+    r1_B, r2_B, p_cert, odds_B, occp_B, flag = generateParadigm(p_occ, r1s, pars)
     
     # generate id for trials
     trials_id = list(range(1, len(odds_B)+1))
@@ -209,6 +234,7 @@ def estimateParameters(df, task):
     r1_B = r1_B.flatten().tolist()
     r2_B = r2_B.flatten().tolist()
     p_cert = p_cert.flatten().tolist()
+    flag = flag.flatten().tolist()
     
     outdata_df = pd.DataFrame(
         {'id': trials_id,
@@ -217,8 +243,9 @@ def estimateParameters(df, task):
         'odds': odds_B,
         'probability': occp_B,
         'task': task,
+        'problem': flag,
         'p_cert': p_cert})
-
+    
     params_df = pd.DataFrame(
         {'subject': id,
         'task': task,
