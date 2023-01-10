@@ -223,7 +223,7 @@ def estimateParameters(df, task):
         r1s=[-1, -5, -10, -20]          # define uncertain rewards used for task B
     p_occ = np.array([.1, .25, .5, .57, .9])
     odds = [1-p_occ]/p_occ          # define odds for task B  
-    r1_B, r2_B, p_cert, odds_B, occp_B, flag = generateParadigm(p_occ, r1s, pars)
+    r1_B, r2_B, p_imm, odds_B, occp_B, flag = generateParadigm(p_occ, r1s, pars)
     
     # generate id for trials
     trials_id = list(range(1, len(odds_B)+1))
@@ -233,7 +233,7 @@ def estimateParameters(df, task):
     occp_B = occp_B.flatten().tolist()
     r1_B = r1_B.flatten().tolist()
     r2_B = r2_B.flatten().tolist()
-    p_cert = p_cert.flatten().tolist()
+    p_imm = p_imm.flatten().tolist()
     flag = flag.flatten().tolist()
     
     outdata_df = pd.DataFrame(
@@ -244,7 +244,7 @@ def estimateParameters(df, task):
         'probability': occp_B,
         'task': task,
         'problem': flag,
-        'p_cert': p_cert})
+        'p_imm': p_imm})
     
     params_df = pd.DataFrame(
         {'subject': id,

@@ -154,3 +154,37 @@ function createTimeline(trialArray) {
         });
     return trialTimeline;
 };
+
+function createTimeline2(trialArray) {
+    /*
+    input: array of Objects with immOpt, delOpt
+    output: jsPsych-Timeline with html stimuli
+    */
+    const trialTimeline = [];
+
+    // add trials to timeline: loop through trialList
+    trialArray.map(trial => {
+        // create random number: 0 or 1
+        // rando == 0 -> immediate left; rando == 1 -> immediate right
+        trial.rando = Math.round(Math.random());
+
+        let trialData = {
+            // 
+            stimulus: constructStim(trial.rando, trial.immOpt, trial.delOpt, trial.probability),
+
+            data: {
+                trialID: trial.id,
+                immOpt: trial.immOpt,
+                delOpt: trial.delOpt,
+                task: trial.task,
+                prob: trial.probability,
+                odds: trial.odds,
+                randomize: trial.rando,
+                p_imm: trial.p_imm,
+                problem: trial.problem
+            }
+        }
+        trialTimeline.push(trialData);
+        });
+    return trialTimeline;
+};

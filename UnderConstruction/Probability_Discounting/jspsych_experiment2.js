@@ -177,7 +177,7 @@ async function runExperiment() {
     .then(data => correctRounding(data))
     .then(data => correctLossSign(data))
     .then(data => roundChoices(data)) // second rounding for correct negative values!
-    .then(data => createTimeline(data))
+    .then(data => createTimeline2(data))
     .then(data => randomizeOrientation(data))
     .then(data => shuffleArray(data))
 
