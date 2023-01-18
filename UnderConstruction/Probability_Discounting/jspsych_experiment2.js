@@ -272,7 +272,7 @@ function saveData() {
     xhr.open('POST', 'web_API/saveExp2.php');
     xhr.setRequestHeader('Content-Type', 'application/json');
     
-     xhr.onload = function() {
+     xhr.onloadstart = function() {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'web_API/saveExp2db.php');
         xhr.setRequestHeader('Content-Type', 'application/json');

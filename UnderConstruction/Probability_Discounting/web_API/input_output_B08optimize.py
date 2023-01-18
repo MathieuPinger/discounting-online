@@ -7,7 +7,7 @@ import numpy as np                          #scientific computing
 #import xlsxwriter
 import json
 from scipy import optimize
-from IPython.core.debugger import set_trace #debugging
+#from IPython.core.debugger import set_trace #debugging
 import pandas as pd                         #import data
 #import math
 
@@ -106,11 +106,67 @@ def discountfun(odds, hh):
     return PD
 
 #------------------------------------------------------------------------------
+# generate r2 based on discounting parameters, increase odds if invalid r2 
+def recursiveRewardGeneration(r1t, p1t, beta, oddst, hh, flag=0):
+    # generate r2
+    r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
+
+    # catch problematic r2s
+    if r2t <= r1t:
+        flagt = 1 # flag as problem
+        odds_n = oddst+1 # increase odds
+        if odds_n <= 99:
+            # until odds = 99 (1% chance): generate updated r2
+            return recursiveRewardGeneration(r1t, p1t, beta, odds_n, hh, flagt)
+        # if increasing odds doesn't work: fix r2 manually
+        else:
+            r2t_n = r1t + 0.01
+            flagt = 1
+            prob = (1-(oddst/(1+oddst)))*100
+            return r2t_n, flagt, oddst, prob
+    else:
+        if flag == 0:
+            flagt = 0
+        else:
+            flagt = 1
+        prob = (1-(oddst/(1+oddst)))*100
+        return r2t, flagt, oddst, prob
+    
+def recursiveLossGeneration(r1t, p1t, beta, oddst, hh, flag=0):
+    # generate r2
+    r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
+
+    # catch problematic r2s
+    if r2t >= r1t:
+        flagt = 1 # flag as problem
+        odds_n = oddst+1 # increase odds
+        if odds_n <= 99:
+            # until odds = 99 (1% chance): generate updated r2
+            return recursiveLossGeneration(r1t, p1t, beta, odds_n, hh, flagt)
+        # if increasing odds doesn't work: fix r2 manually
+        else:
+            r2t_n = r1t - 0.01
+            flagt = 1
+            prob = (1-(oddst/(1+oddst)))*100
+            return r2t_n, flagt, oddst, prob
+    else:
+        if flag == 0:
+            flagt = 0
+        else:
+            flagt = 1
+        prob = (1-(oddst/(1+oddst)))*100
+        return r2t, flagt, oddst, prob    
+
+#------------------------------------------------------------------------------
 # generate paradigm B based on best param estimates
 def generateParadigm(pocc, r1s, pars):
     
-    beta,hh=pars
-
+    b,h=pars
+    # catch zero values
+    if b == 0:
+        beta = 0.001
+    if h == 0:
+        hh = 0.001
     # Probability of choosing the certain option:
         # .1 and .9 create more problemtic trials (more extreme values)
     prob_cert=[.3, .4, .5, .6, .7] #generated probs for certain choice
@@ -221,7 +277,7 @@ def estimateParameters(df, task):
         r1s=[1, 5, 10, 20]          # define delayed rewards used for task B
     else:
         r1s=[-1, -5, -10, -20]          # define uncertain rewards used for task B
-    p_occ = np.array([.1, .25, .5, .57, .9])
+    p_occ = np.array([.1, .25, .5, .75, .9])
     odds = [1-p_occ]/p_occ          # define odds for task B  
     r1_B, r2_B, p_imm, odds_B, occp_B, flag = generateParadigm(p_occ, r1s, pars)
     

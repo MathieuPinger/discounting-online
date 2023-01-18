@@ -18,7 +18,7 @@ import numpy as np                          #scientific computing
 import pandas as pd                         #import data
 #import math
 
-id="exp"
+#id="exp"
 
 
 #------------------------------------------------------------------------------
@@ -31,10 +31,43 @@ def discountfun(odds, hh):
 
 #------------------------------------------------------------------------------
 # generate paradigm B based on best param estimates
+# class invalidRewardException(Exception):
+#     "Raised when r2 < r1"
+#     pass
+
+# class invalidLossException(Exception):
+#     "Raised when r2 > r1"
+#     pass
+
+def recursiveHigherOdds(r1t, p1t, beta, oddst, hh, flag=0):
+    r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
+    print(r2t)
+    if r2t <= r1t:
+        flagt = 1
+        odds_n = oddst+1
+        if odds_n <= 99:
+            print("Problem: R1", r1t, "R2", r2t, odds_n)
+            return recursiveHigherOdds(r1t, p1t, beta, odds_n, hh, flagt)
+        else:
+            r2t_n = r1t + 0.01
+            flagt = 1
+            prob = (1-(oddst/(1+oddst)))*100
+            return r2t_n, flagt, oddst, prob
+    else:
+        if flag == 0:
+            flagt = 0
+        else:
+            flagt = 1
+        print(flagt, r2t)
+        prob = (1-(oddst/(1+oddst)))*100
+        return r2t, flagt, oddst, prob
+
+
 def generateParadigm(pocc, r1s, pars):
     
     beta,hh=pars
 
+    # Änderung Mathieu: von [.1, .3, .5., .7., .9] geändert -> weniger extreme Trials
     prob_cert=[.3, .4, .5, .6, .7] #generated probs for certain choice
        
     X, Y, Z=np.meshgrid(pocc, r1s, prob_cert)
@@ -53,50 +86,50 @@ def generateParadigm(pocc, r1s, pars):
     for i in range(ntrials):
         occpt=trials[i,0]
         oddst=(1-occpt)/occpt
-        prob=occpt*100
+        #prob=occpt*100
         r1t=trials[i,1]
         p1t=trials[i,2]
-        r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
         
-        # correct problematic trials
-        # Reward
         if r1t > 0:
-            if r2t <= r1t:
-                # flag trial als problematic
-                flagt = 1
-                # correct
-                r2t = r1t + 0.01
-            else:
-                # flag trial als fine
-                flagt = 0
-        # Loss
-        if r1t < 0:
-            if r2t >= r1t:
-                # flag trial als problematic
-                flagt = 1
-                # correct
-                r2t = r1t - 0.01
+            r2t, flagt, oddst, prob = recursiveHigherOdds(r1t, p1t, beta, oddst, hh)
+            print("succes: R2t =", r2t, flagt)
+       
+        
+        # # Änderung Mathieu: Problemtrials fixen
+        # # correct problematic trials
+        # # Reward
+        # if r1t > 0:
+        #     if r2t <= r1t:
+        #         # flag trial als problematic
+        #         flagt = 1 # 1 = Problem, 0 = kein Problem
+        #         # correct
+        #         r2t = r1t + 0.01
+        #     else:
+        #         # flag trial als fine
+        #         flagt = 0
+        # # Loss
+        # if r1t < 0:
+        #     if r2t >= r1t:
+        #         # flag trial als problematic
+        #         flagt = 1
+        #         # correct
+        #         r2t = r1t - 0.01
         
         p1[i], r1[i], r2[i], odd[i], occp[i], flag[i] = p1t, r1t, r2t, oddst, prob, flagt
         
     return r1, r2, p1, odd, occp, flag
 
 #---------------------------------MAIN-----------------------------------------
-# input and output paths
-# rootpath = "../data/sim/"
-# outputfile=f"{id}_params_exp2.json"
-# outputfile2=f"{id}_params_exp2_z.csv"
-
-# # output files
-# outputxlsx= rootpath + outputfile2
-
 def countProblems(parameters, task):
     # Trial Generation
     pars=parameters
     if task == "reward":      
-        r1s=[1, 5, 10, 20]          # define delayed rewards used for task B
+        # Änderung Mathieu: 1 durch 50 ersetzen 
+            # -> Probleme mit geringen Geldbeträgen und niedrigem Discounting
+            # 1€-Entscheidungen sind sowieso nicht besonders interessant
+        r1s=[5, 10, 20, 50]          # define delayed rewards used for task B
     else:
-        r1s=[-1, -5, -10, -20]          # define uncertain rewards used for task B
+        r1s=[-5, -10, -20, -50]          # define uncertain rewards used for task B
     p_occ = np.array([.1, .25, .5, .75, .9])
     r1_B, r2_B, p_cert, odds_B, occp_B, flag = generateParadigm(p_occ, r1s, pars)
     
@@ -119,27 +152,22 @@ def countProblems(parameters, task):
         'probability': occp_B,
         'task': task,
         'p_cert': p_cert,
-        'flag': flag})
+        'flag': flag}) # Änderung Mathieu: Problematische (gefixte) Trials werden jetzt in den Daten markiert
     
     # count problematic trials
+    print(outdata_df['flag'])
     problems = outdata_df['flag'].value_counts()[1]
+    print("Anzahl problematischer Trials: ", problems)
 
     return problems, outdata_df
 
-
-# iterate through h values
-# for i in np.arange(0.1, 10, 0.1):
-#     problems = countProblems([0.28,i], "reward")
-#     print(problems, end=', ')
-
-problems, outdata = countProblems([0.28,0.62], "reward")
-#countProblems([0.05,1], "reward")
-# # reassign id (unique id)
-# outdata['id']=np.arange(len(outdata))+1
-# outdata = outdata.set_index('id')
-
-# # write csv with added probabilites
-# outdata.to_csv(outputxlsx)
+# Simuliere Trial-Generierung:
+    # params_test = beta, hh
+    # 0.28, 0.62 = geschätzte Parameter aus echtem Run A von Mathieu
+#params_test = [0.24, 2.2]
+#params_test = [0.34, 0.24]
+params_test = [0.28, 0.0]
+problems, outdata = countProblems(params_test, "reward")
 
 
 
