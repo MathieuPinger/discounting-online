@@ -10,7 +10,7 @@ const instructionsText1 =
     <h3>Willkommen zu dem Experiment!</h3>
     Bitte lesen Sie diese Anweisungen sorgfältig durch.
     <p>
-    Das Experiment besteht aus zwei Teilen und wird insgesamt etwa <b>45 Minuten</b> in Anspruch nehmen.
+    Das Experiment besteht aus zwei Teilen und wird insgesamt etwa <b>30-40 Minuten</b> in Anspruch nehmen.
     Zwischen den beiden Teilen werden Sie gebeten, einige Fragebögen auszufüllen. 
     In jedem der beiden Teile werden Sie <b>vier Blöcke</b> von Versuchen durchführen. 
     Nach jedem Block haben Sie die Möglichkeit, eine kurze Pause einzulegen, wenn Sie dies möchten.
@@ -121,14 +121,14 @@ const instructionsText2 = `
 const instructions1 = {
     type: "html-button-response",
     stimulus: instructionsText1,
-    choices: ['Continue'],
+    choices: ['Weiter'],
     margin_vertical: '100px',
 };
 
 const instructions2 = {
     type: "html-button-response",
     stimulus: instructionsText2,
-    choices: ['Continue to test trials'],
+    choices: ['Weiter zu den Testdurchgängen'],
     margin_vertical: '100px',
 };
 
@@ -201,7 +201,7 @@ const trialfeedback = {
         } else {
             trialFeedback = `<div class = centerbox id='container'>
             <p class = center-block-text style="color:red;">
-                <b>Please select an option by pressing Q or P!</b>
+                <b>Bitte wählen Sie eine Option mit Q oder P!</b>
             </p>`;
             return trialFeedback
         }
@@ -279,14 +279,14 @@ const instructionsPart2 = {
     type: "html-keyboard-response",
     stimulus: 
         `<div class="instructions">
-        <h3>Welcome to part 2 of the experiment!</h3>
-        <p>As in the first part, you will go through four blocks of decisions. 
-        You are free to take breaks between the blocks. 
-        Once you have finished all blocks, the experiment ends.</p>
-        <p>You have 10 seconds for each trial.</p>
-        <p>Please place your <b>left index finger on Q</b>, 
-        and your <b>right index finger on P</b>.</p>
-        <p>Then press Q or P to continue to the experiment.</p>
+        <h3>Willkommen zu Teil 2 des Experiments!</h3>
+        <p>Wie im ersten Teil werden Sie vier Blöcke mit Durchgängen bearbeiten.
+        Sie können zwischen den Blöcken kurze Pausen nehmen.
+        Das Experiment endet, wenn Sie alle Blöcke beendet haben.</p>
+        <p>Sie haben 10 Sekunden pro Durchgang.</p>
+        <p>Bitte platzieren Sie Ihren <b>linken Zeigefinger auf Q</b>, 
+        und Ihren <b>rechten Zeigefinger auf P</b>.</p>
+        <p>Drücken Sie auf Q oder P, um mit dem ersten Block zu starten.</p>
         </div>`,
     choices: ['q', 'p'],
     margin_vertical: '100px',
@@ -294,9 +294,10 @@ const instructionsPart2 = {
 
 const debriefPart2 = {
     type: "html-keyboard-response",
-    stimulus: `<p>You have finished the experiment.</p>
-                <p>Thank you for participating!</p>
-                <p>Please click on the link below to get back to Prolific:</p>
+    stimulus: `<p>Sie haben das Experiment beendet.</p>
+                <p>Vielen Dank für Ihre Teilnahme!</p>
+                <p>Bitte klicken Sie auf den untenstehenden Link, um zurück zu Prolific zu gelangen 
+                und Ihren Abschluss des Experiments zu bestätigen:</p>
                 <a href="https://app.prolific.co/submissions/complete?cc=314880B1"> https://app.prolific.co/submissions/complete?cc=314880B1 </a>`,
     margin_vertical: '100px',
     choices: jsPsych.NO_KEYS,

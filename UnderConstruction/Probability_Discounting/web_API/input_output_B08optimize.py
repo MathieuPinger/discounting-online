@@ -123,6 +123,7 @@ def recursiveRewardGeneration(r1t, p1t, beta, oddst, hh, flag=0):
             r2t_n = r1t + 0.01
             flagt = 1
             prob = (1-(oddst/(1+oddst)))*100
+            prob = round(prob)
             return r2t_n, flagt, oddst, prob
     else:
         if flag == 0:
@@ -130,6 +131,7 @@ def recursiveRewardGeneration(r1t, p1t, beta, oddst, hh, flag=0):
         else:
             flagt = 1
         prob = (1-(oddst/(1+oddst)))*100
+        prob = round(prob)
         return r2t, flagt, oddst, prob
     
 def recursiveLossGeneration(r1t, p1t, beta, oddst, hh, flag=0):
@@ -148,6 +150,7 @@ def recursiveLossGeneration(r1t, p1t, beta, oddst, hh, flag=0):
             r2t_n = r1t - 0.01
             flagt = 1
             prob = (1-(oddst/(1+oddst)))*100
+            prob = round(prob)
             return r2t_n, flagt, oddst, prob
     else:
         if flag == 0:
@@ -155,6 +158,7 @@ def recursiveLossGeneration(r1t, p1t, beta, oddst, hh, flag=0):
         else:
             flagt = 1
         prob = (1-(oddst/(1+oddst)))*100
+        prob = round(prob)
         return r2t, flagt, oddst, prob    
 
 #------------------------------------------------------------------------------
@@ -165,8 +169,13 @@ def generateParadigm(pocc, r1s, pars):
     # catch zero values
     if b == 0:
         beta = 0.001
+    else:
+        beta = b
     if h == 0:
         hh = 0.001
+    else:
+        hh = h
+        
     # Probability of choosing the certain option:
         # .1 and .9 create more problemtic trials (more extreme values)
     prob_cert=[.3, .4, .5, .6, .7] #generated probs for certain choice
