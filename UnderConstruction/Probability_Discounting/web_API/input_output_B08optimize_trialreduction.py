@@ -10,6 +10,7 @@ from scipy import optimize
 #from IPython.core.debugger import set_trace #debugging
 import pandas as pd                         #import data
 #import math
+import glob
 
 id = "5g7hl9ua7"
 #id = sys.argv[1]
@@ -107,38 +108,6 @@ def discountfun(odds, hh):
     return PD
 
 #---------------------------------MAIN-----------------------------------------
-# input and output paths
-rootpath = "../data/data_PD/"
-inputfile= f"{id}_exp1.csv"
-paramsfile=f"{id}_kappa.csv"
-paramsjsonfile=f"{id}_kappa.json"
-outputfile=f"{id}_params_exp2.json"
-outputfile2=f"{id}_params_exp2_z.csv"
-
-filein= rootpath + inputfile
-
-# output files
-outputparams = rootpath + paramsfile
-paramsjson = rootpath + paramsjsonfile
-outputjson= rootpath + outputfile
-outputxlsx= rootpath + outputfile2
-
-# load data to pandas then convert to numpy arrays
-datain = pd.read_csv(filein)
-datain = datain[["immOpt", "delOpt", "odds", "prob", "choice", "task"]]
-
-# drop missing values
-datain = datain.dropna()
-
-# replace missing values with zero
-datain = datain.fillna(0)
-
-# choice: replace "immediate" with 1 and "delayed" with 2
-datain["choice_relabel"] = datain["choice"].replace({"immediate": 1,
-                                                    "delayed": 2})
-# split in loss and reward dfs
-datain_reward = datain[datain["task"] == "reward"]
-datain_loss = datain[datain["task"] == "loss"]
 
 # #  Georgia's Code: load data 
 # r1=pd.read_excel(filein, usecols=[0]).to_numpy()
@@ -175,16 +144,43 @@ def estimateParameters(df, task, n):
     return params_df
 
 
-# generate params for each task
+# load all files (N=53)
+files = glob.glob('../data/data_PD/*_exp1.csv')
+
 params_all = pd.DataFrame()
+for file in files:
+    print(file)
+    # load data to pandas then convert to numpy arrays
+    datain = pd.read_csv(file)
+    datain = datain[["immOpt", "delOpt", "odds", "prob", "choice", "task"]]
 
-# repeat parameter optimization 10 times per number of trials
-for n in reversed(range(91)):
-    for i in range(10):
-        params_reward = estimateParameters(datain_reward, "reward", n)
-        params_loss = estimateParameters(datain_loss, "loss", n)
-        params = params_reward.append(params_loss)
-        params_all = params_all.append(params)
+    print(datain)
+    # drop missing values
+    datain = datain.dropna()
+
+    # replace missing values with zero
+    datain = datain.fillna(0)
+
+    # choice: replace "immediate" with 1 and "delayed" with 2
+    datain["choice_relabel"] = datain["choice"].replace({"immediate": 1,
+                                                        "delayed": 2})
+    # split in loss and reward dfs
+    datain_reward = datain[datain["task"] == "reward"]
+    datain_loss = datain[datain["task"] == "loss"]
+    # generate params for each task
+    
+    if len(datain_reward) > 88 and len(datain_loss) > 88:
+        # repeat parameter optimization 10 times per number of trials
+        for n in range(89,25,-1):
+            for i in range(10):
+                params_reward = estimateParameters(datain_reward, "reward", n)
+                params_loss = estimateParameters(datain_loss, "loss", n)
+                params = params_reward.append(params_loss)
+                params_all = params_all.append(params)
+
+params_all.to_csv("trialReduction_full.csv")
 
 
-
+for file in files:
+    if len(datain_reward) > 88 and len(datain_loss) > 88:
+        print(file)

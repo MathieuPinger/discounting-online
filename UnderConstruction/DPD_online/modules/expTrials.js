@@ -5,62 +5,106 @@ INSTRUCTIONS AND TEST TRIALS
 -> total timeline: [instructions, testProcedure, trialProcedure]
 */
 
-const instructionsText1 =
+const instructionsText0 =
     `<div class="instructions">
     <h3>Willkommen zu dem Experiment!</h3>
     Bitte lesen Sie diese Anweisungen sorgfältig durch.
     <p>
-    Das Experiment besteht aus zwei Teilen und wird insgesamt etwa <b>30-40 Minuten</b> in Anspruch nehmen.
+    Das Experiment besteht aus zwei Teilen und wird insgesamt etwa <b>45 Minuten</b> in Anspruch nehmen.
+    Der erste und der zweite Teil werden jeweils etwa 20 Minuten dauern. 
     Zwischen den beiden Teilen werden Sie gebeten, einige Fragebögen auszufüllen. 
-    In jedem der beiden Teile werden Sie <b>vier Blöcke</b> von Durchgängen durchführen. 
+    In jedem der beiden Teile werden Sie <b>vier Blöcke</b> von Durchgängen einer Entscheidungsaufgabe durchführen, 
+    die Ihnen auf den nächsten Seiten erklärt wird. 
     Nach jedem Block haben Sie die Möglichkeit, eine kurze Pause einzulegen, wenn Sie dies möchten.
     Versuchen Sie nach Möglichkeit, Störfaktoren (z.B. Handy, E-Mails, offene Browserfenster) während der Durchgänge zu minimieren. 
 
-    <p>
-    Bei jedem Durchgang des Experiments haben Sie die Wahl zwischen zwei hypothetischen Geldgewinnen oder -verlusten, 
-    einem <span class="immediate">geringeren Betrag</span> 
-    und einem <span class="delayed">größeren Betrag</span>, wie in diesem Beispiel: 
+    Auf den folgenden Seiten werden Ihnen die Aufgaben für den ersten Teil erklärt.
+    </div>`
+
+const instructionsText1 = 
+    `<div class="instructions">
+    <h3>Allgemeine Aufgabenbeschreibung</h3>
+    Im <b>ersten Teil</b> gibt es zwei Aufgaben, 
+    die Sie in getrennten Blöcken bearbeiten. Insgesamt wird 
+    es <b>vier Blöcke</b> mit jeweils ca. 50 Durchgängen geben. 
+
+    Die Aufgaben bestehen im Allgemeinen aus Durchgängen, bei denen Sie sich 
+    zwischen zwei hypothetischen Geldgewinnen entscheiden müssen, 
+    die zu unterschiedlichen Zeitpunkten (Aufgabe 1) <b>oder</b> 
+    mit unterschiedlichen Wahrscheinlichkeiten (Aufgabe 2) 
+    auftreten können. Dabei wird stets ein kleinerer Gewinn 
+    angeboten, der sicher und sofort ist, sowie ein größerer Gewinn, der verzögert oder unsicher ist. 
+    Die Geldbeträge, die zeitliche Verzögerung (in Tagen) und die Wahrscheinlichkeit (in Prozent) für 
+    den größeren Gewinn werden dabei variiert.
+
+
+    <h3>Aufgabe 1: Entscheidungen zwischen Geldbeträgen und Zeitpunkten</h3>
+
+    Bei jedem Durchgang von Aufgabe 1 haben Sie die Wahl zwischen zwei hypothetischen Geldgewinnen 
+    zu unterschiedlichen Zeitpunkten, wie in diesem Beispiel: 
     (Hinweis: Dies ist nur ein Beispiel, das Drücken der Tasten funktioniert hier nicht.)
     </p>
     </div>
 
     <div id='exampleStim'>
-    ${constructStim('0', '5.00', '10.00', '70')}
+    ${constructStim('0', '5.00', '10.00', 'DD', '180')}
     </div>
     
     <div class="instructions">
-    Sie können sehen, dass jeder Gewinn mit einer <b>Wahrscheinlichkeit</b> verbunden ist.
-    Wenn die Wahrscheinlichkeit 100% beträgt, ist der Gewinn/Verlust sicher. 
-    Liegt die Wahrscheinlichkeit unter 100%, besteht die <b>Möglichkeit, kein Geld zu gewinnen/zu verlieren</b>. 
+    Sie können sehen, dass jeder Gewinn mit einem <b>Zeitpunkt</b> verbunden ist.
     <br>In diesem Beispiel könnten Sie sich entweder für einen Gewinn von
-    <span class="immediate">5 &euro;</span> mit <span class="immediate">100% Wahrscheinlichkeit</span> entscheiden, 
+    <span class="immediate">5 &euro;</span> <span class="immediate">sofort</span> entscheiden, 
     <b>oder</b> einen Gewinn von
-    <span class="delayed">10 &euro;</span>, aber nur mit <span class="delayed">70% Wahrscheinlichkeit</span>.
-    Das bedeutet, Sie haben eine Chance von 70%, 10 &euro; zu gewinnen, aber auch ein Risiko von 30%, gar nichts 
-    zu gewinnen.
+    <span class="delayed">10 &euro;</span>, den Sie aber erst in <span class="delayed">180 Tagen</span> erhalten würden.
     Ihre Aufgabe ist es, zwischen diesen Optionen zu wählen, indem Sie <b>"Q" für die linke Option 
     oder "P" für die rechte Option drücken</b>.
 
     <p>
     Bei jedem Durchgang stehen unterschiedliche Geldbeträge zur Auswahl. 
     Der <span class="immediate">geringere Betrag</span> würde immer 
-    <span class="immediate">mit 100% Wahrscheinlichkeit</span> gewonnen/verloren werden, 
-    während die Wahrscheinlichkeit, den
-    <span class="delayed">größeren Betrag</span> zu gewinnen/verlieren, zwischen 
-    <span class="delayed">90 und 10 Prozent</span> variiert.
+    <span class="immediate">sofort</span> gewonnen werden, 
+    während der Zeitpunkt zum 
+    <span class="delayed">größeren Betrag</span> zwischen 
+    <span class="delayed">30 Tagen und 3 Jahren Prozent</span> variiert.
     </p>
     
     <p>
     Sobald Sie <b>Q</b> oder <b>P</b> drücken, wird die von Ihnen gewählte Option kurz hervorgehoben.
     Wenn Sie zum Beispiel lieber 
-    <span class="immediate">5 &euro; mit einer Wahrscheinlichkeit von 100%</span> gewinnen möchten als 
-    <span class="delayed">10 &euro; mit einer Wahrscheinlichkeit von 70%</span>, drücken Sie auf <b>Q</b> 
+    <span class="immediate">sofort 5 &euro;</span> gewinnen möchten als 
+    <span class="delayed">10 &euro; in 180 Tagen</span>, drücken Sie auf <b>Q</b> 
     und sehen dann Folgendes:
     </p>
         <div id='exampleStim'>
-        ${constructStim('0', '5.00', '10.00', '70', 'left')}
+        $${constructStim('0', '5.00', '10.00', 'DD', '180', null, 'left')}
         </div>
     Der nächste Durchgang wird dann jeweils ein paar Sekunden später präsentiert.
+
+    <h3>Aufgabe 2: Entscheidungen zwischen Geldbeträgen und Wahrscheinlichkeiten</h3>
+
+    Bei jedem Durchgang von Aufgabe 2 haben Sie die Wahl zwischen zwei hypothetischen Geldgewinnen 
+    mit unterschiedlichen Wahrscheinlichkeiten, wie in diesem Beispiel: 
+    (Hinweis: Dies ist nur ein Beispiel, das Drücken der Tasten funktioniert hier nicht.)
+    </p>
+    </div>
+
+    <div id='exampleStim'>
+    $${constructStim('0', '5.00', '10.00', 'PD', null, '50')}
+    </div>
+    
+    <div class="instructions">
+    Sie können sehen, dass jeder Gewinn mit einer <b>Wahrscheinlichkeit</b> verbunden ist.
+    Wenn die Wahrscheinlichkeit 100% beträgt, ist der Gewinn sicher. 
+    Liegt die Wahrscheinlichkeit unter 100%, besteht ein <b>Risiko, kein Geld zu gewinnen</b>. 
+    <br>In diesem Beispiel könnten Sie sich entweder für einen Gewinn von
+    <span class="immediate">5 &euro;</span> mit <span class="immediate">100% Wahrscheinlichkeit</span> entscheiden, 
+    <b>oder</b> einen Gewinn von
+    <span class="delayed">10 &euro;</span>, aber nur mit <span class="delayed">50% Wahrscheinlichkeit</span>.
+    Das bedeutet, Sie haben eine Chance von 50%, 10 &euro; zu gewinnen, aber auch ein Risiko von 50%, gar nichts 
+    zu gewinnen.
+
+    Wie in Aufgabe 1 wählen Sie zwischen den Optionen, indem Sie <b>"Q" für die linke Option 
+    oder "P" für die rechte Option drücken</b>.
 
     Weitere Anweisungen finden Sie auf der nächsten Seite.
     </div>
@@ -71,39 +115,18 @@ const instructionsText2 = `
     <p>
     Bei jedem Durchgang haben Sie <b>10 Sekunden Zeit</b>, um sich zwischen den
     beiden Optionen zu entscheiden.<br>
-    In der Hälfte der Blöcke wählen Sie zwischen zwei <b>Gewinnen</b>, 
-    in der anderen Hälfte zwischen zwei <b>Verlusten</b>.
-    </p>
-
-    <p>
-    Ein <b>Durchgang mit Verlusten</b> könnte so aussehen:
-        <div id='exampleStim'>
-        ${constructStim('0', '-5.00', '-10.00', '70',)}
-        </div>
-    </p>
-    
-    <p>
-    In diesem Fall könnten sie sich entweder für einen Verlust von 
-    <span class="immediate">5 &euro;</span> mit 100% Wahrscheinlichkeit
-    oder von <span class="delayed">10 &euro;</span> mit 70% Wahrscheinlichkeit entscheiden. 
-    Mit anderen Worten: Wenn Sie die rechte Option wählen, haben Sie eine Chance von 30%, 
-    nichts zu verlieren, aber auch ein Risiko von 70%, 10 &euro; zu verlieren. 
-    </p>
-
-    <p>
     Die <span class="immediate">kleinere Option</span> und die 
     <span class="delayed">größere Option</span> werden nach dem Zufallsprinzip auf der 
     <b>linken</b> und <b>rechten</b> Seite angezeigt. Das letzte Beispiel könnte beispielsweise auch wie folgt aussehen: 
     </p>
 
     <div id='exampleStim'>
-    ${constructStim('1', '-5.00', '-10.00', '70')}
+    $${constructStim('1', '5.00', '10.00', 'PD', null, '50')}
     </div>
 
     <p>
     Hinweis: Alle Wahlmöglichkeiten sind <b>fiktiv</b>, d.h. <b>Ihre Vergütung für dieses Experiment wird nicht von Ihren 
-    Entscheidungen abhängen</b>. Sie werden kein Geld verlieren.
-    Bitte wählen Sie dennoch zwischen den Gewinnen und Verlusten, 
+    Entscheidungen abhängen</b>. Bitte wählen Sie dennoch zwischen den Gewinnen, 
     <b>als ob sie eine echte Entscheidungg treffen müssten</b>. Es gibt keine richtige oder falsche Antwort. 
     Jeder Durchgang steht für sich allein, bitte behandeln Sie jede Entscheidung unabhängig.
     </p>
@@ -113,6 +136,14 @@ const instructionsText2 = `
     Auf der nächsten Seite können Sie die Aufgabe in <b>5 Testdurchgängen</b> ohne Zeitlimit ausprobieren.
     </p>
     </div>`
+
+const instructions0 = {
+    type: "html-button-response",
+    stimulus: instructionsText0,
+    choices: ['Weiter'],
+    margin_vertical: '100px',
+};
+    
 
 const instructions1 = {
     type: "html-button-response",
@@ -183,14 +214,16 @@ const trialfeedback = {
         lastImmOpt = jsPsych.data.getLastTrialData().values()[0].immOpt;
         lastDelOpt = jsPsych.data.getLastTrialData().values()[0].delOpt;
         lastProb = jsPsych.data.getLastTrialData().values()[0].prob;
+        lastDelay = jsPsych.data.getLastTrialData().values()[0].delay;
+        lastTask = jsPsych.data.getLastTrialData().values()[0].task;
 
         if(lastChoice == 81){
-            trialFeedback = constructStim(lastRando, lastImmOpt, lastDelOpt, lastProb,
+            trialFeedback = constructStim(lastRando, lastImmOpt, lastDelOpt, lastTask, lastDelay, lastProb,
                 feedback='left');
             return trialFeedback
 
         } else if(lastChoice == 80) {
-            trialFeedback = constructStim(lastRando, lastImmOpt, lastDelOpt, lastProb,
+            trialFeedback = constructStim(lastRando, lastImmOpt, lastDelOpt, lastTask, lastDelay, lastProb,
                 feedback='right');
             return trialFeedback
 

@@ -1,9 +1,3 @@
-/*
-Script for first experimental session
-uncomment console.logs for debugging
-If no data are stored, unable redirect to questionnaires.html to see php errors
-*/
-
 
 // run experiment on page load
 // path to testfile.json
@@ -80,8 +74,7 @@ function run2FC(loss1, loss2, rew1, rew2) {
     }
 
     let timeline = [];
-    timeline.push(instructions0, instructions1, instructions2, 
-        practiceProcedure, finishInstructions, trialProcedure, debriefPart1);
+    timeline.push(instructions0, instructions1, instructions2);
 
     jsPsych.init({
         timeline: timeline,

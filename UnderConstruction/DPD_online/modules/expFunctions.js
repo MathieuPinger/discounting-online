@@ -6,40 +6,80 @@ async function fetchData(path) {
     return data;
 };
 
-
-// constructor function for html stimulus
-function constructStim(rando, immOpt, delOpt, prob, feedback) {
+function constructStim(rando, opt1, opt2, taskType, delay=null, prob=null, feedback=null) {
     // rando = randomize left/right presentation
     // if rando == 0 -> immediate left, else right
-
+  
     // initialize styles for feedback and options
     let feedbackStyle = 'style="border: 5px solid  #008000; padding: 5px;"';
     let immOptColor = '#005AB5';
     let delOptColor = '#DC3220';
-    let task = parseFloat(delOpt) > 0 ? 'reward' : 'loss';
-    let probString = 'mit <b>'+prob+'%</b> Wahrscheinlichkeit'
-
+    let task = parseFloat(opt2) > 0 ? 'reward' : 'loss';
+    let option1, option2;
+  
+    if (taskType === "PD") {
+      let probString = 'mit <b>'+prob+'%</b> Wahrscheinlichkeit';
+      option1 = `<div class = 'option' id='leftOption' ${feedback=='left' ? feedbackStyle : null}>
+                    <font color=${rando==0 ? immOptColor : delOptColor}>
+                      <div class = 'option-row'><b>&euro; ${rando==0 ? opt1 : opt2}</b></div>
+                      <div class = 'option-row'>${rando==0 ? `mit <b>100%</b> Wahrscheinlichkeit` : probString}</div>
+                    </font>
+                 </div>`;
+      option2 = `<div class = 'option' id='rightOption' ${feedback=='right' ? feedbackStyle : null}>
+                    <font color=${rando==0 ? delOptColor : immOptColor}>
+                      <div class = 'option-row'><b>&euro; ${rando==0 ? opt2 : opt1}</b></div>
+                      <div class = 'option-row'>${rando==0 ? probString : `mit <b>100%</b> Wahrscheinlichkeit`}</div>
+                    </font>
+                 </div>`;
+    } else if (taskType === "DD") {
+      let delString = daysToYears(delay);
+      option1 = `<div class = 'option' id='leftOption' ${feedback=='left' ? feedbackStyle : null}>
+                    <center><font color=${rando==0 ? immOptColor : delOptColor}>
+                      <b>&euro; ${rando==0 ? opt1 : opt2}</b><br>
+                      ${rando==0 ? `<b>Heute</b>` : delString}
+                    </font></center>
+                 </div>`;
+      option2 = `<div class = 'option' id='rightOption' ${feedback=='right' ? feedbackStyle : null}>
+                    <center><font color=${rando==0 ? delOptColor : immOptColor}>
+                      <b>&euro; ${rando==0 ? opt2 : opt1}</b><br>
+                      ${rando==0 ? delString : `<b>Heute</b>`}
+                    </font></center>
+                 </div>`;
+    }
+  
     let stimString = `<div class = centerbox id='container'>
-    <p class = center-block-text>
-        Welchen Betrag würden Sie lieber 
-        ${task=='reward' ? '<b>gewinnen</b>' : '<b>verlieren</b>'}?
-        <br>Drücken Sie
-        <strong>'Q'</strong> für die linke Option oder
-        <strong>'P'</strong> für die rechte Option:
-    </p>
-    <div class='table'>
-    <div class='row'>
-    <div class = 'option' id='leftOption' ${feedback=='left' ? feedbackStyle : null}>
-        <font color=${rando==0 ? immOptColor : delOptColor}>
-        <div class = 'option-row'><b>&euro; ${rando==0 ? immOpt : delOpt}</b></div>
-        <div class = 'option-row'>${rando==0 ? `mit <b>100%</b> Wahrscheinlichkeit` : probString}</div>
-        </font></div>
-    <div class = 'option' id='rightOption' ${feedback=='right' ? feedbackStyle : null}>
-        <font color=${rando==0 ? delOptColor : immOptColor}>
-        <div class = 'option-row'><b>&euro; ${rando==0 ? delOpt : immOpt}</b></div>
-        <div class = 'option-row'>${rando==0 ? probString : `mit <b>100%</b> Wahrscheinlichkeit`}</div>
-        </font></div></div></div></div>`;
-        return stimString;
+      <p class = center-block-text>
+          Welchen Betrag würden Sie lieber  
+          ${task=='reward' ? '<b>gewinnen</b>' : '<b>verlieren</b>'}?
+          <br>Drücken Sie 
+          <strong>'Q'</strong> für die linke Option oder 
+          <strong>'P'</strong> für die rechte Option:
+          </p>
+          <div class='table'>
+            <div class='row'>
+                ${rando == 0 ? option1 : option2}
+                ${rando == 0 ? option2 : option1}
+            </div>
+            </div>
+          </div>`;
+    return stimString;
+};
+
+// convert days to years for stimulus
+function daysToYears(numberOfDays) {
+    if(numberOfDays < 365){
+        let delayString = "in <b>"+numberOfDays+"</b> Tagen";
+        return delayString;
+    } else if(numberOfDays >= 365){
+        let years = Math.floor(numberOfDays / 365);
+        if(years > 1){
+            let yearString = "in <b>"+years+"</b> Tagen";
+            return yearString;
+        } else {
+            let yearString = "in <b>" +years+"</b> Tagen";
+            return yearString;
+        };
+    };
 };
 
 // function to create sub-timeline for the loss and reward blocks
