@@ -9,9 +9,11 @@ QUESTIONNAIRES ================================================================
 // define survey elements to change
 let audit = document.querySelectorAll("#audit");
 let bis = document.querySelectorAll("#BIS");
+let dospert = document.querySelectorAll("#dospert");
+let toDospertBtn = document.querySelectorAll("#toDospertBtn");
 let toBisBtn = document.querySelectorAll("#toBisBtn");
 
-document.getElementById("toBisBtn").addEventListener('click', function(e){
+document.getElementById("toDospertBtn").addEventListener('click', function(e){
     e.preventDefault();
     // get audit form element to check validity
     let auditform = document.forms['auditform'];
@@ -25,6 +27,24 @@ document.getElementById("toBisBtn").addEventListener('click', function(e){
     } else {
         // remove finished survey and load new survey
         audit[0].style.display = "none";
+        dospert[0].style.display = "block";
+    }
+});
+
+document.getElementById("toBisBtn").addEventListener('click', function(e){
+    e.preventDefault();
+    // get audit form element to check validity
+    let dospertform = document.forms['dospertform'];
+
+    // checkValidity returns false if any item is invalid
+    let dospertcheck = dospertform.checkValidity();
+
+    if(!dospertcheck) {
+        // show error messages for invalid items
+        dospertform.reportValidity();
+    } else {
+        // remove finished survey and load new survey
+        dospert[0].style.display = "none";
         bis[0].style.display = "block";
     }
 });
@@ -51,8 +71,11 @@ document.getElementById("toPart2").addEventListener('click', function(e){
         const auditJSON = Object.fromEntries(auditData.entries());
         console.log(auditJSON);
 
+        const dospertform = document.forms['dospertform'];
+        const dospertData = new FormData(dospertform);
+        const dospertJSON = Object.fromEntries(dospertData.entries());
         // merge audit and bis data
-        const surveyData = Object.assign(auditJSON, bisJSON);
+        const surveyData = Object.assign(auditJSON, dospertJSON, bisJSON);
 
         // get date and time for storage
         let jsdate = new Date();

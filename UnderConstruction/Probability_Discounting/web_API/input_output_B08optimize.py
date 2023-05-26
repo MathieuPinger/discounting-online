@@ -5,16 +5,17 @@
 import sys
 import numpy as np                          #scientific computing
 #import xlsxwriter
+import random
 import json
 from scipy import optimize
 #from IPython.core.debugger import set_trace #debugging
 import pandas as pd                         #import data
 #import math
 
-id = sys.argv[1]
+#id = sys.argv[1]
 #id = "0ko4o6yky"
 #id = "example"
-
+id="33g4kqjnw"
 # define necessary functions
 #------------------------------------------------------------------------------
 # optimize model
@@ -27,8 +28,8 @@ def optimizeModel(odds, r1, r2, a):
     pars=np.ndarray((ninits,2))
     for i in range(0,ninits):
         #draw initial conditions for optimization algo:
-        betainit= np.random.uniform(low=0.0, high=2.0, size=None)
-        hinit= np.random.uniform(low=0.0, high=100.0, size=None) #GK check boundaries
+        betainit= np.random.uniform(low=0.001, high=2.0, size=None)
+        hinit= np.random.uniform(low=0.001, high=100.0, size=None) #GK check boundaries
 
         pars0=[betainit, hinit]
                
@@ -106,76 +107,10 @@ def discountfun(odds, hh):
     return PD
 
 #------------------------------------------------------------------------------
-# generate r2 based on discounting parameters, increase odds if invalid r2 
-def recursiveRewardGeneration(r1t, p1t, beta, oddst, hh, flag=0):
-    # generate r2
-    r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
-
-    # catch problematic r2s
-    if r2t <= r1t:
-        flagt = 1 # flag as problem
-        odds_n = oddst+1 # increase odds
-        if odds_n <= 99:
-            # until odds = 99 (1% chance): generate updated r2
-            return recursiveRewardGeneration(r1t, p1t, beta, odds_n, hh, flagt)
-        # if increasing odds doesn't work: fix r2 manually
-        else:
-            r2t_n = r1t + 0.01
-            flagt = 1
-            prob = (1-(oddst/(1+oddst)))*100
-            prob = round(prob)
-            return r2t_n, flagt, oddst, prob
-    else:
-        if flag == 0:
-            flagt = 0
-        else:
-            flagt = 1
-        prob = (1-(oddst/(1+oddst)))*100
-        prob = round(prob)
-        return r2t, flagt, oddst, prob
-    
-def recursiveLossGeneration(r1t, p1t, beta, oddst, hh, flag=0):
-    # generate r2
-    r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
-
-    # catch problematic r2s
-    if r2t >= r1t:
-        flagt = 1 # flag as problem
-        odds_n = oddst+1 # increase odds
-        if odds_n <= 99:
-            # until odds = 99 (1% chance): generate updated r2
-            return recursiveLossGeneration(r1t, p1t, beta, odds_n, hh, flagt)
-        # if increasing odds doesn't work: fix r2 manually
-        else:
-            r2t_n = r1t - 0.01
-            flagt = 1
-            prob = (1-(oddst/(1+oddst)))*100
-            prob = round(prob)
-            return r2t_n, flagt, oddst, prob
-    else:
-        if flag == 0:
-            flagt = 0
-        else:
-            flagt = 1
-        prob = (1-(oddst/(1+oddst)))*100
-        prob = round(prob)
-        return r2t, flagt, oddst, prob    
-
-#------------------------------------------------------------------------------
 # generate paradigm B based on best param estimates
 def generateParadigm(pocc, r1s, pars):
     
-    b,h=pars
-    # catch zero values
-    if b == 0:
-        beta = 0.001
-    else:
-        beta = b
-    if h == 0:
-        hh = 0.001
-    else:
-        hh = h
-        
+    beta,hh=pars
     # Probability of choosing the certain option:
         # .1 and .9 create more problemtic trials (more extreme values)
     prob_cert=[.3, .4, .5, .6, .7] #generated probs for certain choice
@@ -201,26 +136,39 @@ def generateParadigm(pocc, r1s, pars):
         p1t=trials[i,2]
         r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
         
-        # correct problematic trials
-        # Reward
-        if r1t > 0:
+        # trial adaptation in case of reward task
+        count=0
+        if r1t>0:
             if r2t <= r1t:
-                # flag trial als problematic
                 flagt = 1
-                # correct
-                r2t = r1t + 0.01
+                max_r1 = max(trials[:,1])
+                
+                while (r2t<=r1t) and (count < 1000):
+                    r1t = random.randint(1, max_r1)
+                    r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
+                    count = count +1 
+                        
+                if count == 1000:
+                    r1t=trials[i,1]
+                    r2t=r1t + .01
             else:
-                # flag trial als fine
                 flagt = 0
-        # Loss
-        if r1t < 0:
+                
+        # trial adaptation in case of loss task 
+        if r1t<0:
             if r2t >= r1t:
-                # flag trial als problematic
                 flagt = 1
-                # correct
-                r2t = r1t - 0.01
+                min_r1 = min(trials[:,1])
+            
+                while (r2t>=r1t) and (count < 1000):
+                    r1t = -random.randint(1, abs(min_r1))
+                    r2t=(r1t -(np.log(p1t/(1-p1t)))/beta)/discountfun(oddst,hh)
+                    count = count +1 
+                    
+                if count == 1000:
+                    r1t=trials[i,1]
+                    r2t= r1t - .01
             else:
-                # flag trial als fine
                 flagt = 0
         
         p1[i], r1[i], r2[i], odd[i], occp[i], flag[i] = p1t, r1t, r2t, oddst, prob, flagt

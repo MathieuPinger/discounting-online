@@ -1,0 +1,1802 @@
+[
+  {
+    "id": 1,
+    "immOpt": 1,
+    "delOpt": 1.9,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 2,
+    "immOpt": 1,
+    "delOpt": 1.3,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 3,
+    "immOpt": 1,
+    "delOpt": 1.1,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 4,
+    "immOpt": 1,
+    "delOpt": 1.033333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 5,
+    "immOpt": 1,
+    "delOpt": 1.011111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 6,
+    "immOpt": 5,
+    "delOpt": 9.5,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 7,
+    "immOpt": 5,
+    "delOpt": 6.5,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 8,
+    "immOpt": 5,
+    "delOpt": 5.5,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 9,
+    "immOpt": 5,
+    "delOpt": 5.166666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 10,
+    "immOpt": 5,
+    "delOpt": 5.055555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 11,
+    "immOpt": 10,
+    "delOpt": 19,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 12,
+    "immOpt": 10,
+    "delOpt": 13,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 13,
+    "immOpt": 10,
+    "delOpt": 11,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 14,
+    "immOpt": 10,
+    "delOpt": 10.33333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 15,
+    "immOpt": 10,
+    "delOpt": 10.11111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 16,
+    "immOpt": 20,
+    "delOpt": 38,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 17,
+    "immOpt": 20,
+    "delOpt": 26,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 18,
+    "immOpt": 20,
+    "delOpt": 22,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 19,
+    "immOpt": 20,
+    "delOpt": 20.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 20,
+    "immOpt": 20,
+    "delOpt": 20.22222222,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 21,
+    "immOpt": 50,
+    "delOpt": 95,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 22,
+    "immOpt": 50,
+    "delOpt": 65,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 23,
+    "immOpt": 50,
+    "delOpt": 55,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 24,
+    "immOpt": 50,
+    "delOpt": 51.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 25,
+    "immOpt": 50,
+    "delOpt": 50.55555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 26,
+    "immOpt": 1,
+    "delOpt": 10,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 27,
+    "immOpt": 1,
+    "delOpt": 4,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 28,
+    "immOpt": 1,
+    "delOpt": 2,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 29,
+    "immOpt": 1,
+    "delOpt": 1.333333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 30,
+    "immOpt": 1,
+    "delOpt": 1.111111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 31,
+    "immOpt": 5,
+    "delOpt": 50,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 32,
+    "immOpt": 5,
+    "delOpt": 20,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 33,
+    "immOpt": 5,
+    "delOpt": 10,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 34,
+    "immOpt": 5,
+    "delOpt": 6.666666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 35,
+    "immOpt": 5,
+    "delOpt": 5.555555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 36,
+    "immOpt": 10,
+    "delOpt": 100,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 37,
+    "immOpt": 10,
+    "delOpt": 40,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 38,
+    "immOpt": 10,
+    "delOpt": 20,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 39,
+    "immOpt": 10,
+    "delOpt": 13.33333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 40,
+    "immOpt": 10,
+    "delOpt": 11.11111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 41,
+    "immOpt": 20,
+    "delOpt": 200,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 42,
+    "immOpt": 20,
+    "delOpt": 80,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 43,
+    "immOpt": 20,
+    "delOpt": 40,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 44,
+    "immOpt": 20,
+    "delOpt": 26.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 45,
+    "immOpt": 20,
+    "delOpt": 22.22222222,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 46,
+    "immOpt": 50,
+    "delOpt": 500,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 47,
+    "immOpt": 50,
+    "delOpt": 200,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 48,
+    "immOpt": 50,
+    "delOpt": 100,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 49,
+    "immOpt": 50,
+    "delOpt": 66.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 50,
+    "immOpt": 50,
+    "delOpt": 55.55555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 51,
+    "immOpt": 1,
+    "delOpt": 28,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 52,
+    "immOpt": 1,
+    "delOpt": 10,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 53,
+    "immOpt": 1,
+    "delOpt": 4,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 54,
+    "immOpt": 1,
+    "delOpt": 2,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 55,
+    "immOpt": 1,
+    "delOpt": 1.333333333,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 56,
+    "immOpt": 5,
+    "delOpt": 140,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 57,
+    "immOpt": 5,
+    "delOpt": 50,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 58,
+    "immOpt": 5,
+    "delOpt": 20,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 59,
+    "immOpt": 5,
+    "delOpt": 10,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 60,
+    "immOpt": 5,
+    "delOpt": 6.666666667,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 61,
+    "immOpt": 10,
+    "delOpt": 280,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 62,
+    "immOpt": 10,
+    "delOpt": 100,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 63,
+    "immOpt": 10,
+    "delOpt": 40,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 64,
+    "immOpt": 10,
+    "delOpt": 20,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 65,
+    "immOpt": 10,
+    "delOpt": 13.33333333,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 66,
+    "immOpt": 20,
+    "delOpt": 560,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 67,
+    "immOpt": 20,
+    "delOpt": 200,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 68,
+    "immOpt": 20,
+    "delOpt": 80,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 69,
+    "immOpt": 20,
+    "delOpt": 40,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 70,
+    "immOpt": 20,
+    "delOpt": 26.66666667,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 71,
+    "immOpt": 50,
+    "delOpt": 1400,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 72,
+    "immOpt": 50,
+    "delOpt": 500,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 73,
+    "immOpt": 50,
+    "delOpt": 200,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 74,
+    "immOpt": 50,
+    "delOpt": 100,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 75,
+    "immOpt": 50,
+    "delOpt": 66.66666667,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 76,
+    "immOpt": 1,
+    "delOpt": 91,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 77,
+    "immOpt": 1,
+    "delOpt": 31,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 78,
+    "immOpt": 1,
+    "delOpt": 11,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 79,
+    "immOpt": 1,
+    "delOpt": 4.333333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 80,
+    "immOpt": 1,
+    "delOpt": 2.111111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 81,
+    "immOpt": 5,
+    "delOpt": 455,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 82,
+    "immOpt": 5,
+    "delOpt": 155,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 83,
+    "immOpt": 5,
+    "delOpt": 55,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 84,
+    "immOpt": 5,
+    "delOpt": 21.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 85,
+    "immOpt": 5,
+    "delOpt": 10.55555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 86,
+    "immOpt": 10,
+    "delOpt": 910,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 87,
+    "immOpt": 10,
+    "delOpt": 310,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 88,
+    "immOpt": 10,
+    "delOpt": 110,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 89,
+    "immOpt": 10,
+    "delOpt": 43.33333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 90,
+    "immOpt": 10,
+    "delOpt": 21.11111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 91,
+    "immOpt": 20,
+    "delOpt": 1820,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 92,
+    "immOpt": 20,
+    "delOpt": 620,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 93,
+    "immOpt": 20,
+    "delOpt": 220,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 94,
+    "immOpt": 20,
+    "delOpt": 86.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 95,
+    "immOpt": 20,
+    "delOpt": 42.22222222,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 96,
+    "immOpt": 50,
+    "delOpt": 4550,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "reward",
+    "probability": 10
+  },
+  {
+    "id": 97,
+    "immOpt": 50,
+    "delOpt": 1550,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "reward",
+    "probability": 25
+  },
+  {
+    "id": 98,
+    "immOpt": 50,
+    "delOpt": 550,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "reward",
+    "probability": 50
+  },
+  {
+    "id": 99,
+    "immOpt": 50,
+    "delOpt": 216.6666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "reward",
+    "probability": 75
+  },
+  {
+    "id": 100,
+    "immOpt": 50,
+    "delOpt": 105.5555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "reward",
+    "probability": 90
+  },
+  {
+    "id": 101,
+    "immOpt": 1,
+    "delOpt": 1.9,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 102,
+    "immOpt": 1,
+    "delOpt": 1.3,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 103,
+    "immOpt": 1,
+    "delOpt": 1.1,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 104,
+    "immOpt": 1,
+    "delOpt": 1.033333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 105,
+    "immOpt": 1,
+    "delOpt": 1.011111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 106,
+    "immOpt": 5,
+    "delOpt": 9.5,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 107,
+    "immOpt": 5,
+    "delOpt": 6.5,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 108,
+    "immOpt": 5,
+    "delOpt": 5.5,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 109,
+    "immOpt": 5,
+    "delOpt": 5.166666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 110,
+    "immOpt": 5,
+    "delOpt": 5.055555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 111,
+    "immOpt": 10,
+    "delOpt": 19,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 112,
+    "immOpt": 10,
+    "delOpt": 13,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 113,
+    "immOpt": 10,
+    "delOpt": 11,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 114,
+    "immOpt": 10,
+    "delOpt": 10.33333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 115,
+    "immOpt": 10,
+    "delOpt": 10.11111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 116,
+    "immOpt": 20,
+    "delOpt": 38,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 117,
+    "immOpt": 20,
+    "delOpt": 26,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 118,
+    "immOpt": 20,
+    "delOpt": 22,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 119,
+    "immOpt": 20,
+    "delOpt": 20.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 120,
+    "immOpt": 20,
+    "delOpt": 20.22222222,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 121,
+    "immOpt": 50,
+    "delOpt": 95,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 122,
+    "immOpt": 50,
+    "delOpt": 65,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 123,
+    "immOpt": 50,
+    "delOpt": 55,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 124,
+    "immOpt": 50,
+    "delOpt": 51.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 125,
+    "immOpt": 50,
+    "delOpt": 50.55555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 126,
+    "immOpt": 1,
+    "delOpt": 10,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 127,
+    "immOpt": 1,
+    "delOpt": 4,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 128,
+    "immOpt": 1,
+    "delOpt": 2,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 129,
+    "immOpt": 1,
+    "delOpt": 1.333333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 130,
+    "immOpt": 1,
+    "delOpt": 1.111111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 131,
+    "immOpt": 5,
+    "delOpt": 50,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 132,
+    "immOpt": 5,
+    "delOpt": 20,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 133,
+    "immOpt": 5,
+    "delOpt": 10,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 134,
+    "immOpt": 5,
+    "delOpt": 6.666666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 135,
+    "immOpt": 5,
+    "delOpt": 5.555555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 136,
+    "immOpt": 10,
+    "delOpt": 100,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 137,
+    "immOpt": 10,
+    "delOpt": 40,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 138,
+    "immOpt": 10,
+    "delOpt": 20,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 139,
+    "immOpt": 10,
+    "delOpt": 13.33333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 140,
+    "immOpt": 10,
+    "delOpt": 11.11111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 141,
+    "immOpt": 20,
+    "delOpt": 200,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 142,
+    "immOpt": 20,
+    "delOpt": 80,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 143,
+    "immOpt": 20,
+    "delOpt": 40,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 144,
+    "immOpt": 20,
+    "delOpt": 26.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 145,
+    "immOpt": 20,
+    "delOpt": 22.22222222,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 146,
+    "immOpt": 50,
+    "delOpt": 500,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 147,
+    "immOpt": 50,
+    "delOpt": 200,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 148,
+    "immOpt": 50,
+    "delOpt": 100,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 149,
+    "immOpt": 50,
+    "delOpt": 66.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 150,
+    "immOpt": 50,
+    "delOpt": 55.55555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 151,
+    "immOpt": 1,
+    "delOpt": 28,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 152,
+    "immOpt": 1,
+    "delOpt": 10,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 153,
+    "immOpt": 1,
+    "delOpt": 4,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 154,
+    "immOpt": 1,
+    "delOpt": 2,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 155,
+    "immOpt": 1,
+    "delOpt": 1.333333333,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 156,
+    "immOpt": 5,
+    "delOpt": 140,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 157,
+    "immOpt": 5,
+    "delOpt": 50,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 158,
+    "immOpt": 5,
+    "delOpt": 20,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 159,
+    "immOpt": 5,
+    "delOpt": 10,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 160,
+    "immOpt": 5,
+    "delOpt": 6.666666667,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 161,
+    "immOpt": 10,
+    "delOpt": 280,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 162,
+    "immOpt": 10,
+    "delOpt": 100,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 163,
+    "immOpt": 10,
+    "delOpt": 40,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 164,
+    "immOpt": 10,
+    "delOpt": 20,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 165,
+    "immOpt": 10,
+    "delOpt": 13.33333333,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 166,
+    "immOpt": 20,
+    "delOpt": 560,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 167,
+    "immOpt": 20,
+    "delOpt": 200,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 168,
+    "immOpt": 20,
+    "delOpt": 80,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 169,
+    "immOpt": 20,
+    "delOpt": 40,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 170,
+    "immOpt": 20,
+    "delOpt": 26.66666667,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 171,
+    "immOpt": 50,
+    "delOpt": 1400,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 172,
+    "immOpt": 50,
+    "delOpt": 500,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 173,
+    "immOpt": 50,
+    "delOpt": 200,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 174,
+    "immOpt": 50,
+    "delOpt": 100,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 175,
+    "immOpt": 50,
+    "delOpt": 66.66666667,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 176,
+    "immOpt": 1,
+    "delOpt": 91,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 177,
+    "immOpt": 1,
+    "delOpt": 31,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 178,
+    "immOpt": 1,
+    "delOpt": 11,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 179,
+    "immOpt": 1,
+    "delOpt": 4.333333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 180,
+    "immOpt": 1,
+    "delOpt": 2.111111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 181,
+    "immOpt": 5,
+    "delOpt": 455,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 182,
+    "immOpt": 5,
+    "delOpt": 155,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 183,
+    "immOpt": 5,
+    "delOpt": 55,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 184,
+    "immOpt": 5,
+    "delOpt": 21.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 185,
+    "immOpt": 5,
+    "delOpt": 10.55555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 186,
+    "immOpt": 10,
+    "delOpt": 910,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 187,
+    "immOpt": 10,
+    "delOpt": 310,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 188,
+    "immOpt": 10,
+    "delOpt": 110,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 189,
+    "immOpt": 10,
+    "delOpt": 43.33333333,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 190,
+    "immOpt": 10,
+    "delOpt": 21.11111111,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 191,
+    "immOpt": 20,
+    "delOpt": 1820,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 192,
+    "immOpt": 20,
+    "delOpt": 620,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 193,
+    "immOpt": 20,
+    "delOpt": 220,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 194,
+    "immOpt": 20,
+    "delOpt": 86.66666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 195,
+    "immOpt": 20,
+    "delOpt": 42.22222222,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  },
+  {
+    "id": 196,
+    "immOpt": 50,
+    "delOpt": 4550,
+    "odds": 9,
+    "prob": 0.1,
+    "task": "loss",
+    "probability": 10
+  },
+  {
+    "id": 197,
+    "immOpt": 50,
+    "delOpt": 1550,
+    "odds": 3,
+    "prob": 0.25,
+    "task": "loss",
+    "probability": 25
+  },
+  {
+    "id": 198,
+    "immOpt": 50,
+    "delOpt": 550,
+    "odds": 1,
+    "prob": 0.5,
+    "task": "loss",
+    "probability": 50
+  },
+  {
+    "id": 199,
+    "immOpt": 50,
+    "delOpt": 216.6666667,
+    "odds": 0.333333333,
+    "prob": 0.75,
+    "task": "loss",
+    "probability": 75
+  },
+  {
+    "id": 200,
+    "immOpt": 50,
+    "delOpt": 105.5555556,
+    "odds": 0.111111111,
+    "prob": 0.9,
+    "task": "loss",
+    "probability": 90
+  }
+]
