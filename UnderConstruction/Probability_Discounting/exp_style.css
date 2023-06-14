@@ -278,3 +278,9 @@ margin: auto; /* this is for overflowing content */
     font-weight:bold;
     color: #DC3220;
 }
+
+/* Double the radio button size */
+input[type='radio']{
+  transform: scale(1.5);
+  margin-bottom: 10px;   /* Apply some bottom margin */
+}

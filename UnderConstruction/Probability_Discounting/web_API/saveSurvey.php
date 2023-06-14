@@ -101,7 +101,13 @@ try {
     `bis1`,`bis2`,`bis3`,`bis4`,`bis5`,`bis6`,`bis7`,`bis8`,`bis9`,`bis10`,
     `bis11`,`bis12`,`bis13`,`bis14`,`bis15`) VALUES ('$id', '$date', '$time',
     '$audit1','$audit2','$audit3','$audit4','$audit5','$audit6','$audit7','$audit8',
-    '$audit9','$audit10',
+    '$audit9','$audit10', 
+    '$dospert1', '$dospert2', '$dospert3', '$dospert4', 
+    '$dospert5', '$dospert6', '$dospert7', '$dospert8', '$dospert9', '$dospert10', '$dospert11', '$dospert12',
+    '$dospert13', '$dospert14', '$dospert15', '$dospert16', '$dospert17', '$dospert18', '$dospert19', '$dospert20',
+    '$dospert21', '$dospert22', '$dospert23', '$dospert24', '$dospert25', '$dospert26', '$dospert27', '$dospert28',
+    '$dospert29', '$dospert30', '$dospert31', '$dospert32', '$dospert33', '$dospert34', '$dospert35', '$dospert36',
+    '$dospert37', '$dospert38', '$dospert39', '$dospert40',
     '$bis1','$bis2','$bis3','$bis4','$bis5','$bis6','$bis7','$bis8','$bis9','$bis10',
     '$bis11','$bis12','$bis13','$bis14','$bis15')";
 

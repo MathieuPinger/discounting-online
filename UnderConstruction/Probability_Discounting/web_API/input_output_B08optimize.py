@@ -12,10 +12,9 @@ from scipy import optimize
 import pandas as pd                         #import data
 #import math
 
-#id = sys.argv[1]
-#id = "0ko4o6yky"
-#id = "example"
-id="33g4kqjnw"
+id = sys.argv[1]
+
+
 # define necessary functions
 #------------------------------------------------------------------------------
 # optimize model
@@ -39,7 +38,7 @@ def optimizeModel(odds, r1, r2, a):
         #result=optimize.minimize(getLikelihoodHyperbolic, pars0 ,(a,r1,r2,delay), options={'eps': eps}) 
 
         #bounded optimization
-        bnds = ((0, 2), (0, 1000))  #upper and lower bounds used for bounded optimization
+        bnds = ((0.001, 2), (0.001, 1000))  #upper and lower bounds used for bounded optimization
         result=optimize.minimize(fun=getNegLikelihood, 
                                  x0=pars0, 
                                  args=(a,r1,r2,odds), 
