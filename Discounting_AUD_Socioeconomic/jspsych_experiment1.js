@@ -3,7 +3,6 @@ Script for first experimental session
 uncomment console.logs for debugging
 If no data are stored, unable redirect to questionnaires.html to see php errors
 */
-
 let dataPath = "stimuli/trials.json";
 
 window.onload = runExperiment();

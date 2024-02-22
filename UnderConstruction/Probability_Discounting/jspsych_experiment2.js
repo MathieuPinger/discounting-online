@@ -214,12 +214,12 @@ async function runExperiment() {
     let rew2 = rew1.splice(0, Math.ceil(rew1.length/2));
 
     // // debug: only 5 trials
-    loss1 = loss1.slice(0,5)
-    console.log(loss1);
-    loss2 = loss2.slice(0,5)
-    rew1 = rew1.slice(0,5)
-    console.log(rew1);
-    rew2 = rew2.slice(0,5)
+    // loss1 = loss1.slice(0,5)
+    // console.log(loss1);
+    // loss2 = loss2.slice(0,5)
+    // rew1 = rew1.slice(0,5)
+    // console.log(rew1);
+    // rew2 = rew2.slice(0,5)
 
     // run 2 forced choice task
     run2FC(loss1, loss2, rew1, rew2);
