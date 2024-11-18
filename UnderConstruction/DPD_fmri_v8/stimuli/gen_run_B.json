@@ -1,0 +1,1922 @@
+[
+    {
+        "delOpt": 30.1,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 1.5,
+        "p_certain": 0.65,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 1.130365595e+18,
+        "delay": 182.5,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.130365595e+18,
+        "delay": 182.5,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 1095,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 27390,
+        "delay": 182.5,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.130365595e+18,
+        "delay": 182.5,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.863308017e+17,
+        "delay": 30,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 6020,
+        "delay": 30,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.130365595e+18,
+        "delay": 182.5,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 4.172746027e+17,
+        "delay": 30,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 4.188831977e+16,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.6666666667,
+        "p_certain": 0.35,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 1.5,
+        "p_certain": 0.65,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 73040,
+        "delay": 182.5,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.25,
+        "p_certain": 0.65,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 5.559040388e+17,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 4,
+        "p_certain": 0.2,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 6.779098371e+18,
+        "delay": 1095,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 18260,
+        "delay": 182.5,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.6666666667,
+        "p_certain": 0.65,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 520,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.25,
+        "p_certain": 0.5,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 780,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.25,
+        "p_certain": 0.5,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 30,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.6666666667,
+        "p_certain": 0.8,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.6666666667,
+        "p_certain": 0.65,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 1.5,
+        "p_certain": 0.8,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 2.093304485e+17,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 1.5,
+        "p_certain": 0.2,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 5.061360712e+18,
+        "delay": 365,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 2.093304485e+17,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 1.5,
+        "p_certain": 0.2,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 1.609501942e+16,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.25,
+        "p_certain": 0.35,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 1.518130955e+19,
+        "delay": 1095,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 676.6666666667,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.6666666667,
+        "p_certain": 0.5,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 9.347492047e+16,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 1.5,
+        "p_certain": 0.35,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.6666666667,
+        "p_certain": 0.65,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.25,
+        "p_certain": 0.8,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 1.863308017e+17,
+        "delay": 30,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 182.5,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 182.5,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.25,
+        "p_certain": 0.65,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 2.482347226e+17,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 4,
+        "p_certain": 0.35,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 2030,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.6666666667,
+        "p_certain": 0.5,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 1.518130955e+19,
+        "delay": 1095,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 5.061360712e+18,
+        "delay": 365,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 365,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 30,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.25,
+        "p_certain": 0.65,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 547550,
+        "delay": 1095,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 3.604365339e+16,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.25,
+        "p_certain": 0.2,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 2.26011215e+18,
+        "delay": 365,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 3.604365339e+16,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.25,
+        "p_certain": 0.2,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 2.093304485e+17,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 1.5,
+        "p_certain": 0.2,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 4515,
+        "delay": 30,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 365,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 7550,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 1.5,
+        "p_certain": 0.5,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 1095,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 54765,
+        "delay": 365,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 4,
+        "p_certain": 0.8,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 365,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.518130955e+19,
+        "delay": 1095,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 219020,
+        "delay": 1095,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 5.559040388e+17,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 4,
+        "p_certain": 0.2,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 4,
+        "p_certain": 0.65,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 365,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 4.172746027e+17,
+        "delay": 30,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 182.5,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 9.347492047e+16,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 1.5,
+        "p_certain": 0.35,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 365,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 6.779098371e+18,
+        "delay": 1095,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 4.172746027e+17,
+        "delay": 30,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.863308017e+17,
+        "delay": 30,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 12030,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 4,
+        "p_certain": 0.5,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 1095,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.609501942e+16,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.25,
+        "p_certain": 0.35,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 4.188831977e+16,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.6666666667,
+        "p_certain": 0.35,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 1.130365595e+18,
+        "delay": 182.5,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 1095,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.609501942e+16,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.25,
+        "p_certain": 0.35,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 182.5,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 30,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 30,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 1.5,
+        "p_certain": 0.65,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 3.604365339e+16,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.25,
+        "p_certain": 0.2,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 5.559040388e+17,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 4,
+        "p_certain": 0.2,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 328530,
+        "delay": 1095,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.609501942e+16,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.25,
+        "p_certain": 0.35,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 2.482347226e+17,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 4,
+        "p_certain": 0.35,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 30,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 4,
+        "p_certain": 0.8,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 182.5,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 5.559040388e+17,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 4,
+        "p_certain": 0.2,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 1510,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 1.5,
+        "p_certain": 0.5,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.6666666667,
+        "p_certain": 0.8,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 6.779098371e+18,
+        "delay": 1095,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 4.188831977e+16,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.6666666667,
+        "p_certain": 0.35,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 1.518130955e+19,
+        "delay": 1095,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 1095,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 30,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 1.5,
+        "p_certain": 0.65,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 4,
+        "p_certain": 0.65,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 2706.6666666667,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.6666666667,
+        "p_certain": 0.5,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 36510,
+        "delay": 365,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 4,
+        "p_certain": 0.8,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 9.380591844e+16,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.6666666667,
+        "p_certain": 0.2,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.25,
+        "p_certain": 0.65,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 3010,
+        "delay": 30,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 2.482347226e+17,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 4,
+        "p_certain": 0.35,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 5.061360712e+18,
+        "delay": 365,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 36520,
+        "delay": 182.5,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 9.347492047e+16,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 1.5,
+        "p_certain": 0.35,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 4,
+        "p_certain": 0.65,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 1.518130955e+19,
+        "delay": 1095,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 2.26011215e+18,
+        "delay": 365,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 3.604365339e+16,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.25,
+        "p_certain": 0.2,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 15050,
+        "delay": 30,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 5.061360712e+18,
+        "delay": 365,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 2.531373503e+18,
+        "delay": 182.5,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 8020,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 4,
+        "p_certain": 0.5,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 5.559040388e+17,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 4,
+        "p_certain": 0.2,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 2.531373503e+18,
+        "delay": 182.5,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.25,
+        "p_certain": 0.8,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 6.779098371e+18,
+        "delay": 1095,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 9030,
+        "delay": 30,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 91300,
+        "delay": 182.5,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 30,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.6666666667,
+        "p_certain": 0.65,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 6.779098371e+18,
+        "delay": 1095,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 164265,
+        "delay": 1095,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 30,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 3383.3333333333,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.6666666667,
+        "p_certain": 0.5,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 6015,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 4,
+        "p_certain": 0.5,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 16040,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 4,
+        "p_certain": 0.5,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 390,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.25,
+        "p_certain": 0.5,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 2.093304485e+17,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 1.5,
+        "p_certain": 0.2,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 2.093304485e+17,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 1.5,
+        "p_certain": 0.2,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 73020,
+        "delay": 365,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 1095,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 4,
+        "p_certain": 0.8,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 4,
+        "p_certain": 0.65,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 4530,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 1.5,
+        "p_certain": 0.5,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 2.531373503e+18,
+        "delay": 182.5,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 5.559040388e+17,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 4,
+        "p_certain": 0.2,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.6666666667,
+        "p_certain": 0.8,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 1.5,
+        "p_certain": 0.8,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 365,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 54780,
+        "delay": 182.5,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 2.482347226e+17,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 4,
+        "p_certain": 0.35,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 2.531373503e+18,
+        "delay": 182.5,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 1095,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 4,
+        "p_certain": 0.8,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.25,
+        "p_certain": 0.65,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 9.380591844e+16,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.6666666667,
+        "p_certain": 0.2,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 3.604365339e+16,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.25,
+        "p_certain": 0.2,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 2.26011215e+18,
+        "delay": 365,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 6040,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 1.5,
+        "p_certain": 0.5,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 1.863308017e+17,
+        "delay": 30,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.25,
+        "p_certain": 0.8,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 4.188831977e+16,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.6666666667,
+        "p_certain": 0.35,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 9.380591844e+16,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.6666666667,
+        "p_certain": 0.2,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 9.380591844e+16,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.6666666667,
+        "p_certain": 0.2,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 146040,
+        "delay": 365,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 182.5,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 2265,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 1.5,
+        "p_certain": 0.5,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 1015,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.6666666667,
+        "p_certain": 0.5,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.6666666667,
+        "p_certain": 0.65,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 1095,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.6666666667,
+        "p_certain": 0.8,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 2.482347226e+17,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 4,
+        "p_certain": 0.35,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 2.531373503e+18,
+        "delay": 182.5,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 12040,
+        "delay": 30,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.518130955e+19,
+        "delay": 1095,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 182.5,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 4,
+        "p_certain": 0.8,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 5.061360712e+18,
+        "delay": 365,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 9.380591844e+16,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.6666666667,
+        "p_certain": 0.2,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 30,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 2.26011215e+18,
+        "delay": 365,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 2.531373503e+18,
+        "delay": 182.5,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 365,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.863308017e+17,
+        "delay": 30,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 4.172746027e+17,
+        "delay": 30,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 182.5,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 9.380591844e+16,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.6666666667,
+        "p_certain": 0.2,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 1.5,
+        "p_certain": 0.8,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 2.26011215e+18,
+        "delay": 365,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 1.5,
+        "p_certain": 0.65,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 438040,
+        "delay": 1095,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 1095,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 9.347492047e+16,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 1.5,
+        "p_certain": 0.35,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 109510,
+        "delay": 1095,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 365,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 182.5,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 182.5,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 4010,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 4,
+        "p_certain": 0.5,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.6666666667,
+        "p_certain": 0.8,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.25,
+        "p_certain": 0.8,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 6.779098371e+18,
+        "delay": 1095,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.6666666667,
+        "p_certain": 0.8,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 2.482347226e+17,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 4,
+        "p_certain": 0.35,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 1095,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 3020,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 1.5,
+        "p_certain": 0.5,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 5.061360712e+18,
+        "delay": 365,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 365,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 4,
+        "p_certain": 0.65,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 1095,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 4.172746027e+17,
+        "delay": 30,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 9.347492047e+16,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 1.5,
+        "p_certain": 0.35,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 1.130365595e+18,
+        "delay": 182.5,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 1.5,
+        "p_certain": 0.8,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 182.5,
+        "immOpt": 20,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.25,
+        "p_certain": 0.8,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 1040,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.25,
+        "p_certain": 0.5,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 30,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 365,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 1.5,
+        "p_certain": 0.8,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 20.1,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.25,
+        "p_certain": 0.65,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 30,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 3.604365339e+16,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.25,
+        "p_certain": 0.2,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 365,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 4.188831977e+16,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.6666666667,
+        "p_certain": 0.35,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 182.5,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1353.3333333333,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.6666666667,
+        "p_certain": 0.5,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 4.172746027e+17,
+        "delay": 30,
+        "immOpt": 15,
+        "odds": 0,
+        "p_certain": 0.2,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 109530,
+        "delay": 365,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 50.1,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 1.5,
+        "p_certain": 0.65,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 4,
+        "p_certain": 0.65,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 9.347492047e+16,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 1.5,
+        "p_certain": 0.35,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 260,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.25,
+        "p_certain": 0.5,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 4.188831977e+16,
+        "delay": 0,
+        "immOpt": 20,
+        "odds": 0.6666666667,
+        "p_certain": 0.35,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 1.5,
+        "p_certain": 0.8,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 2.093304485e+17,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 1.5,
+        "p_certain": 0.2,
+        "p_occurence": 0.4
+    },
+    {
+        "delOpt": 2.26011215e+18,
+        "delay": 365,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1300,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 0.25,
+        "p_certain": 0.5,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 15.1,
+        "delay": 0,
+        "immOpt": 15,
+        "odds": 0.6666666667,
+        "p_certain": 0.65,
+        "p_occurence": 0.6
+    },
+    {
+        "delOpt": 40.1,
+        "delay": 1095,
+        "immOpt": 40,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 20050,
+        "delay": 0,
+        "immOpt": 50,
+        "odds": 4,
+        "p_certain": 0.5,
+        "p_occurence": 0.2
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 365,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.8,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.863308017e+17,
+        "delay": 30,
+        "immOpt": 10,
+        "odds": 0,
+        "p_certain": 0.35,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 1.609501942e+16,
+        "delay": 0,
+        "immOpt": 30,
+        "odds": 0.25,
+        "p_certain": 0.35,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 30.1,
+        "delay": 30,
+        "immOpt": 30,
+        "odds": 0,
+        "p_certain": 0.65,
+        "p_occurence": 0
+    },
+    {
+        "delOpt": 10.1,
+        "delay": 0,
+        "immOpt": 10,
+        "odds": 0.25,
+        "p_certain": 0.8,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 1.609501942e+16,
+        "delay": 0,
+        "immOpt": 40,
+        "odds": 0.25,
+        "p_certain": 0.35,
+        "p_occurence": 0.8
+    },
+    {
+        "delOpt": 182550,
+        "delay": 365,
+        "immOpt": 50,
+        "odds": 0,
+        "p_certain": 0.5,
+        "p_occurence": 0
+    }
+]
