@@ -4,6 +4,7 @@ INSTRUCTIONS AND TEST TRIALS
 - one test trial per condition: loss and reward
 -> total timeline: [instructions, testProcedure, trialProcedure]
 */
+var jsPsych = initJsPsych();
 
 const instructionsText1 =
     `<div class="instructions">
@@ -119,101 +120,101 @@ const instructionsText2 = `
     </div>`
 
 const instructions1 = {
-    type: "html-button-response",
+    type: jsPsychHtmlButtonResponse,
     stimulus: instructionsText1,
-    choices: ['Continue'],
-    margin_vertical: '100px',
-};
+    choices: ["Continue"],
+    margin_vertical: "100px",
+    };      
 
 const instructions2 = {
-    type: "html-button-response",
+    type: jsPsychHtmlButtonResponse,
     stimulus: instructionsText2,
-    choices: ['Continue to test trials'],
-    margin_vertical: '100px',
-};
+    choices: ["Continue to test trials"],
+    margin_vertical: "100px",
+    };
 
 const practiceBlock = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: jsPsych.timelineVariable('stimulus'),
     data: jsPsych.timelineVariable('data'),
-    choices: ['q', 'p'],
-    on_finish: function(data) {
-        // add timelineType
+    choices: ["q", "p"],
+    on_finish: function (data) {
         data.timelineType = "test";
-    }
-};
+    },
+    };
+      
 
 const trialBlock = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: jsPsych.timelineVariable('stimulus'),
     data: jsPsych.timelineVariable('data'),
-    choices: ['q', 'p'],
+    choices: ["q", "p"],
     stimulus_duration: 10000,
     trial_duration: 10000,
-    on_finish: function(data) {
-        delete data.stimulus; // not needed in csv
-        // recode button press for csv
-        if(data.key_press == 80 && data.randomize == 0){
+    on_finish: function (data) {
+        delete data.stimulus;
+        if (data.response == "p" && data.randomize == 0) {
         data.choice = "delayed";
-        } else if(data.key_press == 81 && data.randomize == 0){
+        } else if (data.response == "q" && data.randomize == 0) {
         data.choice = "immediate";
-        } else if(data.key_press == 81 && data.randomize == 1){
+        } else if (data.response == "q" && data.randomize == 1) {
         data.choice = "delayed";
-        } else if(data.key_press == 80 && data.randomize == 1){
+        } else if (data.response == "p" && data.randomize == 1) {
         data.choice = "immediate";
-        };
-        // add timelineType
-        data.timelineType = "trial";
-    }
-};
-
-const fixation = {
-    type: 'html-keyboard-response',
-    stimulus: '<div style="font-size:60px;">+</div>',
-    choices: jsPsych.NO_KEYS,
-    // jitter fixcross between 500 and 1500 ms
-    trial_duration: 1000,
-    on_finish: function(data) {
-        // add timelineType
-        data.timelineType = "fixcross"; 
-    }
-};
-
-const trialfeedback = {
-    type: 'html-keyboard-response',
-    stimulus: function(){
-        lastChoice = jsPsych.data.getLastTrialData().values()[0].key_press;
-        lastRando = jsPsych.data.getLastTrialData().values()[0].randomize;
-        lastImmOpt = jsPsych.data.getLastTrialData().values()[0].immOpt;
-        lastDelOpt = jsPsych.data.getLastTrialData().values()[0].delOpt;
-        lastDelay = jsPsych.data.getLastTrialData().values()[0].delay;
-        lastProb = jsPsych.data.getLastTrialData().values()[0].prob;
-
-        if(lastChoice == 81){
-            trialFeedback = constructStim(lastRando, lastImmOpt, lastDelOpt, lastDelay, lastProb,
-                feedback='left');
-            return trialFeedback
-
-        } else if(lastChoice == 80) {
-            trialFeedback = constructStim(lastRando, lastImmOpt, lastDelOpt, lastDelay, lastProb,
-                feedback='right');
-            return trialFeedback
-
-        } else {
-            trialFeedback = `<div class = centerbox id='container'>
-            <p class = center-block-text style="color:red;">
-                <b>Please select an option by pressing Q or P!</b>
-            </p>`;
-            return trialFeedback
         }
+        data.timelineType = "trial";
     },
-    choices: jsPsych.NO_KEYS,
+    };
+    
+    const fixation = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<div style=\"font-size:60px;\">+</div>",
+    choices: "NO_KEYS",
     trial_duration: 1000,
-    on_finish: function(data) {
-        // add timelineType
-        data.timelineType = "feedback"; 
-    }
-};
+    on_finish: function (data) {
+        data.timelineType = "fixcross";
+    },
+    };
+    
+    const trialfeedback = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function () {
+        let lastData = jsPsych.data.getLastTrialData().values()[0];
+        let feedback;
+    
+        if (lastData.response == "q") {
+        feedback = constructStim(
+            lastData.randomize,
+            lastData.immOpt,
+            lastData.delOpt,
+            lastData.delay,
+            lastData.prob,
+            "left"
+        );
+        } else if (lastData.response == "p") {
+        feedback = constructStim(
+            lastData.randomize,
+            lastData.immOpt,
+            lastData.delOpt,
+            lastData.delay,
+            lastData.prob,
+            "right"
+        );
+        } else {
+        feedback = `<div class = centerbox id='container'>
+            <p class = center-block-text style="color:red;">
+            <b>Please select an option by pressing Q or P!</b>
+            </p>`;
+        }
+        return feedback;
+    },
+    choices: "NO_KEYS",
+    trial_duration: 1000,
+    on_finish: function (data) {
+        data.timelineType = "feedback";
+    },
+    };
+      
 
 const practiceTimeline_variables = [
     {   data: {immOpt: '5.00', delOpt: '10.20', delay: '365', prob: '0.5', randomize: '0'},
@@ -235,7 +236,7 @@ const practiceProcedure = {
 }
 
 const finishInstructions = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: 
         `<div class="instructions">
         <p>Das Experiment kann jetzt beginnen!
@@ -250,7 +251,7 @@ const finishInstructions = {
 };
 
 const debriefPart1 = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: `<p>Sie haben den erste Teil beendet.</p>
                 <p><b>Bitte schließen sie nicht dieses Browserfenster.</b>
                 <p>Sie werden automatisch zum zweiten Teil weitergeleitet.</p>
@@ -260,14 +261,14 @@ const debriefPart1 = {
                 // If you are not redirected, please click 
                 // <a target="_self" href="https://clox.zi-mannheim.de/rewad2/rewad2_server/rewad_part2.html" >here</a>`,
     margin_vertical: '100px',
-    choices: jsPsych.NO_KEYS,
+    choices: "NO_KEYS",
     on_load: function() {
         saveData();
     }
 };
 
 const blockIntro = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: `<p>Drücken Sie Q oder P, wenn Sie bereit sind, den nächsten Block zu starten.</p>`,
     margin_vertical: '100px',
     choices: ['q', 'p'],

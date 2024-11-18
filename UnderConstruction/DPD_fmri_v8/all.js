@@ -1,127 +1,115 @@
 /*
-Main File (jspsych_experiment1.js)
+Script 1
 */
+var jsPsych = initJsPsych();
 
 // run experiment on page load
 // path to testfile.json
 let dataPath = "stimuli/gen_run_B.json";
-window.onload = runExperiment();
+
+window.onload = runExperiment;
 
 async function runExperiment() {
-    /*
-    RUN EXPERIMENT
-    - loads json trial
-    - converts json data to an array of trial objects
-    - calls run2FC (2-forced-choice) function with the trial array
-    */
+  /*
+  RUN EXPERIMENT
+  - loads json trial
+  - converts json data to an array of trial objects
+  - calls run2FC (2-forced-choice) function with the trial array
+  */
 
-    const trialList = await fetchData(dataPath).then(data => Object.values(data))
-    .then(data => roundChoices(data))
-    .then(data => correctRounding(data))
-    .then(data => correctLossSign(data))
-    .then(data => roundChoices(data)) // second rounding for correct negative values!
-    .then(data => createTimeline(data))
-    .then(data => randomizeOrientation(data))
-    .then(data => shuffleArray(data))
+  const trialList = await fetchData(dataPath)
+    .then((data) => Object.values(data))
+    .then((data) => roundChoices(data))
+    .then((data) => correctRounding(data))
+    .then((data) => correctLossSign(data))
+    .then((data) => roundChoices(data)) // second rounding for correct negative values!
+    .then((data) => createTimeline(data))
+    .then((data) => randomizeOrientation(data))
+    .then((data) => shuffleArray(data));
 
-    let loss1 = [];
-    let rew1 = [];
-    trialList.forEach((trial) => (trial.data.task=='loss' ? loss1 : rew1).push(trial));
+  let loss1 = [];
+  let rew1 = [];
+  trialList.forEach((trial) => (trial.data.task == "loss" ? loss1 : rew1).push(trial));
 
-    // slice loss and reward into 2 sections each
-    // slice loss and reward into 2 sections each
-    let loss2 = loss1.splice(0, Math.ceil(loss1.length/2));
-    let rew2 = rew1.splice(0, Math.ceil(rew1.length/2));
+  // slice loss and reward into 2 sections each
+  let loss2 = loss1.splice(0, Math.ceil(loss1.length / 2));
+  let rew2 = rew1.splice(0, Math.ceil(rew1.length / 2));
 
-    // run 2 forced choice task
-    run2FC(loss1, loss2, rew1, rew2);
-
-};
-
+  // run 2 forced choice task
+  run2FC(loss1, loss2, rew1, rew2);
+}
 
 function run2FC(loss1, loss2, rew1, rew2) {
+  // create 2 orders of stimuli: loss-rew and rew-loss
+  let order = Math.round(Math.random());
+  console.log(order);
 
-    // input: jsPsych timeline (array)
-    
+  let lossProc1 = createProcedure(loss1, "loss");
+  let lossProc2 = createProcedure(loss2, "loss");
+  let rewProc1 = createProcedure(rew1, "reward");
+  let rewProc2 = createProcedure(rew2, "reward");
 
-    // console.log("This is the trialTimeline:");
-    // console.log(trialTimeline);
+  let trialProcedure;
+  if (order == 0) {
+    trialProcedure = {
+      timeline: [rewProc1, lossProc1, rewProc2, lossProc2],
+    };
+  } else {
+    trialProcedure = {
+      timeline: [lossProc1, rewProc1, lossProc2, rewProc2],
+    };
+  }
 
-    // create 2 orders of stimuli: loss-rew and rew-loss
-    let order=Math.round(Math.random());
-    console.log(order);
+  let timeline = [
+    instructions1,
+    instructions2,
+    practiceProcedure,
+    finishInstructions,
+    trialProcedure,
+    debriefPart1,
+  ];
 
-    let lossProc1 = createProcedure(loss1, "loss");
-    let lossProc2 = createProcedure(loss2, "loss");
-    let rewProc1 = createProcedure(rew1, "reward");
-    let rewProc2 = createProcedure(rew2, "reward");
-    // console.log(lossProc1);
+  jsPsych.run(timeline);
+}
 
-    let trialProcedure;
-    if(order==0) {
-        trialProcedure={
-            timeline: [rewProc1, lossProc1, rewProc2, lossProc2]
-        };
-    } else {
-        trialProcedure={
-            timeline: [lossProc1, rewProc1, lossProc2, rewProc2]
-        };
-    }
-
-    let timeline = [];
-    timeline.push(instructions1, instructions2, 
-        practiceProcedure, finishInstructions, trialProcedure, debriefPart1);
-
-    jsPsych.init({
-        timeline: timeline,
-        minimum_valid_rt: 200,
-        on_close: function(){
-            saveData(); // save data if window is closed; otherwise during debrief trial
-        }
-    });
-};
-
+// Updated saveData function to jsPsych v8 syntax
 function saveData() {
-    // creates object with prolific id and experiment data
-    // sends json-object to php for storage
+  // add startdate and starttime
+  let startdate = jsPsych.getStartTime().toLocaleDateString();
+  let starttime = jsPsych.getStartTime().toLocaleTimeString();
+  jsPsych.data.addProperties({ startdate: startdate, starttime: starttime });
 
-    // add startdate and starttime
-    let startdate = jsPsych.startTime().toLocaleDateString();
-    let starttime = jsPsych.startTime().toLocaleTimeString();
-    jsPsych.data.addProperties({startdate: startdate, starttime: starttime});
+  // add ID to every trial
+  jsPsych.data.addProperties({ subject_id: sessionStorage.getItem("prolific_id") });
 
-    // add ID to every trial
-    jsPsych.data.addProperties({subject_id: sessionStorage.getItem('prolific_id')});
+  // get data object
+  let data = jsPsych.data.get();
 
-    // get data object
-    let data = jsPsych.data.get();
+  // separate json and csv files
+  let jsonfile = data.json();
+  let csvfile = data.filter({ timelineType: "trial" }).csv();
+  let csvparams = {
+    prolific_id: sessionStorage.getItem("prolific_id"),
+    data: csvfile,
+  };
 
-    // separate json and csv files
-    let jsonfile = data.json();
-    let csvfile = data.filter({timelineType: "trial"}).csv();
-    let csvparams = {
-                "prolific_id": sessionStorage.getItem('prolific_id'),
-                "data": csvfile
-            }; 
-   
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "web_API/saveExp1.php");
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.upload.onloadstart = function () {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'web_API/saveExp1.php');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    
-     xhr.upload.onloadstart = function() {
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'web_API/saveExp1db.php');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(jsonfile)
+    xhr.open("POST", "web_API/saveExp1db.php");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(jsonfile);
+  };
 
-     }
+  xhr.send(JSON.stringify(csvparams));
+}
 
-    xhr.send(JSON.stringify(csvparams));
-};
+/* SCRIPT 2*/
 
-/*
-Function file (expFunctions.js)
-*/
+var jsPsych = initJsPsych();
 
 // fetch data
 async function fetchData(path) {
@@ -302,14 +290,14 @@ function createTimeline(trialArray) {
     return trialTimeline;
 };
 
-/* Trials File (expTrials.js) */
-
+/* SCRIPT 3*/
 /* 
 INSTRUCTIONS AND TEST TRIALS
 - verbal instructions
 - one test trial per condition: loss and reward
 -> total timeline: [instructions, testProcedure, trialProcedure]
 */
+var jsPsych = initJsPsych();
 
 const instructionsText1 =
     `<div class="instructions">
@@ -425,101 +413,101 @@ const instructionsText2 = `
     </div>`
 
 const instructions1 = {
-    type: "html-button-response",
+    type: jsPsychHtmlButtonResponse,
     stimulus: instructionsText1,
-    choices: ['Continue'],
-    margin_vertical: '100px',
-};
+    choices: ["Continue"],
+    margin_vertical: "100px",
+    };      
 
 const instructions2 = {
-    type: "html-button-response",
+    type: jsPsychHtmlButtonResponse,
     stimulus: instructionsText2,
-    choices: ['Continue to test trials'],
-    margin_vertical: '100px',
-};
+    choices: ["Continue to test trials"],
+    margin_vertical: "100px",
+    };
 
 const practiceBlock = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: jsPsych.timelineVariable('stimulus'),
     data: jsPsych.timelineVariable('data'),
-    choices: ['q', 'p'],
-    on_finish: function(data) {
-        // add timelineType
+    choices: ["q", "p"],
+    on_finish: function (data) {
         data.timelineType = "test";
-    }
-};
+    },
+    };
+      
 
 const trialBlock = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: jsPsych.timelineVariable('stimulus'),
     data: jsPsych.timelineVariable('data'),
-    choices: ['q', 'p'],
+    choices: ["q", "p"],
     stimulus_duration: 10000,
     trial_duration: 10000,
-    on_finish: function(data) {
-        delete data.stimulus; // not needed in csv
-        // recode button press for csv
-        if(data.key_press == 80 && data.randomize == 0){
+    on_finish: function (data) {
+        delete data.stimulus;
+        if (data.response == "p" && data.randomize == 0) {
         data.choice = "delayed";
-        } else if(data.key_press == 81 && data.randomize == 0){
+        } else if (data.response == "q" && data.randomize == 0) {
         data.choice = "immediate";
-        } else if(data.key_press == 81 && data.randomize == 1){
+        } else if (data.response == "q" && data.randomize == 1) {
         data.choice = "delayed";
-        } else if(data.key_press == 80 && data.randomize == 1){
+        } else if (data.response == "p" && data.randomize == 1) {
         data.choice = "immediate";
-        };
-        // add timelineType
-        data.timelineType = "trial";
-    }
-};
-
-const fixation = {
-    type: 'html-keyboard-response',
-    stimulus: '<div style="font-size:60px;">+</div>',
-    choices: jsPsych.NO_KEYS,
-    // jitter fixcross between 500 and 1500 ms
-    trial_duration: 1000,
-    on_finish: function(data) {
-        // add timelineType
-        data.timelineType = "fixcross"; 
-    }
-};
-
-const trialfeedback = {
-    type: 'html-keyboard-response',
-    stimulus: function(){
-        lastChoice = jsPsych.data.getLastTrialData().values()[0].key_press;
-        lastRando = jsPsych.data.getLastTrialData().values()[0].randomize;
-        lastImmOpt = jsPsych.data.getLastTrialData().values()[0].immOpt;
-        lastDelOpt = jsPsych.data.getLastTrialData().values()[0].delOpt;
-        lastDelay = jsPsych.data.getLastTrialData().values()[0].delay;
-        lastProb = jsPsych.data.getLastTrialData().values()[0].prob;
-
-        if(lastChoice == 81){
-            trialFeedback = constructStim(lastRando, lastImmOpt, lastDelOpt, lastDelay, lastProb,
-                feedback='left');
-            return trialFeedback
-
-        } else if(lastChoice == 80) {
-            trialFeedback = constructStim(lastRando, lastImmOpt, lastDelOpt, lastDelay, lastProb,
-                feedback='right');
-            return trialFeedback
-
-        } else {
-            trialFeedback = `<div class = centerbox id='container'>
-            <p class = center-block-text style="color:red;">
-                <b>Please select an option by pressing Q or P!</b>
-            </p>`;
-            return trialFeedback
         }
+        data.timelineType = "trial";
     },
-    choices: jsPsych.NO_KEYS,
+    };
+    
+    const fixation = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<div style=\"font-size:60px;\">+</div>",
+    choices: "NO_KEYS",
     trial_duration: 1000,
-    on_finish: function(data) {
-        // add timelineType
-        data.timelineType = "feedback"; 
-    }
-};
+    on_finish: function (data) {
+        data.timelineType = "fixcross";
+    },
+    };
+    
+    const trialfeedback = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function () {
+        let lastData = jsPsych.data.getLastTrialData().values()[0];
+        let feedback;
+    
+        if (lastData.response == "q") {
+        feedback = constructStim(
+            lastData.randomize,
+            lastData.immOpt,
+            lastData.delOpt,
+            lastData.delay,
+            lastData.prob,
+            "left"
+        );
+        } else if (lastData.response == "p") {
+        feedback = constructStim(
+            lastData.randomize,
+            lastData.immOpt,
+            lastData.delOpt,
+            lastData.delay,
+            lastData.prob,
+            "right"
+        );
+        } else {
+        feedback = `<div class = centerbox id='container'>
+            <p class = center-block-text style="color:red;">
+            <b>Please select an option by pressing Q or P!</b>
+            </p>`;
+        }
+        return feedback;
+    },
+    choices: "NO_KEYS",
+    trial_duration: 1000,
+    on_finish: function (data) {
+        data.timelineType = "feedback";
+    },
+    };
+      
 
 const practiceTimeline_variables = [
     {   data: {immOpt: '5.00', delOpt: '10.20', delay: '365', prob: '0.5', randomize: '0'},
@@ -541,7 +529,7 @@ const practiceProcedure = {
 }
 
 const finishInstructions = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: 
         `<div class="instructions">
         <p>Das Experiment kann jetzt beginnen!
@@ -556,7 +544,7 @@ const finishInstructions = {
 };
 
 const debriefPart1 = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: `<p>Sie haben den erste Teil beendet.</p>
                 <p><b>Bitte schließen sie nicht dieses Browserfenster.</b>
                 <p>Sie werden automatisch zum zweiten Teil weitergeleitet.</p>
@@ -566,14 +554,14 @@ const debriefPart1 = {
                 // If you are not redirected, please click 
                 // <a target="_self" href="https://clox.zi-mannheim.de/rewad2/rewad2_server/rewad_part2.html" >here</a>`,
     margin_vertical: '100px',
-    choices: jsPsych.NO_KEYS,
+    choices: "NO_KEYS",
     on_load: function() {
         saveData();
     }
 };
 
 const blockIntro = {
-    type: "html-keyboard-response",
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: `<p>Drücken Sie Q oder P, wenn Sie bereit sind, den nächsten Block zu starten.</p>`,
     margin_vertical: '100px',
     choices: ['q', 'p'],
