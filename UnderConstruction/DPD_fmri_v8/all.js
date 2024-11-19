@@ -1,66 +1,47 @@
 /*
 Script 1
 */
-var jsPsych = initJsPsych();
+// Initialize jsPsych
+const jsPsych = initJsPsych();
 
-// run experiment on page load
-// path to testfile.json
-let dataPath = "stimuli/gen_run_B.json";
+// Path to the JSON data file
+const dataPath = "stimuli/gen_run_B.json";
 
+// Run experiment on page load
 window.onload = runExperiment;
 
 async function runExperiment() {
-  /*
-  RUN EXPERIMENT
-  - loads json trial
-  - converts json data to an array of trial objects
-  - calls run2FC (2-forced-choice) function with the trial array
-  */
+  // Fetch and process trial data
+  const data = await fetchData(dataPath);
+  const trialList = processTrialData(Object.values(data));
+  console.log(trialList)
+  const trialTimeline = createTimeline(trialList);
+  console.log(trialTimeline)
+  const shuffledTrials = shuffleArray(trialTimeline);
 
-  const trialList = await fetchData(dataPath)
-    .then((data) => Object.values(data))
-    .then((data) => roundChoices(data))
-    .then((data) => correctRounding(data))
-    .then((data) => correctLossSign(data))
-    .then((data) => roundChoices(data)) // second rounding for correct negative values!
-    .then((data) => createTimeline(data))
-    .then((data) => randomizeOrientation(data))
-    .then((data) => shuffleArray(data));
+  // Separate trials into loss and reward, then split each into two halves
+  const [loss1, loss2, rew1, rew2] = splitTrials(shuffledTrials);
 
-  let loss1 = [];
-  let rew1 = [];
-  trialList.forEach((trial) => (trial.data.task == "loss" ? loss1 : rew1).push(trial));
-
-  // slice loss and reward into 2 sections each
-  let loss2 = loss1.splice(0, Math.ceil(loss1.length / 2));
-  let rew2 = rew1.splice(0, Math.ceil(rew1.length / 2));
-
-  // run 2 forced choice task
+  // Run the two-forced-choice task
   run2FC(loss1, loss2, rew1, rew2);
 }
 
 function run2FC(loss1, loss2, rew1, rew2) {
-  // create 2 orders of stimuli: loss-rew and rew-loss
-  let order = Math.round(Math.random());
-  console.log(order);
+  // Randomly decide the order of blocks
+  const order = Math.round(Math.random());
 
-  let lossProc1 = createProcedure(loss1, "loss");
-  let lossProc2 = createProcedure(loss2, "loss");
-  let rewProc1 = createProcedure(rew1, "reward");
-  let rewProc2 = createProcedure(rew2, "reward");
+  const lossProc1 = createProcedure(loss1);
+  const lossProc2 = createProcedure(loss2);
+  const rewProc1 = createProcedure(rew1);
+  const rewProc2 = createProcedure(rew2);
 
-  let trialProcedure;
-  if (order == 0) {
-    trialProcedure = {
-      timeline: [rewProc1, lossProc1, rewProc2, lossProc2],
-    };
-  } else {
-    trialProcedure = {
-      timeline: [lossProc1, rewProc1, lossProc2, rewProc2],
-    };
-  }
+  const trialProcedure = {
+    timeline: order === 0
+      ? [rewProc1, lossProc1, rewProc2, lossProc2]
+      : [lossProc1, rewProc1, lossProc2, rewProc2],
+  };
 
-  let timeline = [
+  const timeline = [
     instructions1,
     instructions2,
     practiceProcedure,
@@ -72,56 +53,124 @@ function run2FC(loss1, loss2, rew1, rew2) {
   jsPsych.run(timeline);
 }
 
-// Updated saveData function to jsPsych v8 syntax
 function saveData() {
-  // add startdate and starttime
-  let startdate = jsPsych.getStartTime().toLocaleDateString();
-  let starttime = jsPsych.getStartTime().toLocaleTimeString();
-  jsPsych.data.addProperties({ startdate: startdate, starttime: starttime });
+  // Add start date and time to data
+  const startDate = jsPsych.getStartTime().toLocaleDateString();
+  const startTime = jsPsych.getStartTime().toLocaleTimeString();
+  jsPsych.data.addProperties({ startDate, startTime });
 
-  // add ID to every trial
-  jsPsych.data.addProperties({ subject_id: sessionStorage.getItem("prolific_id") });
+  // Add subject ID to data
+  const subjectId = sessionStorage.getItem("prolific_id");
+  jsPsych.data.addProperties({ subject_id: subjectId });
 
-  // get data object
-  let data = jsPsych.data.get();
+  // Get data and prepare files
+  const data = jsPsych.data.get();
+  const jsonData = data.json();
+  const csvData = data.filter({ timelineType: "trial" }).csv();
 
-  // separate json and csv files
-  let jsonfile = data.json();
-  let csvfile = data.filter({ timelineType: "trial" }).csv();
-  let csvparams = {
-    prolific_id: sessionStorage.getItem("prolific_id"),
-    data: csvfile,
+  // Prepare parameters for CSV
+  const csvParams = {
+    prolific_id: subjectId,
+    data: csvData,
   };
 
-  let xhr = new XMLHttpRequest();
+  // Send CSV data
+  const xhr = new XMLHttpRequest();
   xhr.open("POST", "web_API/saveExp1.php");
   xhr.setRequestHeader("Content-Type", "application/json");
-
-  xhr.upload.onloadstart = function () {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "web_API/saveExp1db.php");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(jsonfile);
+  xhr.upload.onloadstart = () => {
+    // Send JSON data upon upload start
+    const xhr2 = new XMLHttpRequest();
+    xhr2.open("POST", "web_API/saveExp1db.php");
+    xhr2.setRequestHeader("Content-Type", "application/json");
+    xhr2.send(jsonData);
   };
-
-  xhr.send(JSON.stringify(csvparams));
+  xhr.send(JSON.stringify(csvParams));
 }
 
 /* SCRIPT 2*/
-
-var jsPsych = initJsPsych();
-
-// fetch data
 async function fetchData(path) {
-    // fetch json from server
-    const  res = await fetch(path);
-    const data = await res.json();
-    return data;
-};
+    const res = await fetch(path);
+    return res.json();
+  }
+  
+  function processTrialData(dataArray) {
+    return dataArray.map((trial) => {
+    // replace p_occurence with prob
+    trial.prob = trial.p_occurence;
+    delete trial.p_occurence;
 
+    // Correct loss signs if necessary
+    if (trial.task === "loss" && trial.immOpt > 0) {
+    trial.immOpt = -trial.immOpt;
+    trial.delOpt = -trial.delOpt;
+    }
 
+    // Round options to 2 decimal places
+    trial.immOpt = parseFloat(trial.immOpt).toFixed(2);
+    trial.delOpt = parseFloat(trial.delOpt).toFixed(2);
+    // Correct rounding errors
+    if (trial.immOpt === trial.delOpt) {
+    trial.immOpt = (trial.delOpt - 0.01).toFixed(2);
+    }
+    // Randomize option presentation
+    trial.rando = Math.round(Math.random());
+    return trial;
+    });
+  }
+  
+  function createTimeline(trialArray) {
+    return trialArray.map((trial) => ({
+      stimulus: constructStimulus(trial.rando, trial.immOpt, trial.delOpt, trial.delay, trial.prob),
+      data: {
+        trialID: trial.id,
+        immOpt: trial.immOpt,
+        delOpt: trial.delOpt,
+        delay: trial.delay,
+        task: trial.task,
+        prob: trial.prob,
+        odds: trial.odds,
+        randomize: trial.rando,
+      },
+    }));
+  }
+  
+  function splitTrials(trials) {
+    const lossTrials = trials.filter((trial) => trial.data.task === "loss");
+    const rewardTrials = trials.filter((trial) => trial.data.task !== "loss");
+  
+    const lossMid = Math.ceil(lossTrials.length / 2);
+    const rewardMid = Math.ceil(rewardTrials.length / 2);
+  
+    const loss1 = lossTrials.slice(0, lossMid);
+    const loss2 = lossTrials.slice(lossMid);
+    const rew1 = rewardTrials.slice(0, rewardMid);
+    const rew2 = rewardTrials.slice(rewardMid);
+  
+    return [loss1, loss2, rew1, rew2];
+  }
+  
+  // Helper functions
+  function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+  
+  function createProcedure(trials) {
+    return {
+      timeline: [
+        blockIntro,
+        {
+          timeline: [trialBlock, trialFeedback, fixation],
+          timeline_variables: trials,
+          randomize_order: true,
+        },
+      ],
+    };
+  }
+  
+  
 // constructor function for html stimulus
-function constructStim(rando, immOpt, delOpt, delay, prob, feedback) {
+function constructStimulus(rando, immOpt, delOpt, delay, prob, feedback) {
     // rando = randomize left/right presentation
     // if rando == 0 -> immediate left, else right
 
@@ -130,7 +179,7 @@ function constructStim(rando, immOpt, delOpt, delay, prob, feedback) {
     let immOptColor = '#005AB5';
     let delOptColor = '#DC3220';
     let task = parseFloat(delOpt) > 0 ? 'reward' : 'loss';
-    let delString = daysToYears(delay);
+    let delString = formatDelay(delay);
     let probString = 'with <b>'+prob*100+'%</b> probability'
 
     let stimString = `<div class = centerbox id='container'>
@@ -157,138 +206,15 @@ function constructStim(rando, immOpt, delOpt, delay, prob, feedback) {
         </font></div></div></div></div>`;
         return stimString;
 };
-
-// function to create sub-timeline for the loss and reward blocks
-function createProcedure(trials) {
-    let trialProcedure = {
-    timeline: [
-        trialBlock,
-        trialfeedback,
-        fixation
-    ],
-    timeline_variables: trials,
-    randomize_order: true
-    };
-let blockProcedure = {
-    timeline: [blockIntro, trialProcedure]
-};
-return blockProcedure;
-};
-
-// convert days to years for stimulus
-function daysToYears(numberOfDays) {
-    if(numberOfDays < 365){
-        let delayString = "in <b>"+numberOfDays+"</b> days";
-        return delayString;
-    } else if(numberOfDays >= 365){
-        let years = Math.floor(numberOfDays / 365);
-        if(years > 1){
-            let yearString = "in <b>"+years+"</b> years";
-            return yearString;
-        } else {
-            let yearString = "in <b>" +years+"</b> year";
-            return yearString;
-        };
-    };
-};
-
-
-function shuffleArray(array) {
-    /* Randomize trial order */
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+  
+  function formatDelay(days) {
+    if (days < 365) {
+      return `in <b>${days}</b> days`;
+    } else {
+      const years = Math.floor(days / 365);
+      return `in <b>${years}</b> year${years > 1 ? "s" : ""}`;
     }
-    console.log(array);
-    return array;
-};
-
-
-
-function roundChoices(arr) {
-    /* Converts JSON to array and rounds monetary choices to 2 digits */
-    arr.map(trial => {
-        // round trial Options to 2 digits
-        trial['immOpt'] = parseFloat(trial['immOpt']).toFixed(2);
-        trial['delOpt'] = parseFloat(trial['delOpt']).toFixed(2);
-        // correct rounding errors (4.999 -> 5)
-        if(trial['immOpt'] == trial['delOpt']) {
-            trial['immOpt'] = trial['delOpt']-0.01;
-        };
-    });
-    console.log(arr);
-    return arr;
-}
-
-
-function correctRounding(arr) {
-    /* Converts JSON to array and rounds monetary choices to 2 digits */
-    arr.map(trial => {
-        // correct rounding errors (4.999 -> 5)
-        if(trial['immOpt'] == trial['delOpt']) {
-            trial['immOpt'] = trial['delOpt']-0.01;
-        };
-    });
-    console.log(arr);
-    return arr;
-}
-
-
-function correctLossSign(arr) {
-    /* Convert Loss Values to negative, if necessary */
-    arr.map(trial => {
-        if (trial['task'] == "loss" && trial['immOpt'] > 0) {
-            trial['immOpt'] = -trial['immOpt'];
-            trial['delOpt'] = -trial['delOpt'];
-        };
-    });
-    return arr;
-}
-
-
-function randomizeOrientation(arr) {
-    arr.map(trial => {
-        /* Add Randomizer for Stimulus Presentation */
-        // create random number: 0 or 1
-        // rando == 0 -> immediate left; rando == 1 -> immediate right
-        trial.rando = Math.round(Math.random());
-    });
-    console.log(arr);
-    return arr;
-}
-
-function createTimeline(trialArray) {
-    /*
-    input: array of Objects with immOpt, delOpt, delay
-    output: jsPsych-Timeline with html stimuli
-    */
-    const trialTimeline = [];
-
-    // add trials to timeline: loop through trialList
-    trialArray.map(trial => {
-        // create random number: 0 or 1
-        // rando == 0 -> immediate left; rando == 1 -> immediate right
-        trial.rando = Math.round(Math.random());
-
-        let trialData = {
-            // 
-            stimulus: constructStim(trial.rando, trial.immOpt, trial.delOpt, trial.delay, trial.p_occurence),
-
-            data: {
-                trialID: trial.id,
-                immOpt: trial.immOpt,
-                delOpt: trial.delOpt,
-                delay: trial.delay,
-                task: trial.task,
-                prob: trial.p_occurence,
-                odds: trial.odds,
-                randomize: trial.rando
-            }
-        }
-        trialTimeline.push(trialData);
-        });
-    return trialTimeline;
-};
+  }
 
 /* SCRIPT 3*/
 /* 
@@ -297,7 +223,6 @@ INSTRUCTIONS AND TEST TRIALS
 - one test trial per condition: loss and reward
 -> total timeline: [instructions, testProcedure, trialProcedure]
 */
-var jsPsych = initJsPsych();
 
 const instructionsText1 =
     `<div class="instructions">
@@ -317,7 +242,7 @@ const instructionsText1 =
     </div>
 
     <div id='exampleStim'>
-    ${constructStim('0', '5.00', '10.00', '30', '0.7')}
+    ${constructStimulus('0', '5.00', '10.00', '30', '0.7')}
     </div>
     
     <div class="instructions">
@@ -354,7 +279,7 @@ const instructionsText1 =
     und sehen dann Folgendes:
     </p>
         <div id='exampleStim'>
-        ${constructStim('0', '5.00', '10.00', '30', '0.7', 'left')}
+        ${constructStimulus('0', '5.00', '10.00', '30', '0.7', 'left')}
         </div>
     Der nächste Versuch würde dann ein paar Sekunden später präsentiert werden.
 
@@ -374,7 +299,7 @@ const instructionsText2 = `
     <p>
     Ein <b>Versuch mit Verlusten</b> könnte so aussehen:
         <div id='exampleStim'>
-        ${constructStim('0', '-5.00', '-10.00', '30', '0.7',)}
+        ${constructStimulus('0', '-5.00', '-10.00', '30', '0.7',)}
         </div>
     </p>
     
@@ -393,7 +318,7 @@ const instructionsText2 = `
     </p>
 
     <div id='exampleStim'>
-    ${constructStim('1', '-5.00', '-10.00', '30', '0.7')}
+    ${constructStimulus('1', '-5.00', '-10.00', '30', '0.7')}
     </div>
 
     <p>
@@ -413,159 +338,142 @@ const instructionsText2 = `
     </div>`
 
 const instructions1 = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: instructionsText1,
-    choices: ["Continue"],
-    margin_vertical: "100px",
-    };      
+  type: jsPsychHtmlButtonResponse,
+  stimulus: instructionsText1,
+  choices: ["Continue"],
+  margin_vertical: "100px",
+};
 
 const instructions2 = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: instructionsText2,
-    choices: ["Continue to test trials"],
-    margin_vertical: "100px",
-    };
+  type: jsPsychHtmlButtonResponse,
+  stimulus: instructionsText2,
+  choices: ["Continue to test trials"],
+  margin_vertical: "100px",
+};
 
+// Practice and trial blocks
 const practiceBlock = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: jsPsych.timelineVariable('stimulus'),
-    data: jsPsych.timelineVariable('data'),
-    choices: ["q", "p"],
-    on_finish: function (data) {
-        data.timelineType = "test";
-    },
-    };
-      
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: jsPsych.timelineVariable("stimulus"),
+  data: jsPsych.timelineVariable("data"),
+  choices: ["q", "p"],
+  on_finish: (data) => {
+    data.timelineType = "test";
+  },
+};
 
 const trialBlock = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: jsPsych.timelineVariable('stimulus'),
-    data: jsPsych.timelineVariable('data'),
-    choices: ["q", "p"],
-    stimulus_duration: 10000,
-    trial_duration: 10000,
-    on_finish: function (data) {
-        delete data.stimulus;
-        if (data.response == "p" && data.randomize == 0) {
-        data.choice = "delayed";
-        } else if (data.response == "q" && data.randomize == 0) {
-        data.choice = "immediate";
-        } else if (data.response == "q" && data.randomize == 1) {
-        data.choice = "delayed";
-        } else if (data.response == "p" && data.randomize == 1) {
-        data.choice = "immediate";
-        }
-        data.timelineType = "trial";
-    },
-    };
-    
-    const fixation = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: "<div style=\"font-size:60px;\">+</div>",
-    choices: "NO_KEYS",
-    trial_duration: 1000,
-    on_finish: function (data) {
-        data.timelineType = "fixcross";
-    },
-    };
-    
-    const trialfeedback = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: function () {
-        let lastData = jsPsych.data.getLastTrialData().values()[0];
-        let feedback;
-    
-        if (lastData.response == "q") {
-        feedback = constructStim(
-            lastData.randomize,
-            lastData.immOpt,
-            lastData.delOpt,
-            lastData.delay,
-            lastData.prob,
-            "left"
-        );
-        } else if (lastData.response == "p") {
-        feedback = constructStim(
-            lastData.randomize,
-            lastData.immOpt,
-            lastData.delOpt,
-            lastData.delay,
-            lastData.prob,
-            "right"
-        );
-        } else {
-        feedback = `<div class = centerbox id='container'>
-            <p class = center-block-text style="color:red;">
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: jsPsych.timelineVariable("stimulus"),
+  data: jsPsych.timelineVariable("data"),
+  choices: ["q", "p"],
+  stimulus_duration: 10000,
+  trial_duration: 10000,
+  on_finish: (data) => {
+    delete data.stimulus;
+    const { response, randomize } = data;
+    if ((response === "p" && randomize === 0) || (response === "q" && randomize === 1)) {
+      data.choice = "delayed";
+    } else if ((response === "q" && randomize === 0) || (response === "p" && randomize === 1)) {
+      data.choice = "immediate";
+    }
+    data.timelineType = "trial";
+    console.log(data);
+  },
+};
+
+const fixation = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: '<div style="font-size:60px;">+</div>',
+  choices: "NO_KEYS",
+  trial_duration: 1000,
+  on_finish: (data) => {
+    data.timelineType = "fixcross";
+  },
+};
+
+const trialFeedback = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: () => {
+    const lastData = jsPsych.data.getLastTrialData().values()[0];
+    console.log(lastData);
+    let feedbackStimulus;
+    if (lastData.response === "q" || lastData.response === "p") {
+      const feedbackSide = lastData.response === "q" ? "left" : "right";
+      //feedbackStimulus = constructStimulus({ ...lastData, feedback: feedbackSide });
+      feedbackStimulus = constructStimulus(
+        lastData.randomize,
+        lastData.immOpt,
+        lastData.delOpt,
+        lastData.delay,
+        lastData.prob,
+        feedbackSide
+    );
+      console.log(feedbackStimulus);
+    } else {
+      feedbackStimulus = `
+        <div class="centerbox" id="container">
+          <p class="center-block-text" style="color:red;">
             <b>Please select an option by pressing Q or P!</b>
-            </p>`;
-        }
-        return feedback;
-    },
-    choices: "NO_KEYS",
-    trial_duration: 1000,
-    on_finish: function (data) {
-        data.timelineType = "feedback";
-    },
-    };
+          </p>
+        </div>`;
+    }
+    return feedbackStimulus;
+  },
+  choices: "NO_KEYS",
+  trial_duration: 1000,
+  on_finish: (data) => {
+    data.timelineType = "feedback";
+  },
+};
       
 
-const practiceTimeline_variables = [
+const practiceTrials = [
     {   data: {immOpt: '5.00', delOpt: '10.20', delay: '365', prob: '0.5', randomize: '0'},
-        stimulus: constructStim('0', '5.00', '10.20', '365', '0.5') },
+        stimulus: constructStimulus('0', '5.00', '10.20', '365', '0.5') },
     {   data: {immOpt: '-4.00', delOpt: '-8.80', delay: '30', prob: '0.9', randomize: '1'},
-        stimulus: constructStim('1', '-4.00', '-8.80', '30', '0.9') },
+        stimulus: constructStimulus('1', '-4.00', '-8.80', '30', '0.9') },
     {   data: {immOpt: '3.00', delOpt: '3.40', delay: '90', prob: '0.2', randomize: '1'},
-        stimulus: constructStim('1', '3.00', '3.40', '90', '0.2') },
+        stimulus: constructStimulus('1', '3.00', '3.40', '90', '0.2') },
     {   data: {immOpt: '-3.00', delOpt: '-3.40', delay: '90', prob: '0.2', randomize: '1'},
-        stimulus: constructStim('1', '-3.00', '-3.40', '90', '0.2') },
+        stimulus: constructStimulus('1', '-3.00', '-3.40', '90', '0.2') },
     {   data: {immOpt: '-3.00', delOpt: '-12.00', delay: '90', prob: '0.1', randomize: '1'},
-        stimulus: constructStim('1', '-3.00', '-12.00', '90', '0.1') }
+        stimulus: constructStimulus('1', '-3.00', '-12.00', '90', '0.1') }
 ];
 
 const practiceProcedure = {
-    timeline: [practiceBlock, trialfeedback, fixation],
-    timeline_variables: practiceTimeline_variables,
-    randomize_order: false
-}
-
-const finishInstructions = {
+    timeline: [practiceBlock, trialFeedback, fixation],
+    timeline_variables: practiceTrials,
+    randomize_order: false,
+  };
+  
+  const finishInstructions = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: 
-        `<div class="instructions">
-        <p>Das Experiment kann jetzt beginnen!
-        Von nun an haben Sie für jede Entscheidung <b>10 Sekunden</b> Zeit.
-        Nach vier Versuchsblöcken werden Sie gebeten, einige Fragebögen auszufüllen.</p>
-        <p>Bitte legen Sie Ihren <b>linken Zeigefinger auf Q</b>, 
-        und Ihren <b>rechten Zeigefinger auf P</b>.</p>
-        <p>Drücken Sie dann Q oder P, um mit dem Experiment fortzufahren.</p>
-        </div>`,
-    choices: ['q', 'p'],
-    margin_vertical: '100px',
-};
-
-const debriefPart1 = {
+    stimulus: `
+      <div class="instructions">
+        <!-- Your instruction content here -->
+      </div>`,
+    choices: ["q", "p"],
+    margin_vertical: "100px",
+  };
+  
+  const debriefPart1 = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>Sie haben den erste Teil beendet.</p>
-                <p><b>Bitte schließen sie nicht dieses Browserfenster.</b>
-                <p>Sie werden automatisch zum zweiten Teil weitergeleitet.</p>
-                <p>Der zweite Teil wird mit zwei Fragebögen beginnen.</p>
-                <p>Je nach Ihrer Internetverbindung kann die Weiterleitung ein paar Sekunden oder Minuten dauern.</p>
-                <p>Wenn Sie nach ein paar Minuten nicht weitergeleitet werden, kontaktieren Sie uns bitte über Prolific.</p>`,
-                // If you are not redirected, please click 
-                // <a target="_self" href="https://clox.zi-mannheim.de/rewad2/rewad2_server/rewad_part2.html" >here</a>`,
-    margin_vertical: '100px',
+    stimulus: `
+      <p>Sie haben den ersten Teil beendet.</p>
+      <!-- Additional content -->
+    `,
+    margin_vertical: "100px",
     choices: "NO_KEYS",
-    on_load: function() {
-        saveData();
-    }
-};
-
-const blockIntro = {
+    on_load: saveData,
+  };
+  
+  const blockIntro = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `<p>Drücken Sie Q oder P, wenn Sie bereit sind, den nächsten Block zu starten.</p>`,
-    margin_vertical: '100px',
-    choices: ['q', 'p'],
-    on_finish: function(data) {
-        data.timelineType = "blockIntro";
-    }
-};
+    margin_vertical: "100px",
+    choices: ["q", "p"],
+    on_finish: (data) => {
+      data.timelineType = "blockIntro";
+    },
+  };
