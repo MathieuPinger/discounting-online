@@ -3,6 +3,8 @@ Script 1
 */
 // Initialize jsPsych
 const jsPsych = initJsPsych();
+// Seed the random number generator for pseudorandomization
+Math.seedrandom('42');
 
 // Path to the JSON data file
 const dataPath = "stimuli/gen_run_B_test.json";
@@ -24,6 +26,16 @@ async function runExperiment() {
   // Pseudorandomize trials
   const pseudorandomTrials = pseudorandomizeTrials(trialsWithIDs);
   console.log(pseudorandomTrials);
+
+
+  // Generate pseudorandomized left/right sequence
+  const leftRightSequence = pseudorandomizeLeftRight(pseudorandomTrials.length, 3);
+
+  // Assign left/right sequence to trials
+  pseudorandomTrials.forEach((trial, index) => {
+    trial.rando = leftRightSequence[index];
+  });
+  console.log('Left/Right Sequence:', leftRightSequence);
 
   const trialTimeline = createTimeline(pseudorandomTrials);
   console.log(trialTimeline);
@@ -101,8 +113,6 @@ function processTrialData(dataArray) {
   if (trial.immOpt === trial.delOpt) {
   trial.immOpt = (trial.delOpt - 0.01).toFixed(2);
   }
-  // Randomize option presentation
-  trial.rando = Math.round(Math.random());
 
   // Determine condition
   if (trial.delay > 0 && trial.prob == 1) {
@@ -119,8 +129,6 @@ function processTrialData(dataArray) {
   });
 }
 
-// Seed the random number generator for pseudorandomization
-Math.seedrandom('42');
 
 // deterministic shuffle
 function shuffleArray(array) {
@@ -216,6 +224,53 @@ function assignIDs(trialArray) {
   });
 }
 
+function pseudorandomizeLeftRight(totalTrials, maxConsecutive) {
+  // Generate an array with equal numbers of 0s and 1s
+  const halfTrials = Math.floor(totalTrials / 2);
+  const zeros = halfTrials;
+  const ones = totalTrials - zeros; // In case totalTrials is odd
+
+  let leftRightArray = [];
+
+  for (let i = 0; i < zeros; i++) {
+    leftRightArray.push(0);
+  }
+
+  for (let i = 0; i < ones; i++) {
+    leftRightArray.push(1);
+  }
+
+  // Shuffle the array using the deterministic shuffle
+  shuffleArray(leftRightArray);
+
+  // Rearrange to avoid more than maxConsecutive same values in a row
+  let rearrangedArray = [];
+
+  while (leftRightArray.length > 0) {
+    let valueAdded = false;
+
+    for (let i = 0; i < leftRightArray.length; i++) {
+      const value = leftRightArray[i];
+
+      const lastValues = rearrangedArray.slice(- (maxConsecutive));
+      const sameAsLastValues = lastValues.every((v) => v === value);
+
+      if (!sameAsLastValues) {
+        // Add value to rearrangedArray
+        rearrangedArray.push(leftRightArray.splice(i, 1)[0]);
+        valueAdded = true;
+        break;
+      }
+    }
+
+    if (!valueAdded) {
+      // Can't avoid exceeding maxConsecutive, so add the next value
+      rearrangedArray.push(leftRightArray.shift());
+    }
+  }
+
+  return rearrangedArray;
+}
   
 function createTimeline(trialArray) {
   return trialArray.map((trial) => ({
@@ -425,16 +480,16 @@ const instructionsText2 = `
     </div>`
 
 const instructions1 = {
-  type: jsPsychHtmlButtonResponse,
+  type: jsPsychHtmlKeyboardResponse,
   stimulus: instructionsText1,
-  choices: ["Continue"],
+  choices: ["q", "p"],
   margin_vertical: "100px",
 };
 
 const instructions2 = {
-  type: jsPsychHtmlButtonResponse,
+  type: jsPsychHtmlKeyboardResponse,
   stimulus: instructionsText2,
-  choices: ["Continue to test trials"],
+  choices: ["q", "p"],
   margin_vertical: "100px",
 };
 
