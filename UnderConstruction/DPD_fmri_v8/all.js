@@ -5,7 +5,7 @@ Script 1
 const jsPsych = initJsPsych();
 
 // Path to the JSON data file
-const dataPath = "stimuli/gen_run_B.json";
+const dataPath = "stimuli/gen_run_B_test.json";
 
 // Run experiment on page load
 window.onload = runExperiment;
@@ -15,31 +15,25 @@ async function runExperiment() {
   const data = await fetchData(dataPath);
   const trialList = processTrialData(Object.values(data));
   console.log(trialList)
-  const trialTimeline = createTimeline(trialList);
-  console.log(trialTimeline)
-  const shuffledTrials = shuffleArray(trialTimeline);
+  // Sort trials
+  const sortedTrials = sortTrials(trialList);
+  console.log(sortedTrials);
+  // Assign IDs
+  const trialsWithIDs = assignIDs(sortedTrials);
 
-  // Separate trials into loss and reward, then split each into two halves
-  const [loss1, loss2, rew1, rew2] = splitTrials(shuffledTrials);
+  // Pseudorandomize trials
+  const pseudorandomTrials = pseudorandomizeTrials(trialsWithIDs);
+  console.log(pseudorandomTrials);
+
+  const trialTimeline = createTimeline(pseudorandomTrials);
+  console.log(trialTimeline);
 
   // Run the two-forced-choice task
-  run2FC(loss1, loss2, rew1, rew2);
+  run2FC(trialTimeline);
 }
 
-function run2FC(loss1, loss2, rew1, rew2) {
-  // Randomly decide the order of blocks
-  const order = Math.round(Math.random());
-
-  const lossProc1 = createProcedure(loss1);
-  const lossProc2 = createProcedure(loss2);
-  const rewProc1 = createProcedure(rew1);
-  const rewProc2 = createProcedure(rew2);
-
-  const trialProcedure = {
-    timeline: order === 0
-      ? [rewProc1, lossProc1, rewProc2, lossProc2]
-      : [lossProc1, rewProc1, lossProc2, rewProc2],
-  };
+function run2FC(trials) {
+  const trialProcedure = createProcedure(trials);
 
   const timeline = [
     instructions1,
@@ -94,79 +88,167 @@ async function fetchData(path) {
     return res.json();
   }
   
-  function processTrialData(dataArray) {
-    return dataArray.map((trial) => {
-    // replace p_occurence with prob
-    trial.prob = trial.p_occurence;
-    delete trial.p_occurence;
+function processTrialData(dataArray) {
+  return dataArray.map((trial) => {
+  // replace p_occurence with prob
+  trial.prob = trial.p_occurence;
+  delete trial.p_occurence;
 
-    // Correct loss signs if necessary
-    if (trial.task === "loss" && trial.immOpt > 0) {
-    trial.immOpt = -trial.immOpt;
-    trial.delOpt = -trial.delOpt;
-    }
+  // Round options to 2 decimal places
+  trial.immOpt = parseFloat(trial.immOpt).toFixed(2);
+  trial.delOpt = parseFloat(trial.delOpt).toFixed(2);
+  // Correct rounding errors
+  if (trial.immOpt === trial.delOpt) {
+  trial.immOpt = (trial.delOpt - 0.01).toFixed(2);
+  }
+  // Randomize option presentation
+  trial.rando = Math.round(Math.random());
 
-    // Round options to 2 decimal places
-    trial.immOpt = parseFloat(trial.immOpt).toFixed(2);
-    trial.delOpt = parseFloat(trial.delOpt).toFixed(2);
-    // Correct rounding errors
-    if (trial.immOpt === trial.delOpt) {
-    trial.immOpt = (trial.delOpt - 0.01).toFixed(2);
+  // Determine condition
+  if (trial.delay > 0 && trial.prob == 1) {
+    trial.condition = "DD";
+  } else if (trial.delay == 0 && trial.prob < 1) {
+    trial.condition = "PD";
+  } else if (trial.delay > 0 && trial.prob < 1) {
+    trial.condition = "DPD";
+  } else {
+    trial.condition = "Other"; // Just in case
+  }
+  
+  return trial;
+  });
+}
+
+// Seed the random number generator for pseudorandomization
+Math.seedrandom('42');
+
+// deterministic shuffle
+function shuffleArray(array) {
+  let currentIndex = array.length,
+    temporaryValue, randomIndex;
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    // Swap
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
+
+
+function sortTrials(trialArray) {
+  const conditionOrder = { DD: 1, PD: 2, DPD: 3 };
+  return trialArray.sort((a, b) => {
+    // Sort by condition
+    if (conditionOrder[a.condition] !== conditionOrder[b.condition]) {
+      return conditionOrder[a.condition] - conditionOrder[b.condition];
     }
-    // Randomize option presentation
-    trial.rando = Math.round(Math.random());
+    // Then by p_certain
+    if (a.p_certain !== b.p_certain) {
+      return a.p_certain - b.p_certain;
+    }
+    // Then by prob
+    if (a.prob !== b.prob) {
+      return a.prob - b.prob;
+    }
+    // Then by delay
+    return a.delay - b.delay;
+  });
+}
+
+function assignIDs(trialArray) {
+  return trialArray.map((trial, index) => {
+    trial.id = index + 1;
     return trial;
-    });
+  });
+}
+function pseudorandomizeTrials(trialArray) {
+  // Shuffle the entire array
+  shuffleArray(trialArray);
+
+  // Initialize an array to hold the pseudorandomized trials
+  const pseudorandomTrials = [];
+
+  // Loop through the shuffled array and build the pseudorandomized sequence
+  while (trialArray.length > 0) {
+    let trialAdded = false;
+    for (let i = 0; i < trialArray.length; i++) {
+      const trial = trialArray[i];
+
+      // Check if adding this trial would create a sequence of more than two similar trials
+      const lastTrial = pseudorandomTrials[pseudorandomTrials.length - 1];
+      const secondLastTrial = pseudorandomTrials[pseudorandomTrials.length - 2];
+
+      const isSameAsLastTwo =
+        lastTrial &&
+        secondLastTrial &&
+        trial.condition === lastTrial.condition &&
+        trial.prob === lastTrial.prob &&
+        trial.delay === lastTrial.delay &&
+        trial.condition === secondLastTrial.condition &&
+        trial.prob === secondLastTrial.prob &&
+        trial.delay === secondLastTrial.delay;
+
+      if (!isSameAsLastTwo) {
+        // Add the trial to the pseudorandomized sequence
+        pseudorandomTrials.push(trialArray.splice(i, 1)[0]);
+        trialAdded = true;
+        break;
+      }
+    }
+
+    if (!trialAdded) {
+      // If no trial could be added without violating the sequence rule, add the trial that causes the least violation
+      pseudorandomTrials.push(trialArray.shift());
+    }
   }
+
+  return pseudorandomTrials;
+}
+
+function assignIDs(trialArray) {
+  return trialArray.map((trial, index) => {
+    trial.id = index + 1;
+    return trial;
+  });
+}
+
   
-  function createTimeline(trialArray) {
-    return trialArray.map((trial) => ({
-      stimulus: constructStimulus(trial.rando, trial.immOpt, trial.delOpt, trial.delay, trial.prob),
-      data: {
-        trialID: trial.id,
-        immOpt: trial.immOpt,
-        delOpt: trial.delOpt,
-        delay: trial.delay,
-        task: trial.task,
-        prob: trial.prob,
-        odds: trial.odds,
-        randomize: trial.rando,
-      },
-    }));
-  }
-  
-  function splitTrials(trials) {
-    const lossTrials = trials.filter((trial) => trial.data.task === "loss");
-    const rewardTrials = trials.filter((trial) => trial.data.task !== "loss");
-  
-    const lossMid = Math.ceil(lossTrials.length / 2);
-    const rewardMid = Math.ceil(rewardTrials.length / 2);
-  
-    const loss1 = lossTrials.slice(0, lossMid);
-    const loss2 = lossTrials.slice(lossMid);
-    const rew1 = rewardTrials.slice(0, rewardMid);
-    const rew2 = rewardTrials.slice(rewardMid);
-  
-    return [loss1, loss2, rew1, rew2];
-  }
-  
-  // Helper functions
-  function shuffleArray(array) {
-    return array.sort(() => Math.random() - 0.5);
-  }
-  
-  function createProcedure(trials) {
-    return {
-      timeline: [
-        blockIntro,
-        {
-          timeline: [trialBlock, trialFeedback, fixation],
-          timeline_variables: trials,
-          randomize_order: true,
-        },
-      ],
-    };
-  }
+function createTimeline(trialArray) {
+  return trialArray.map((trial) => ({
+    stimulus: constructStimulus(
+      trial.rando,
+      trial.immOpt,
+      trial.delOpt,
+      trial.delay,
+      trial.prob
+    ),
+    data: {
+      trialID: trial.id,
+      immOpt: trial.immOpt,
+      delOpt: trial.delOpt,
+      delay: trial.delay,
+      prob: trial.prob,
+      odds: trial.odds,
+      randomize: trial.rando,
+      condition: trial.condition,
+      p_certain: trial.p_certain,
+    },
+  }));
+}
+
+
+
+function createProcedure(trials) {
+  return {
+      timeline: [trialBlock, trialFeedback, fixation],
+      timeline_variables: trials,
+      randomize_order: false,
+  };
+}
   
   
 // constructor function for html stimulus
@@ -178,14 +260,12 @@ function constructStimulus(rando, immOpt, delOpt, delay, prob, feedback) {
     let feedbackStyle = 'style="border: 5px solid  #008000; padding: 5px;"';
     let immOptColor = '#005AB5';
     let delOptColor = '#DC3220';
-    let task = parseFloat(delOpt) > 0 ? 'reward' : 'loss';
     let delString = formatDelay(delay);
     let probString = 'with <b>'+prob*100+'%</b> probability'
 
     let stimString = `<div class = centerbox id='container'>
     <p class = center-block-text>
-        Which amount would you prefer to 
-        ${task=='reward' ? '<b>win</b>' : '<b>lose</b>'}?
+        Which amount would you prefer to <b>win</b>?
         <br>Press
         <strong>'q'</strong> for left or
         <strong>'p'</strong> for right:
@@ -207,14 +287,21 @@ function constructStimulus(rando, immOpt, delOpt, delay, prob, feedback) {
         return stimString;
 };
   
-  function formatDelay(days) {
-    if (days < 365) {
-      return `in <b>${days}</b> days`;
-    } else {
-      const years = Math.floor(days / 365);
-      return `in <b>${years}</b> year${years > 1 ? "s" : ""}`;
-    }
+function formatDelay(days) {
+  const daysNum = parseFloat(days);
+  if (daysNum === 0) {
+    return `<b>Today</b>`;
+  } else if (daysNum === 30) {
+    return `in <b>1 month</b>`;
+  } else if (daysNum === 182.5) {
+    return `in <b>6 months</b>`;
+  } else if (daysNum < 365) {
+    return `in <b>${daysNum}</b> days`;
+  } else {
+    const years = daysNum / 365;
+    return `in <b>${years}</b> year${years > 1 ? "s" : ""}`;
   }
+}
 
 /* SCRIPT 3*/
 /* 
@@ -414,7 +501,7 @@ const trialFeedback = {
       feedbackStimulus = `
         <div class="centerbox" id="container">
           <p class="center-block-text" style="color:red;">
-            <b>Please select an option by pressing Q or P!</b>
+            <b>Bitte wählen Sie rechtzeitig eine Option!</b>
           </p>
         </div>`;
     }
@@ -429,16 +516,8 @@ const trialFeedback = {
       
 
 const practiceTrials = [
-    {   data: {immOpt: '5.00', delOpt: '10.20', delay: '365', prob: '0.5', randomize: '0'},
-        stimulus: constructStimulus('0', '5.00', '10.20', '365', '0.5') },
-    {   data: {immOpt: '-4.00', delOpt: '-8.80', delay: '30', prob: '0.9', randomize: '1'},
-        stimulus: constructStimulus('1', '-4.00', '-8.80', '30', '0.9') },
-    {   data: {immOpt: '3.00', delOpt: '3.40', delay: '90', prob: '0.2', randomize: '1'},
-        stimulus: constructStimulus('1', '3.00', '3.40', '90', '0.2') },
-    {   data: {immOpt: '-3.00', delOpt: '-3.40', delay: '90', prob: '0.2', randomize: '1'},
-        stimulus: constructStimulus('1', '-3.00', '-3.40', '90', '0.2') },
-    {   data: {immOpt: '-3.00', delOpt: '-12.00', delay: '90', prob: '0.1', randomize: '1'},
-        stimulus: constructStimulus('1', '-3.00', '-12.00', '90', '0.1') }
+    {   data: {immOpt: '50.00', delOpt: '100.00', delay: '365', prob: '0.5', randomize: '0'},
+        stimulus: constructStimulus('0', '50.00', '100.00', '365', '0.5') }
 ];
 
 const practiceProcedure = {
@@ -451,7 +530,8 @@ const practiceProcedure = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
       <div class="instructions">
-        <!-- Your instruction content here -->
+        Der Probedurchlauf ist abgeschlossen. <br>
+        Sie können das Experiment starten, indem Sie auf Q oder P drücken.
       </div>`,
     choices: ["q", "p"],
     margin_vertical: "100px",
