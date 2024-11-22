@@ -279,7 +279,13 @@ function createTimeline(trialArray) {
       trial.immOpt,
       trial.delOpt,
       trial.delay,
-      trial.prob
+      trial.prob,
+      null,
+      {
+        showDelayedAmount: true,
+        showDelay: true,
+        showProb: true,
+      }
     ),
     data: {
       trialID: trial.id,
@@ -305,43 +311,97 @@ function createProcedure(trials) {
   };
 }
   
-  
-// constructor function for html stimulus
-function constructStimulus(rando, immOpt, delOpt, delay, prob, feedback) {
-    // rando = randomize left/right presentation
-    // if rando == 0 -> immediate left, else right
+function constructStimulus(
+  rando,
+  immOpt,
+  delOpt,
+  delay,
+  prob,
+  feedback,
+  displayOptions = {}
+) {
+  const {
+    showDelayedAmount = true,
+    showDelay = true,
+    showProb = true,
+    immAlwaysVisible = true,
+  } = displayOptions;
 
-    // initialize styles for feedback and options
-    let feedbackStyle = 'style="border: 5px solid  #008000; padding: 5px;"';
-    let immOptColor = '#005AB5';
-    let delOptColor = '#DC3220';
-    let delString = formatDelay(delay);
-    let probString = 'with <b>'+prob*100+'%</b> probability'
+  // Format delay and probability
+  const formattedDelay = formatDelay(delay);
+  const formattedProb =
+    prob < 1 ? `with <b>${prob * 100}%</b> probability` : "with <b>100%</b> probability";
 
-    let stimString = `<div class = centerbox id='container'>
-    <p class = center-block-text>
+  // Immediate option content
+  const immOptionContent = `
+    <div class='option-row'><b>${immOpt}€</b></div>
+    <div class='option-row'><b>Today</b></div>
+    <div class='option-row'>with <b>100%</b> probability</div>
+  `;
+
+  // Delayed option content
+  let delayedOptionContent = "";
+  if (showDelayedAmount) {
+    delayedOptionContent += `<div class='option-row'><b>${delOpt}€</b></div>`;
+  } else {
+    delayedOptionContent += `<div class='option-row'>&nbsp;</div>`;
+  }
+  if (showDelay) {
+    delayedOptionContent += `<div class='option-row'>in <b>${formattedDelay}</b></div>`;
+  } else {
+    delayedOptionContent += `<div class='option-row'>&nbsp;</div>`;
+  }
+  if (showProb) {
+    delayedOptionContent += `<div class='option-row'>${formattedProb}</div>`;
+  } else {
+    delayedOptionContent += `<div class='option-row'>&nbsp;</div>`;
+  }
+
+  // Feedback border (if applicable)
+  let feedbackLeft = "";
+  let feedbackRight = "";
+  if (feedback === "left") {
+    feedbackLeft = "style='border: 5px solid green;'";
+  } else if (feedback === "right") {
+    feedbackRight = "style='border: 5px solid green;'";
+  }
+
+  // Option templates with feedback styles
+  const immOption = `
+    <div class='option' id='${rando === 0 ? "leftOption" : "rightOption"}' ${rando === 0 ? feedbackLeft : feedbackRight}>
+      <font color='#005AB5'>
+        ${immOptionContent}
+      </font>
+    </div>
+  `;
+
+  const delayedOption = `
+    <div class='option' id='${rando === 0 ? "rightOption" : "leftOption"}' ${rando === 0 ? feedbackRight : feedbackLeft}>
+      <font color='#DC3220'>
+        ${delayedOptionContent}
+      </font>
+    </div>
+  `;
+
+  // Construct the final stimulus HTML
+  const stimulusHTML = `
+    <div class='centerbox' id='container'>
+      <p class='center-block-text'>
         Which amount would you prefer to <b>win</b>?
-        <br>Press
-        <strong>'q'</strong> for left or
-        <strong>'p'</strong> for right:
-    </p>
-    <div class='table'>
-    <div class='row'>
-    <div class = 'option' id='leftOption' ${feedback=='left' ? feedbackStyle : null}>
-        <font color=${rando==0 ? immOptColor : delOptColor}>
-        <div class = 'option-row'><b>&pound; ${rando==0 ? immOpt : delOpt}</b></div>
-        <div class = 'option-row'>${rando==0 ? `<b>Today</b>` : delString}</div>
-        <div class = 'option-row'>${rando==0 ? `with <b>100%</b> probability` : probString}</div>
-        </font></div>
-    <div class = 'option' id='rightOption' ${feedback=='right' ? feedbackStyle : null}>
-        <font color=${rando==0 ? delOptColor : immOptColor}>
-        <div class = 'option-row'><b>&pound; ${rando==0 ? delOpt : immOpt}</b></div>
-        <div class = 'option-row'>${rando==0 ? delString : `<b>Today</b>`}</div>
-        <div class = 'option-row'>${rando==0 ? probString : `with <b>100%</b> probability`}</div>
-        </font></div></div></div></div>`;
-        return stimString;
-};
-  
+        <br>Press <strong>'q'</strong> for left or <strong>'p'</strong> for right:
+      </p>
+      <div class='table'>
+        <div class='row'>
+          ${rando === 0 ? immOption + delayedOption : delayedOption + immOption}
+        </div>
+      </div>
+    </div>
+  `;
+
+  return stimulusHTML;
+}
+
+
 function formatDelay(days) {
   const daysNum = parseFloat(days);
   if (daysNum === 0) {
@@ -549,7 +609,12 @@ const trialFeedback = {
         lastData.delOpt,
         lastData.delay,
         lastData.prob,
-        feedbackSide
+        feedbackSide,
+        {
+          showDelayedAmount: true,
+          showDelay: true,
+          showProb: true,
+        }
     );
       console.log(feedbackStimulus);
     } else {
