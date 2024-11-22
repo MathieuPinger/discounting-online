@@ -274,19 +274,19 @@ function pseudorandomizeLeftRight(totalTrials, maxConsecutive) {
   
 function createTimeline(trialArray) {
   return trialArray.map((trial) => ({
-    stimulus: constructStimulus(
-      trial.rando,
-      trial.immOpt,
-      trial.delOpt,
-      trial.delay,
-      trial.prob,
-      null,
-      {
-        showDelayedAmount: true,
-        showDelay: true,
-        showProb: true,
-      }
-    ),
+    // stimulus: constructStimulus(
+    //   trial.rando,
+    //   trial.immOpt,
+    //   trial.delOpt,
+    //   trial.delay,
+    //   trial.prob,
+    //   null,
+    //   {
+    //     showDelayedAmount: true,
+    //     showDelay: true,
+    //     showProb: true,
+    //   }
+    // ),
     data: {
       trialID: trial.id,
       immOpt: trial.immOpt,
@@ -566,21 +566,53 @@ const practiceBlock = {
 
 const trialBlock = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: jsPsych.timelineVariable("stimulus"),
-  data: jsPsych.timelineVariable("data"),
-  choices: ["q", "p"],
-  stimulus_duration: 10000,
+  stimulus: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    console.log(trial);
+    
+
+    return constructStimulus(
+      trial.randomize,
+      trial.immOpt,
+      trial.delOpt,
+      trial.delay,
+      trial.prob,
+      null, // No feedback
+      {
+        showDelayedAmount: true,
+        showDelay: true,
+        showProb: true,
+      }
+    );
+  },
   trial_duration: 10000,
-  on_finish: (data) => {
-    delete data.stimulus;
-    const { response, randomize } = data;
-    if ((response === "p" && randomize === 0) || (response === "q" && randomize === 1)) {
+  choices: ["q", "p"],
+  data: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    return {
+      ...trial,
+      timelineType: "thirdDisplay",
+    };
+  },
+  on_finish: function (data) {
+    const response = data.response;
+    const randomize = data.randomize;
+
+    if (
+      (response === "p" && randomize == 0) ||
+      (response === "q" && randomize == 1)
+    ) {
       data.choice = "delayed";
-    } else if ((response === "q" && randomize === 0) || (response === "p" && randomize === 1)) {
+    } else if (
+      (response === "q" && randomize == 0) ||
+      (response === "p" && randomize == 1)
+    ) {
       data.choice = "immediate";
+    } else {
+      data.choice = "no_response";
     }
-    data.timelineType = "trial";
-    console.log(data);
+    // Record the response time
+    data.rt = data.rt;
   },
 };
 
