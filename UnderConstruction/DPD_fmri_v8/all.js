@@ -37,6 +37,13 @@ async function runExperiment() {
   });
   console.log('Left/Right Sequence:', leftRightSequence);
 
+  // Set displayDelayFirst for each trial
+  pseudorandomTrials.forEach((trial) => {
+    trial.displayDelayFirst = Math.random() < 0.5;
+  });
+  console.log(pseudorandomTrials);
+  
+
   const trialTimeline = createTimeline(pseudorandomTrials);
   console.log(trialTimeline);
 
@@ -274,19 +281,6 @@ function pseudorandomizeLeftRight(totalTrials, maxConsecutive) {
   
 function createTimeline(trialArray) {
   return trialArray.map((trial) => ({
-    // stimulus: constructStimulus(
-    //   trial.rando,
-    //   trial.immOpt,
-    //   trial.delOpt,
-    //   trial.delay,
-    //   trial.prob,
-    //   null,
-    //   {
-    //     showDelayedAmount: true,
-    //     showDelay: true,
-    //     showProb: true,
-    //   }
-    // ),
     data: {
       trialID: trial.id,
       immOpt: trial.immOpt,
@@ -297,6 +291,7 @@ function createTimeline(trialArray) {
       randomize: trial.rando,
       condition: trial.condition,
       p_certain: trial.p_certain,
+      displayDelayFirst: trial.displayDelayFirst
     },
   }));
 }
@@ -304,10 +299,19 @@ function createTimeline(trialArray) {
 
 
 function createProcedure(trials) {
+  // Randomly decide whether to display Delay or Probability first for each trial
   return {
-      timeline: [trialBlock, trialFeedback, fixation],
-      timeline_variables: trials,
-      randomize_order: false,
+    timeline: [
+      firstDisplay,
+      fixation1,
+      secondDisplay,
+      fixation2,
+      thirdDisplay,
+      trialFeedback,
+      fixation,
+    ],
+    timeline_variables: trials, // Pass trials directly
+    randomize_order: false,
   };
 }
   
@@ -564,7 +568,86 @@ const practiceBlock = {
   },
 };
 
-const trialBlock = {
+const firstDisplay = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    const displayDelayFirst = trial.displayDelayFirst;
+    console.log(trial);
+    
+
+    return constructStimulus(
+      trial.randomize,
+      trial.immOpt,
+      trial.delOpt,
+      trial.delay,
+      trial.prob,
+      null, // No feedback
+      {
+        showDelayedAmount: false,
+        showDelay: displayDelayFirst,
+        showProb: !displayDelayFirst,
+      }
+    );
+  },
+  trial_duration: 2000,
+  choices: "NO_KEYS",
+  data: function () {
+    return {
+      timelineType: "firstDisplay",
+    };
+  },
+};
+
+const fixation1 = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: '<div style="font-size:60px;">+</div>',
+  choices: "NO_KEYS",
+  trial_duration: 1000,
+  data: {
+    timelineType: "fixation1",
+  },
+};
+
+const secondDisplay = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+
+    return constructStimulus(
+      trial.randomize,
+      trial.immOpt,
+      trial.delOpt,
+      trial.delay,
+      trial.prob,
+      null, // No feedback
+      {
+        showDelayedAmount: false,
+        showDelay: true,
+        showProb: true,
+      }
+    );
+  },
+  trial_duration: 2000,
+  choices: "NO_KEYS",
+  data: function () {
+    return {
+      timelineType: "secondDisplay",
+    };
+  },
+};
+
+const fixation2 = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: '<div style="font-size:60px;">+</div>',
+  choices: "NO_KEYS",
+  trial_duration: 1000,
+  data: {
+    timelineType: "fixation2",
+  },
+};
+
+const thirdDisplay = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function () {
     const trial = jsPsych.evaluateTimelineVariable("data");
@@ -616,16 +699,6 @@ const trialBlock = {
   },
 };
 
-const fixation = {
-  type: jsPsychHtmlKeyboardResponse,
-  stimulus: '<div style="font-size:60px;">+</div>',
-  choices: "NO_KEYS",
-  trial_duration: 1000,
-  on_finish: (data) => {
-    data.timelineType = "fixcross";
-  },
-};
-
 const trialFeedback = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: () => {
@@ -663,6 +736,16 @@ const trialFeedback = {
   trial_duration: 1000,
   on_finish: (data) => {
     data.timelineType = "feedback";
+  },
+};
+
+const fixation = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: '<div style="font-size:60px;">+</div>',
+  choices: "NO_KEYS",
+  trial_duration: 1000,
+  data: {
+    timelineType: "fixation",
   },
 };
       
