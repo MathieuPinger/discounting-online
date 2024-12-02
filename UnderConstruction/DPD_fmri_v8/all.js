@@ -1,6 +1,8 @@
 /*
 Script 1
 */
+const testMode = true;
+
 // Initialize jsPsych
 const jsPsych = initJsPsych();
 // Seed the random number generator for pseudorandomization
@@ -55,9 +57,14 @@ async function runExperiment() {
   });
   console.log(pseudorandomTrials);
 
-  const trialTimeline = createTimeline(pseudorandomTrials);
+  let trialTimeline = createTimeline(pseudorandomTrials);
   console.log(trialTimeline);
 
+  if (testMode) {
+    trialTimeline = createTimeline(pseudorandomTrials.slice(0, 2));
+  } else {
+    trialTimeline = createTimeline(pseudorandomTrials);
+  }
   // Run the two-forced-choice task
   run2FC(trialTimeline);
 }
@@ -66,6 +73,7 @@ function run2FC(trials) {
   const trialProcedure = createProcedure(trials);
 
   const timeline = [
+    enterId,
     instructions1,
     instructions2,
     practiceProcedure,
@@ -84,32 +92,10 @@ function saveData() {
   jsPsych.data.addProperties({ startDate, startTime });
 
   // Add subject ID to data
-  const subjectId = sessionStorage.getItem("prolific_id");
   jsPsych.data.addProperties({ subject_id: subjectId });
 
   // Get data and prepare files
-  const data = jsPsych.data.get();
-  const jsonData = data.json();
-  const csvData = data.filter({ timelineType: "trial" }).csv();
-
-  // Prepare parameters for CSV
-  const csvParams = {
-    prolific_id: subjectId,
-    data: csvData,
-  };
-
-  // Send CSV data
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "web_API/saveExp1.php");
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.upload.onloadstart = () => {
-    // Send JSON data upon upload start
-    const xhr2 = new XMLHttpRequest();
-    xhr2.open("POST", "web_API/saveExp1db.php");
-    xhr2.setRequestHeader("Content-Type", "application/json");
-    xhr2.send(jsonData);
-  };
-  xhr.send(JSON.stringify(csvParams));
+  jsPsych.data.get().ignore('stimulus').localSave('csv',`${subjectId}_dpd_fmri.csv`)
 }
 
 /* SCRIPT 2*/
@@ -349,14 +335,14 @@ function constructStimulus(
   const formattedDelay = formatDelay(delay);
   const formattedProb =
     prob < 1
-      ? `with <b>${prob * 100}%</b> probability`
-      : "with <b>100%</b> probability";
+      ? `<b>${prob * 100}%</b>`
+      : "<b>100%</b>";
 
   // Immediate option content
   const immOptionContent = `
     <div class='option-row'><b>${immOpt}€</b></div>
-    <div class='option-row'><b>Today</b></div>
-    <div class='option-row'>with <b>100%</b> probability</div>
+    <div class='option-row'><b>Heute</b></div>
+    <div class='option-row'><b>100%</b></div>
   `;
 
   // Delayed option content
@@ -414,7 +400,7 @@ function constructStimulus(
   const stimulusHTML = `
     <div class='centerbox' id='container'>
       <p class='center-block-text ${promptClass}'>
-        Which amount would you prefer to <b>win</b>?<br>Press <strong>'q'</strong> for left or <strong>'p'</strong> for right:
+        Bitte entscheiden Sie sich für einen <b>Gewinn</b>.<br>Drücken Sie <strong>'links'</strong> oder <strong>'rechts'</strong>:
       </p>
       <div class='table'>
         <div class='row'>
@@ -432,16 +418,16 @@ function constructStimulus(
 function formatDelay(days) {
   const daysNum = parseFloat(days);
   if (daysNum === 0) {
-    return `<b>Today</b>`;
+    return `<b>Heute</b>`;
   } else if (daysNum === 30) {
-    return `in <b>1 month</b>`;
+    return `in <b>1 Monat</b>`;
   } else if (daysNum === 182.5) {
-    return `in <b>6 months</b>`;
+    return `in <b>6 Monaten</b>`;
   } else if (daysNum < 365) {
-    return `in <b>${daysNum}</b> days`;
+    return `in <b>${daysNum}</b> Tagen`;
   } else {
     const years = daysNum / 365;
-    return `in <b>${years}</b> year${years > 1 ? "s" : ""}`;
+    return `in <b>${years}</b> Jahr${years > 1 ? "en" : ""}`;
   }
 }
 
@@ -493,6 +479,26 @@ const instructionsText2 = `
   Bitte warten Sie nun auf die Anweisungen der/des Versuchsleiters/Versuchsleiterin.
   </p>
   </div>`
+
+const enterId = {
+  type: jsPsychSurveyText,
+  questions: [
+    {prompt: 'Probanden-ID:'}
+  ],
+  button_label: "Weiter",
+  data: {
+    task: 'enter_id'
+  },
+  on_finish: function(data) {
+    // Capture the subject ID from the response
+    subjectId = data.response.Q0;
+    console.log(subjectId);
+    
+
+    // Add subject ID to data properties for subsequent trials
+    jsPsych.data.addProperties({ subject_id: subjectId });
+  }
+}
 
 const instructions1 = {
   type: jsPsychHtmlKeyboardResponse,
@@ -750,7 +756,7 @@ const practiceProcedure = createProcedure(practiceTrials);
   const debriefPart1 = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
-      <p>Sie haben den ersten Teil beendet.</p>
+      <p>Sie haben die Studie beendet. Der/die Studienleiter/in wird Sie bald kontaktieren.</p>
       <!-- Additional content -->
     `,
     margin_vertical: "100px",
