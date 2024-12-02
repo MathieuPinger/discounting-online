@@ -303,9 +303,7 @@ function createProcedure(trials) {
   return {
     timeline: [
       firstDisplay,
-      fixation1,
       secondDisplay,
-      fixation2,
       thirdDisplay,
       trialFeedback,
       fixation,
@@ -351,7 +349,7 @@ function constructStimulus(
     delayedOptionContent += `<div class='option-row'>&nbsp;</div>`;
   }
   if (showDelay) {
-    delayedOptionContent += `<div class='option-row'>in <b>${formattedDelay}</b></div>`;
+    delayedOptionContent += `<div class='option-row'><b>${formattedDelay}</b></div>`;
   } else {
     delayedOptionContent += `<div class='option-row'>&nbsp;</div>`;
   }
@@ -431,117 +429,92 @@ INSTRUCTIONS AND TEST TRIALS
 */
 
 const instructionsText1 =
-    `<div class="instructions">
-    <h3>Willkommen zu dem Experiment!</h3>
-    Bitte lesen Sie diese Anweisungen sorgfältig durch.
-    <p>
-    Das Experiment besteht aus zwei Teilen und wird insgesamt etwa <b>45 Minuten</b> in Anspruch nehmen.
-    Zwischen den beiden Teilen werden Sie gebeten, einige Fragebögen auszufüllen. 
-    In jedem der beiden Teile werden Sie <b>vier Blöcke</b> von Versuchen durchführen. 
-    Nach jedem Block haben Sie die Möglichkeit, eine kurze Pause einzulegen, wenn Sie dies möchten.
+  `<div class="instructions">
+  <h3>Willkommen zum Experiment!</h3>
+  <p>
+  Wie im ersten Teil des Experiments haben Sie die Wahl zwischen zwei hypothetischen Geldgewinnen, 
+  einem <span class="immediate">geringeren Betrag</span> 
+  und einem <span class="delayed">größeren Betrag</span>.
+  </p>
 
-    <p>
-    Bei jedem Versuch des Experiments haben Sie die Wahl zwischen zwei hypothetischen Geldgewinnen oder -verlusten, 
-    einem <span class="immediate">geringeren Betrag</span> 
-    und einem <span class="delayed">größeren Betrag</span>, wie in diesem Beispiel:
-    </p>
-    </div>
+  <div class="instructions">
+  Jeder Gewinn ist mit einer <b>Verzögerung</b> und einer <b>Wahrscheinlichkeit</b> verbunden.
+  Die <b>Verzögerung</b> informiert Sie darüber, <b>wann</b> Sie das Geld gewinnen/verlieren würden. Die <b>Wahrscheinlichkeit</b> 
+  gibt Ihnen Auskunft über die Wahrscheinlichkeit des gewählten Gewinns/Verlusts. Wenn die Wahrscheinlichkeit 100% beträgt, ist 
+  der Gewinn/Verlust sicher. Ihre Aufgabe ist es, zwischen diesen Optionen zu wählen, indem Sie <b>"q" für die linke Option und "p" für die rechte Option 
+  drücken</b>.
 
-    <div id='exampleStim'>
-    ${constructStimulus('0', '5.00', '10.00', '30', '0.7')}
-    </div>
-    
-    <div class="instructions">
-    Sie können sehen, dass jeder Gewinn mit einer <b>Verzögerung</b> und einer <b>Wahrscheinlichkeit</b> verbunden ist.
-    Die <b>Verzögerung</b> informiert Sie darüber, <b>wann</b> Sie das Geld gewinnen/verlieren würden. Die <b>Wahrscheinlichkeit</b> 
-    gibt Ihnen Auskunft über die Wahrscheinlichkeit des gewählten Gewinns/Verlusts. Wenn die Wahrscheinlichkeit 100% beträgt, ist 
-    der Gewinn/Verlust sicher. 
-    Liegt die Wahrscheinlichkeit unter 100%, besteht eine <b>Chance, kein Geld zu gewinnen/zu verlieren</b>. 
-    <br>In diesem Beispiel könnten Sie sich entweder für einen Gewinn von
-    <span class="immediate">5 &euro; sofort</span> mit <span class="immediate">100% Wahrscheinlichkeit</span> entscheiden, 
-    <b>oder</b> einen Gewinn von
-    <span class="delayed">10 &euro; in einem Monat</span>, aber nur mit <span class="delayed">70% Wahrscheinlichkeit</span>.
-    Das bedeutet, Sie haben eine Chance von 70%, in einem Monat 10 &euro; zu gewinnen, aber auch eine Chance von 30%, gar nichts 
-    zu gewinnen.
-    Ihre Aufgabe ist es, zwischen diesen Optionen zu wählen, indem Sie <b>"q" für die linke Option und "p" für die rechte Option 
-    drücken</b>. (Hinweis: Dies ist nur ein Beispiel, das Drücken der Tasten funktioniert hier nicht.)
+  <p>
+  Der <span class="immediate">geringere Betrag</span> besteht immer aus 50€, 
+  <span class="immediate">sofort</span> und <span class="immediate">mit 100% Wahrscheinlichkeit</span>.
+  Beim <span class="delayed">größeren Betrag</span> stehen unterschiedliche Geldbeträge, Verzögerungen und Wahrscheinlichkeiten zur Auswahl.
+  </p>
+  
+  <p>
+  Sobald Sie <b>p</b> oder <b>q</b> drücken, wird die von Ihnen gewählte Option hervorgehoben.
+  Wenn Sie zum Beispiel lieber 
+  <span class="immediate">sofort 5 &euro; mit einer Wahrscheinlichkeit von 100%</span> gewinnen möchten als 
+  <span class="delayed">10 &euro; in einem Monat mit einer Wahrscheinlichkeit von 70%</span>, drücken Sie auf <b>q</b> 
+  und sehen dann Folgendes:
+  </p>
+      <div id='exampleStim'>
+      ${constructStimulus('0', '5.00', '10.00', '30', '0.7', 'left')}
+      </div>
+  Der nächste Versuch würde dann ein paar Sekunden später präsentiert werden.
 
-    <p>
-    Bei jedem Versuch stehen unterschiedliche Geldbeträge zur Auswahl. 
-    Der <span class="immediate">geringere Betrag</span> würde immer 
-    <span class="immediate">sofort</span> und <span class="immediate">mit 100% Wahrscheinlichkeit</span> gewonnen/verloren werden, 
-    während die Verzögerung für den Gewinn/Verlust des
-    <span class="delayed">größeren Betrags</span> zwischen 
-    <span class="delayed">0, 30, 90, 180 Tagen, 1 Jahr, und 3 Jahren</span> variiert. Die Wahrscheinlichkeit, den
-    <span class="delayed">größeren Betrag</span> zu gewinnen/verlieren, variiert zwischen 
-    <span class="delayed">100, 90, 75, 50, 25 und 10 Prozent.</span>
-    </p>
-    
-    <p>
-    Sobald Sie <b>p</b> oder <b>q</b> drücken, wird die von Ihnen gewählte Option hervorgehoben.
-    Wenn Sie zum Beispiel lieber 
-    <span class="immediate">sofort 5 &euro; mit einer Wahrscheinlichkeit von 100%</span> gewinnen möchten als 
-    <span class="delayed">10 &euro; in einem Monat mit einer Wahrscheinlichkeit von 70%</span>, drücken Sie auf <b>q</b> 
-    und sehen dann Folgendes:
-    </p>
-        <div id='exampleStim'>
-        ${constructStimulus('0', '5.00', '10.00', '30', '0.7', 'left')}
-        </div>
-    Der nächste Versuch würde dann ein paar Sekunden später präsentiert werden.
-
-    Weitere Anweisungen finden Sie auf der nächsten Seite.
-    </div>
-    `
+  Weitere Anweisungen finden Sie auf der nächsten Seite.
+  </div>
+  `
 
 const instructionsText2 = `
-    <div class="instructions">
-    <p>
-    Bei jedem Versuch haben Sie <b>10 Sekunden Zeit</b>, um sich zwischen den
-    beiden Optionen zu entscheiden.<br>
-    In der Hälfte der Blöcke wählen Sie zwischen zwei <b>Gewinnen</b>, 
-    in der anderen Hälfte zwischen zwei <b>Verlusten</b>.
-    </p>
+  <div class="instructions">
+  <p>
+  Bei jedem Versuch haben Sie <b>10 Sekunden Zeit</b>, um sich zwischen den
+  beiden Optionen zu entscheiden.<br>
+  In der Hälfte der Blöcke wählen Sie zwischen zwei <b>Gewinnen</b>, 
+  in der anderen Hälfte zwischen zwei <b>Verlusten</b>.
+  </p>
 
-    <p>
-    Ein <b>Versuch mit Verlusten</b> könnte so aussehen:
-        <div id='exampleStim'>
-        ${constructStimulus('0', '-5.00', '-10.00', '30', '0.7',)}
-        </div>
-    </p>
-    
-    <p>
-    In diesem Fall könnten sie sich entweder für einen Verlust von 
-    <span class="immediate">5 &euro; sofort</span> mit 100% Wahrscheinlichkeit
-    oder von <span class="delayed">10 &euro; in einem Monat</span> mit 70% Wahrscheinlichkeit entscheiden. 
-    Mit anderen Worten: Wenn Sie die rechte Option wählen, haben Sie eine Chance von 30%, nichts zu verlieren, aber auch eine 
-    Chance von 70%, in einem Monat 10 &euro; zu verlieren. 
-    </p>
+  <p>
+  Ein <b>Versuch mit Verlusten</b> könnte so aussehen:
+      <div id='exampleStim'>
+      ${constructStimulus('0', '-5.00', '-10.00', '30', '0.7',)}
+      </div>
+  </p>
+  
+  <p>
+  In diesem Fall könnten sie sich entweder für einen Verlust von 
+  <span class="immediate">5 &euro; sofort</span> mit 100% Wahrscheinlichkeit
+  oder von <span class="delayed">10 &euro; in einem Monat</span> mit 70% Wahrscheinlichkeit entscheiden. 
+  Mit anderen Worten: Wenn Sie die rechte Option wählen, haben Sie eine Chance von 30%, nichts zu verlieren, aber auch eine 
+  Chance von 70%, in einem Monat 10 &euro; zu verlieren. 
+  </p>
 
-    <p>
-    Die <span class="immediate">kleinere Variante</span> und die 
-    <span class="delayed">größere Variante</span> werden nach dem Zufallsprinzip auf der 
-    <b>linken</b> und <b>rechten</b> Seite angezeigt. Das letzte Beispiel könnte beispielsweise auch wie folgt aussehen: 
-    </p>
+  <p>
+  Die <span class="immediate">kleinere Variante</span> und die 
+  <span class="delayed">größere Variante</span> werden nach dem Zufallsprinzip auf der 
+  <b>linken</b> und <b>rechten</b> Seite angezeigt. Das letzte Beispiel könnte beispielsweise auch wie folgt aussehen: 
+  </p>
 
-    <div id='exampleStim'>
-    ${constructStimulus('1', '-5.00', '-10.00', '30', '0.7')}
-    </div>
+  <div id='exampleStim'>
+  ${constructStimulus('1', '-5.00', '-10.00', '30', '0.7')}
+  </div>
 
-    <p>
-    Hinweis: Alle Wahlmöglichkeiten sind <b>fiktiv</b>, d.h. <b>Ihre Vergütung für dieses Experiment wird nicht von Ihren 
-    Entscheidungen abhängen</b>. Sie werden kein Geld verlieren.
-    Bitte wählen Sie dennoch zwischen den Verlusten, 
-    <b>als ob die Möglichkeiten real wären</b>. Es gibt keine richtige oder falsche Antwort. 
-    Bitte wählen Sie die Option, die Sie bevorzugen würden, als ob Sie das Geld in dem entsprechenden Zeitrahmen und mit der 
-    entsprechenden Wahrscheinlichkeit verlieren würden. Jeder Versuch steht für sich allein, bitte behandeln Sie jede Entscheidung 
-    unabhängig.
-    </p>
+  <p>
+  Hinweis: Alle Wahlmöglichkeiten sind <b>fiktiv</b>, d.h. <b>Ihre Vergütung für dieses Experiment wird nicht von Ihren 
+  Entscheidungen abhängen</b>. Sie werden kein Geld verlieren.
+  Bitte wählen Sie dennoch zwischen den Verlusten, 
+  <b>als ob die Möglichkeiten real wären</b>. Es gibt keine richtige oder falsche Antwort. 
+  Bitte wählen Sie die Option, die Sie bevorzugen würden, als ob Sie das Geld in dem entsprechenden Zeitrahmen und mit der 
+  entsprechenden Wahrscheinlichkeit verlieren würden. Jeder Versuch steht für sich allein, bitte behandeln Sie jede Entscheidung 
+  unabhängig.
+  </p>
 
-    
-    <p>
-    Auf der nächsten Seite können Sie die Aufgabe in <b>5 Testversuchen</b> ohne Zeitlimit ausprobieren.
-    </p>
-    </div>`
+  
+  <p>
+  Auf der nächsten Seite können Sie die Aufgabe in <b>5 Testversuchen</b> ohne Zeitlimit ausprobieren.
+  </p>
+  </div>`
 
 const instructions1 = {
   type: jsPsychHtmlKeyboardResponse,
@@ -599,16 +572,6 @@ const firstDisplay = {
   },
 };
 
-const fixation1 = {
-  type: jsPsychHtmlKeyboardResponse,
-  stimulus: '<div style="font-size:60px;">+</div>',
-  choices: "NO_KEYS",
-  trial_duration: 1000,
-  data: {
-    timelineType: "fixation1",
-  },
-};
-
 const secondDisplay = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function () {
@@ -628,22 +591,12 @@ const secondDisplay = {
       }
     );
   },
-  trial_duration: 2000,
+  trial_duration: 3000,
   choices: "NO_KEYS",
   data: function () {
     return {
       timelineType: "secondDisplay",
     };
-  },
-};
-
-const fixation2 = {
-  type: jsPsychHtmlKeyboardResponse,
-  stimulus: '<div style="font-size:60px;">+</div>',
-  choices: "NO_KEYS",
-  trial_duration: 1000,
-  data: {
-    timelineType: "fixation2",
   },
 };
 
@@ -743,7 +696,7 @@ const fixation = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: '<div style="font-size:60px;">+</div>',
   choices: "NO_KEYS",
-  trial_duration: 1000,
+  trial_duration: 5000,
   data: {
     timelineType: "fixation",
   },
@@ -751,15 +704,16 @@ const fixation = {
       
 
 const practiceTrials = [
-    {   data: {immOpt: '50.00', delOpt: '100.00', delay: '365', prob: '0.5', randomize: '0'},
-        stimulus: constructStimulus('0', '50.00', '100.00', '365', '0.5') }
+    {   data: {immOpt: '50.00', delOpt: '100.00', delay: '365', prob: '0.5', randomize: '0', displayDelayFirst: true} }
 ];
 
-const practiceProcedure = {
-    timeline: [practiceBlock, trialFeedback, fixation],
-    timeline_variables: practiceTrials,
-    randomize_order: false,
-  };
+const practiceProcedure = createProcedure(practiceTrials);
+
+// const practiceProcedure = {
+//     timeline: [practiceBlock, trialFeedback, fixation],
+//     timeline_variables: practiceTrials,
+//     randomize_order: false,
+//   };
   
   const finishInstructions = {
     type: jsPsychHtmlKeyboardResponse,
