@@ -8,15 +8,12 @@ const jsPsych = initJsPsych();
 // Seed the random number generator for pseudorandomization
 Math.seedrandom('42');
 
-// Path to the JSON data file
-const dataPath = "stimuli/gen_run_B_test.json";
-
 // Run experiment on page load
 window.onload = runExperiment;
 
-async function runExperiment() {
+function runExperiment() {
   // Fetch and process trial data
-  const data = await fetchData(dataPath);
+  const data = trial_data;
   const trialList = processTrialData(Object.values(data));
   console.log(trialList)
   // Sort trials
@@ -99,11 +96,7 @@ function saveData() {
 }
 
 /* SCRIPT 2*/
-async function fetchData(path) {
-    const res = await fetch(path);
-    return res.json();
-  }
-  
+
 function processTrialData(dataArray) {
   return dataArray.map((trial) => {
   // replace p_occurence with prob
