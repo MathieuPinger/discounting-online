@@ -328,7 +328,6 @@ function createProcedure(trials) {
     randomize_order: false,
   };
 }
-  
 function constructStimulus(
   rando,
   immOpt,
@@ -343,7 +342,7 @@ function constructStimulus(
     showDelay = true,
     showProb = true,
     immAlwaysVisible = true,
-    showPrompt = true, // Add showPrompt option, default to true
+    showPrompt = true, // Control prompt visibility
   } = displayOptions;
 
   // Format delay and probability
@@ -378,20 +377,20 @@ function constructStimulus(
     delayedOptionContent += `<div class='option-row'>&nbsp;</div>`;
   }
 
-  // Feedback border (if applicable)
+  // Feedback outline (if applicable)
   let feedbackLeft = "";
   let feedbackRight = "";
   if (feedback === "left") {
-    feedbackLeft = "style='border: 5px solid green;'";
+    feedbackLeft = "feedback-highlight";
   } else if (feedback === "right") {
-    feedbackRight = "style='border: 5px solid green;'";
+    feedbackRight = "feedback-highlight";
   }
 
   // Option templates with feedback styles
   const immOption = `
-    <div class='option' id='${
-      rando === 0 ? "leftOption" : "rightOption"
-    }' ${rando === 0 ? feedbackLeft : feedbackRight}>
+    <div class='option ${rando === 0 ? "leftOption" : "rightOption"} ${
+    rando === 0 ? feedbackLeft : feedbackRight
+  }'>
       <font color='#005AB5'>
         ${immOptionContent}
       </font>
@@ -399,24 +398,23 @@ function constructStimulus(
   `;
 
   const delayedOption = `
-    <div class='option' id='${
-      rando === 0 ? "rightOption" : "leftOption"
-    }' ${rando === 0 ? feedbackRight : feedbackLeft}>
+    <div class='option ${rando === 0 ? "rightOption" : "leftOption"} ${
+    rando === 0 ? feedbackRight : feedbackLeft
+  }'>
       <font color='#DC3220'>
         ${delayedOptionContent}
       </font>
     </div>
   `;
 
-  // Construct the final stimulus HTML, conditionally include the prompt
-  const promptText = showPrompt
-    ? `Which amount would you prefer to <b>win</b>?<br>Press <strong>'q'</strong> for left or <strong>'p'</strong> for right:`
-    : `Which amount would you prefer to <b>win</b>?`;
+  // Control prompt visibility using CSS classes
+  const promptClass = showPrompt ? "prompt-visible" : "prompt-hidden";
 
+  // Construct the final stimulus HTML
   const stimulusHTML = `
     <div class='centerbox' id='container'>
-      <p class='center-block-text'>
-        ${promptText}
+      <p class='center-block-text ${promptClass}'>
+        Which amount would you prefer to <b>win</b>?<br>Press <strong>'q'</strong> for left or <strong>'p'</strong> for right:
       </p>
       <div class='table'>
         <div class='row'>
@@ -428,6 +426,7 @@ function constructStimulus(
 
   return stimulusHTML;
 }
+
 
 
 function formatDelay(days) {

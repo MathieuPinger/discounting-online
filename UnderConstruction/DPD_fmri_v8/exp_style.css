@@ -1,61 +1,181 @@
+/* Adjusted CSS */
 
-/* JSPSYCH */
-html{
-	background-color: rgba(221, 221, 221, 0.9);
+body, .jspsych-display-element {
+  font-family: 'Arial', sans-serif;
 }
 
-/*
- * CSS for jsPsych experiments.
- *
- * This stylesheet provides minimal styling to make jsPsych
- * experiments look polished without any additional styles.
- */
+/* 2. Set background color to black and text and option borders to light grey */
 
- @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+html, body, .jspsych-content-wrapper, .jspsych-display-element {
+  background-color: black;
+  color: lightgrey;
+}
 
-/* Container holding jsPsych content */
+/* 3. Increase presentation size to cover two-thirds of the screen */
 
- .jspsych-display-element {
-   display: flex;
-   flex-direction: column;
-   overflow-y: auto;
- }
+.jspsych-content-wrapper {
+  display: flex;
+  margin: auto;
+  flex: 1 1 100%;
+  width: 66vw; /* 66% of the viewport width */
+}
 
- .jspsych-display-element:focus {
-   outline: none;
- }
+.jspsych-content {
+  max-width: none; /* Remove max-width limit */
+  text-align: center;
+  margin: auto;
+}
 
- .jspsych-top {
-   align-items: flex-start;
- }
+/* Adjust container sizes */
+#container, .centerbox {
+  width: 66vw; /* 66% of the viewport width */
+  display: block;
+  text-align: center;
+  font-size: 1.5em; /* Increase font size */
+  margin: 0 auto;
+}
 
- .jspsych-middle {
-   align-items: center;
- }
+/* Prompt visibility control */
+.prompt-hidden {
+  visibility: hidden;
+}
 
-/* fonts and type */
+.prompt-visible {
+  visibility: visible;
+}
 
+/* Feedback highlight without affecting layout */
+.feedback-highlight {
+  outline: 5px solid green;
+  outline-offset: -5px; /* Adjust as needed */
+}
+
+/* Ensure consistent heights and prevent content shifts */
+.center-block-text {
+  min-height: 60px; /* Set a minimum height to accommodate the prompt */
+}
+
+/* Adjust the option-row to have consistent height */
+.option-row {
+  width: 100%;
+  padding: 15px 0px;
+  margin: 0px;
+  border-left: 2px solid lightgrey;
+  border-right: 2px solid lightgrey;
+  border-bottom: 2px solid lightgrey;
+  box-sizing: border-box;
+}
+
+
+/* Apply border-top to the first row */
+.option-row:first-child {
+  border-top: 2px solid lightgrey;
+}
+
+/* Adjust the option class to prevent layout shifts */
+.option {
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0px;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+/* Ensure that the feedback outline does not cause elements to shift */
+.option.feedback-highlight {
+  /* Use outline instead of border */
+  outline: 5px solid green;
+  outline-offset: -5px;
+}
+
+/* Adjust text sizes */
+.instructions, .center-block-text, p, li, .option-row {
+  font-size: 1.5em;
+}
+
+/* Ensure options are displayed side by side */
+.table {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+#exampleStim, #flowchart {
+  width: 66vw;
+  text-align: center;
+  display: block;
+  padding: 10px;
+  margin: 20px auto;
+  border: 1px solid lightgrey;
+}
+
+/* Adjust immediate and delayed option styles */
+.immediate {
+  font-weight: bold;
+  color: #005AB5;
+}
+
+.delayed {
+  font-weight: bold;
+  color: #DC3220;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 800px) {
+  .jspsych-content-wrapper, #container, .centerbox {
+    width: 90vw; /* Expand to 90% on smaller screens */
+  }
+
+  .option {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+/* JSPSYCH default styles */
 .jspsych-display-element {
-  font-family: 'Open Sans', 'Arial', sans-serif;
-  font-size: 18px;
-  line-height: 1.6em;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
-/* Form elements like input fields and buttons */
+.jspsych-display-element:focus {
+  outline: none;
+}
 
+.jspsych-top {
+  align-items: flex-start;
+}
+
+.jspsych-middle {
+  align-items: center;
+}
+
+/* Form elements */
 .jspsych-display-element input[type="text"] {
-  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-size: 14px;
 }
 
-/* borrowing Bootstrap style for btn elements, but combining styles a bit */
+/* Button styles */
 .jspsych-btn {
   display: inline-block;
   padding: 6px 12px;
   margin: 0px;
   font-size: 14px;
   font-weight: 400;
-  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-family: 'Arial', sans-serif;
   cursor: pointer;
   line-height: 1.4;
   text-align: center;
@@ -69,7 +189,6 @@ html{
   border-color: #ccc;
 }
 
-/* only apply the hover style on devices with a mouse/pointer that can hover - issue #977 */
 @media (hover: hover) {
   .jspsych-btn:hover {
     background-color: #ddd;
@@ -79,7 +198,7 @@ html{
 
 .jspsych-btn:active {
   background-color: #ddd;
-  border-color:#000000;
+  border-color: #000000;
 }
 
 .jspsych-btn:disabled {
@@ -89,51 +208,51 @@ html{
   cursor: not-allowed;
 }
 
-/* custom style for input[type="range] (slider) to improve alignment between positions and labels */
-
+/* Slider styles */
 .jspsych-slider {
   appearance: none;
-  -webkit-appearance: none; 
+  -webkit-appearance: none;
   -moz-appearance: none;
-  width: 100%; 
-  background: transparent; 
+  width: 100%;
+  background: transparent;
 }
+
 .jspsych-slider:focus {
   outline: none;
 }
-/* track */
+
+/* Track */
 .jspsych-slider::-webkit-slider-runnable-track {
   appearance: none;
-  -webkit-appearance: none;
   width: 100%;
   height: 8px;
   cursor: pointer;
   background: #eee;
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   border-radius: 2px;
   border: 1px solid #aaa;
 }
+
 .jspsych-slider::-moz-range-track {
   appearance: none;
   width: 100%;
   height: 8px;
   cursor: pointer;
   background: #eee;
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   border-radius: 2px;
   border: 1px solid #aaa;
 }
+
 .jspsych-slider::-ms-track {
   appearance: none;
   width: 99%;
   height: 14px;
   cursor: pointer;
   background: #eee;
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   border-radius: 2px;
   border: 1px solid #aaa;
 }
-/* thumb */
+
+/* Thumb */
 .jspsych-slider::-webkit-slider-thumb {
   border: 1px solid #666;
   height: 24px;
@@ -144,6 +263,7 @@ html{
   -webkit-appearance: none;
   margin-top: -9px;
 }
+
 .jspsych-slider::-moz-range-thumb {
   border: 1px solid #666;
   height: 24px;
@@ -152,6 +272,7 @@ html{
   background: #ffffff;
   cursor: pointer;
 }
+
 .jspsych-slider::-ms-thumb {
   border: 1px solid #666;
   height: 20px;
@@ -162,8 +283,7 @@ html{
   margin-top: -2px;
 }
 
-/* jsPsych progress bar */
-
+/* Progress bar */
 #jspsych-progressbar-container {
   color: #555;
   border-bottom: 1px solid #dedede;
@@ -174,10 +294,12 @@ html{
   width: 100%;
   line-height: 1em;
 }
+
 #jspsych-progressbar-container span {
   font-size: 14px;
   padding-right: 14px;
 }
+
 #jspsych-progressbar-outer {
   background-color: #eee;
   width: 50%;
@@ -187,94 +309,29 @@ html{
   vertical-align: middle;
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
+
 #jspsych-progressbar-inner {
   background-color: #aaa;
   width: 0%;
   height: 100%;
 }
 
-/* Control appearance of jsPsych.data.displayData() */
+/* Data display */
 #jspsych-data-display {
   text-align: left;
 }
 
-
-.jspsych-content-wrapper {
-display: flex;
-margin: auto;
-flex: 1 1 100%;
-width: 100%;
+.instructions {
+  text-align: left;
 }
 
-.jspsych-content {
-max-width: 800px; /* this is mainly an IE 10-11 fix */
-text-align: center;
-margin: auto; /* this is for overflowing content */
+/* Immediate and delayed option styles */
+.immediate {
+  font-weight: bold;
+  color: #005AB5;
 }
 
-#container { 
-    width: 500px;
-    display: block;
-    text-align: center;
-    font-size: 20px; 
-}
-
-.table { 
-    display: table; 
-    width: 100%; 
-    padding-top: 5px; 
-}
-
-.row { 
-    display: table-row; 
-}
-.option { 
-    display: table-cell; 
-    width: 50%; 
-    padding: 10px;
-    /* padding: 20px; */
-    margin: 10px;
-    /*border: 1px solid rgb(7, 7, 7);*/ 
-}
-
-.option-row { 
-  width: 100%; 
-  padding: 15px 0px 15px 0px;
-  margin: 0px;
-  border: 1px solid rgb(7, 7, 7); 
-}
-
-#exampleStim{
-    width: 500px;
-    text-align: center;
-    display: block;
-    padding: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom:20px;
-    margin-top: 20px;
-    border: 1px solid rgb(27, 27, 27);
-}
-
-#flowchart{
-    width:500px;
-    text-align: center;
-    display: block;
-    padding: 10px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.instructions{
-    text-align:left;
-}
-
-.immediate{
-    font-weight:bold;
-    color:#005AB5;
-}
-
-.delayed{
-    font-weight:bold;
-    color: #DC3220;
+.delayed {
+  font-weight: bold;
+  color: #DC3220;
 }
