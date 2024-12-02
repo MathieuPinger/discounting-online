@@ -43,6 +43,17 @@ async function runExperiment() {
   });
   console.log(pseudorandomTrials);
   
+  // Assign jittered durations to trials
+  pseudorandomTrials.forEach((trial) => {
+    // Jitter durations between 2000ms and 4000ms for displays
+    trial.firstDisplayDuration = Math.round(2000 + Math.random() * 2000);
+    trial.secondDisplayDuration = Math.round(2000 + Math.random() * 2000);
+    trial.thirdDisplayDuration = Math.round(2000 + Math.random() * 2000);
+
+    // Jitter fixation duration between 5000ms and 7000ms
+    trial.fixationDuration = Math.round(5000 + Math.random() * 2000);
+  });
+  console.log(pseudorandomTrials);
 
   const trialTimeline = createTimeline(pseudorandomTrials);
   console.log(trialTimeline);
@@ -291,7 +302,11 @@ function createTimeline(trialArray) {
       randomize: trial.rando,
       condition: trial.condition,
       p_certain: trial.p_certain,
-      displayDelayFirst: trial.displayDelayFirst
+      displayDelayFirst: trial.displayDelayFirst,
+      firstDisplayDuration: trial.firstDisplayDuration,
+      secondDisplayDuration: trial.secondDisplayDuration,
+      thirdDisplayDuration: trial.thirdDisplayDuration,
+      fixationDuration: trial.fixationDuration
     },
   }));
 }
@@ -528,7 +543,10 @@ const firstDisplay = {
       }
     );
   },
-  trial_duration: 2000,
+  trial_duration: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    return trial.firstDisplayDuration;
+  },
   choices: "NO_KEYS",
   data: function () {
     return {
@@ -557,7 +575,10 @@ const secondDisplay = {
       }
     );
   },
-  trial_duration: 3000,
+  trial_duration: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    return trial.secondDisplayDuration;
+  },
   choices: "NO_KEYS",
   data: function () {
     return {
@@ -586,7 +607,10 @@ const thirdDisplay = {
       }
     );
   },
-  trial_duration: 2000, // Adjust duration as needed
+  trial_duration: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    return trial.thirdDisplayDuration;
+  },
   choices: "NO_KEYS", // Do not allow responses yet
   data: function () {
     const trial = jsPsych.timelineVariable();
@@ -690,7 +714,10 @@ const fixation = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: '<div style="font-size:60px;">+</div>',
   choices: "NO_KEYS",
-  trial_duration: 5000,
+  trial_duration: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    return trial.fixationDuration;
+  },
   data: {
     timelineType: "fixation",
   },
@@ -698,7 +725,8 @@ const fixation = {
       
 
 const practiceTrials = [
-    {   data: {immOpt: '50.00', delOpt: '100.00', delay: '365', prob: '0.5', randomize: '0', displayDelayFirst: true} }
+    {   data: {immOpt: '50.00', delOpt: '100.00', delay: '365', prob: '0.5', randomize: '0', displayDelayFirst: true,
+      firstDisplayDuration: '3000', secondDisplayDuration: '3000', thirdDisplayDuration: '3000', fixationDuration: '1000'} }
 ];
 
 const practiceProcedure = createProcedure(practiceTrials);
