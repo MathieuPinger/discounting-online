@@ -305,6 +305,7 @@ function createProcedure(trials) {
       firstDisplay,
       secondDisplay,
       thirdDisplay,
+      fourthDisplay,
       trialFeedback,
       fixation,
     ],
@@ -327,12 +328,15 @@ function constructStimulus(
     showDelay = true,
     showProb = true,
     immAlwaysVisible = true,
+    showPrompt = true, // Add showPrompt option, default to true
   } = displayOptions;
 
   // Format delay and probability
   const formattedDelay = formatDelay(delay);
   const formattedProb =
-    prob < 1 ? `with <b>${prob * 100}%</b> probability` : "with <b>100%</b> probability";
+    prob < 1
+      ? `with <b>${prob * 100}%</b> probability`
+      : "with <b>100%</b> probability";
 
   // Immediate option content
   const immOptionContent = `
@@ -349,7 +353,7 @@ function constructStimulus(
     delayedOptionContent += `<div class='option-row'>&nbsp;</div>`;
   }
   if (showDelay) {
-    delayedOptionContent += `<div class='option-row'><b>${formattedDelay}</b></div>`;
+    delayedOptionContent += `<div class='option-row'>${formattedDelay}</div>`;
   } else {
     delayedOptionContent += `<div class='option-row'>&nbsp;</div>`;
   }
@@ -370,7 +374,9 @@ function constructStimulus(
 
   // Option templates with feedback styles
   const immOption = `
-    <div class='option' id='${rando === 0 ? "leftOption" : "rightOption"}' ${rando === 0 ? feedbackLeft : feedbackRight}>
+    <div class='option' id='${
+      rando === 0 ? "leftOption" : "rightOption"
+    }' ${rando === 0 ? feedbackLeft : feedbackRight}>
       <font color='#005AB5'>
         ${immOptionContent}
       </font>
@@ -378,19 +384,24 @@ function constructStimulus(
   `;
 
   const delayedOption = `
-    <div class='option' id='${rando === 0 ? "rightOption" : "leftOption"}' ${rando === 0 ? feedbackRight : feedbackLeft}>
+    <div class='option' id='${
+      rando === 0 ? "rightOption" : "leftOption"
+    }' ${rando === 0 ? feedbackRight : feedbackLeft}>
       <font color='#DC3220'>
         ${delayedOptionContent}
       </font>
     </div>
   `;
 
-  // Construct the final stimulus HTML
+  // Construct the final stimulus HTML, conditionally include the prompt
+  const promptText = showPrompt
+    ? `Which amount would you prefer to <b>win</b>?<br>Press <strong>'q'</strong> for left or <strong>'p'</strong> for right:`
+    : `Which amount would you prefer to <b>win</b>?`;
+
   const stimulusHTML = `
     <div class='centerbox' id='container'>
       <p class='center-block-text'>
-        Which amount would you prefer to <b>win</b>?
-        <br>Press <strong>'q'</strong> for left or <strong>'p'</strong> for right:
+        ${promptText}
       </p>
       <div class='table'>
         <div class='row'>
@@ -440,79 +451,32 @@ const instructionsText1 =
   <div class="instructions">
   Jeder Gewinn ist mit einer <b>Verzögerung</b> und einer <b>Wahrscheinlichkeit</b> verbunden.
   Die <b>Verzögerung</b> informiert Sie darüber, <b>wann</b> Sie das Geld gewinnen/verlieren würden. Die <b>Wahrscheinlichkeit</b> 
-  gibt Ihnen Auskunft über die Wahrscheinlichkeit des gewählten Gewinns/Verlusts. Wenn die Wahrscheinlichkeit 100% beträgt, ist 
-  der Gewinn/Verlust sicher. Ihre Aufgabe ist es, zwischen diesen Optionen zu wählen, indem Sie <b>"q" für die linke Option und "p" für die rechte Option 
+  gibt Ihnen Auskunft über die Wahrscheinlichkeit des gewählten Gewinns/Verlusts. 
+  Ihre Aufgabe ist es, zwischen diesen Optionen zu wählen, indem Sie <b>Links für die linke Option und Rechts für die rechte Option 
   drücken</b>.
 
-  <p>
-  Der <span class="immediate">geringere Betrag</span> besteht immer aus 50€, 
-  <span class="immediate">sofort</span> und <span class="immediate">mit 100% Wahrscheinlichkeit</span>.
-  Beim <span class="delayed">größeren Betrag</span> stehen unterschiedliche Geldbeträge, Verzögerungen und Wahrscheinlichkeiten zur Auswahl.
-  </p>
-  
-  <p>
-  Sobald Sie <b>p</b> oder <b>q</b> drücken, wird die von Ihnen gewählte Option hervorgehoben.
-  Wenn Sie zum Beispiel lieber 
-  <span class="immediate">sofort 5 &euro; mit einer Wahrscheinlichkeit von 100%</span> gewinnen möchten als 
-  <span class="delayed">10 &euro; in einem Monat mit einer Wahrscheinlichkeit von 70%</span>, drücken Sie auf <b>q</b> 
-  und sehen dann Folgendes:
-  </p>
-      <div id='exampleStim'>
-      ${constructStimulus('0', '5.00', '10.00', '30', '0.7', 'left')}
-      </div>
-  Der nächste Versuch würde dann ein paar Sekunden später präsentiert werden.
-
-  Weitere Anweisungen finden Sie auf der nächsten Seite.
+  Bitte drücken Sie Links oder Rechts, um die weiteren Anweisungen zu lesen.
   </div>
   `
 
 const instructionsText2 = `
   <div class="instructions">
   <p>
-  Bei jedem Versuch haben Sie <b>10 Sekunden Zeit</b>, um sich zwischen den
-  beiden Optionen zu entscheiden.<br>
-  In der Hälfte der Blöcke wählen Sie zwischen zwei <b>Gewinnen</b>, 
-  in der anderen Hälfte zwischen zwei <b>Verlusten</b>.
+  In diesem Teil des Experiments ist der <span class="immediate">geringere Betrag</span> immer gleich: 50€, sofort und mit 100% Wahrscheinlichkeit.
+  Die Informationen für den <span class="delayed">größeren Betrag</span>, also Wahrscheinlichkeit, 
+  Verzögerung und Geldbetrag, werden in jedem Durchgang <b>nacheinander</b> präsentiert. <br>
+  Bitte warten Sie die Präsentation aller Informationen ab, bevor Sie sich für eine der beiden Optionen entscheiden. <br>
+  Es erscheint in jedem Durchgang ein Hinweis, sobald Sie eine der beiden Optionen wählen sollen. Sie haben ab dann jeweils <b>5 Sekunden</b> Zeit.
   </p>
 
   <p>
-  Ein <b>Versuch mit Verlusten</b> könnte so aussehen:
-      <div id='exampleStim'>
-      ${constructStimulus('0', '-5.00', '-10.00', '30', '0.7',)}
-      </div>
-  </p>
-  
-  <p>
-  In diesem Fall könnten sie sich entweder für einen Verlust von 
-  <span class="immediate">5 &euro; sofort</span> mit 100% Wahrscheinlichkeit
-  oder von <span class="delayed">10 &euro; in einem Monat</span> mit 70% Wahrscheinlichkeit entscheiden. 
-  Mit anderen Worten: Wenn Sie die rechte Option wählen, haben Sie eine Chance von 30%, nichts zu verlieren, aber auch eine 
-  Chance von 70%, in einem Monat 10 &euro; zu verlieren. 
+  Der <span class="immediate">kleinere Betrag</span> und der 
+  <span class="delayed">größere Betrag</span> werden nach dem Zufallsprinzip auf der 
+  <b>linken</b> und <b>rechten</b> Seite angezeigt.
   </p>
 
   <p>
-  Die <span class="immediate">kleinere Variante</span> und die 
-  <span class="delayed">größere Variante</span> werden nach dem Zufallsprinzip auf der 
-  <b>linken</b> und <b>rechten</b> Seite angezeigt. Das letzte Beispiel könnte beispielsweise auch wie folgt aussehen: 
-  </p>
-
-  <div id='exampleStim'>
-  ${constructStimulus('1', '-5.00', '-10.00', '30', '0.7')}
-  </div>
-
-  <p>
-  Hinweis: Alle Wahlmöglichkeiten sind <b>fiktiv</b>, d.h. <b>Ihre Vergütung für dieses Experiment wird nicht von Ihren 
-  Entscheidungen abhängen</b>. Sie werden kein Geld verlieren.
-  Bitte wählen Sie dennoch zwischen den Verlusten, 
-  <b>als ob die Möglichkeiten real wären</b>. Es gibt keine richtige oder falsche Antwort. 
-  Bitte wählen Sie die Option, die Sie bevorzugen würden, als ob Sie das Geld in dem entsprechenden Zeitrahmen und mit der 
-  entsprechenden Wahrscheinlichkeit verlieren würden. Jeder Versuch steht für sich allein, bitte behandeln Sie jede Entscheidung 
-  unabhängig.
-  </p>
-
-  
-  <p>
-  Auf der nächsten Seite können Sie die Aufgabe in <b>5 Testversuchen</b> ohne Zeitlimit ausprobieren.
+  Bitte warten Sie nun auf die Anweisungen der/des Versuchsleiters/Versuchsleiterin.
   </p>
   </div>`
 
@@ -560,6 +524,7 @@ const firstDisplay = {
         showDelayedAmount: false,
         showDelay: displayDelayFirst,
         showProb: !displayDelayFirst,
+        showPrompt: false,
       }
     );
   },
@@ -588,6 +553,7 @@ const secondDisplay = {
         showDelayedAmount: false,
         showDelay: true,
         showProb: true,
+        showPrompt: false,
       }
     );
   },
@@ -604,8 +570,6 @@ const thirdDisplay = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function () {
     const trial = jsPsych.evaluateTimelineVariable("data");
-    console.log(trial);
-    
 
     return constructStimulus(
       trial.randomize,
@@ -613,21 +577,53 @@ const thirdDisplay = {
       trial.delOpt,
       trial.delay,
       trial.prob,
-      null, // No feedback
+      null,
       {
         showDelayedAmount: true,
         showDelay: true,
         showProb: true,
+        showPrompt: false, // Remove prompt
       }
     );
   },
-  trial_duration: 10000,
+  trial_duration: 2000, // Adjust duration as needed
+  choices: "NO_KEYS", // Do not allow responses yet
+  data: function () {
+    const trial = jsPsych.timelineVariable();
+    return {
+      ...trial,
+      timelineType: "thirdDisplay",
+    };
+  },
+};
+
+const fourthDisplay = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+
+    return constructStimulus(
+      trial.randomize,
+      trial.immOpt,
+      trial.delOpt,
+      trial.delay,
+      trial.prob,
+      null,
+      {
+        showDelayedAmount: true,
+        showDelay: true,
+        showProb: true,
+        showPrompt: true, // Show prompt
+      }
+    );
+  },
+  trial_duration: 10000, // Allow up to 10 seconds for response
   choices: ["q", "p"],
   data: function () {
     const trial = jsPsych.evaluateTimelineVariable("data");
     return {
       ...trial,
-      timelineType: "thirdDisplay",
+      timelineType: "fourthDisplay",
     };
   },
   on_finish: function (data) {
@@ -656,11 +652,9 @@ const trialFeedback = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: () => {
     const lastData = jsPsych.data.getLastTrialData().values()[0];
-    console.log(lastData);
     let feedbackStimulus;
     if (lastData.response === "q" || lastData.response === "p") {
       const feedbackSide = lastData.response === "q" ? "left" : "right";
-      //feedbackStimulus = constructStimulus({ ...lastData, feedback: feedbackSide });
       feedbackStimulus = constructStimulus(
         lastData.randomize,
         lastData.immOpt,
@@ -672,14 +666,14 @@ const trialFeedback = {
           showDelayedAmount: true,
           showDelay: true,
           showProb: true,
+          showPrompt: true, // Show prompt during feedback if desired
         }
-    );
-      console.log(feedbackStimulus);
+      );
     } else {
       feedbackStimulus = `
         <div class="centerbox" id="container">
           <p class="center-block-text" style="color:red;">
-            <b>Bitte wählen Sie rechtzeitig eine Option!</b>
+            <b>Please make a selection in time!</b>
           </p>
         </div>`;
     }
