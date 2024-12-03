@@ -8,6 +8,7 @@ let triggerFlag = false;
 
 // initialize trigger array
 const triggers = [];
+let triggerCount = 0;
 
 // Event Listener for Trigger
 document.addEventListener('keydown', (event) => {
@@ -17,6 +18,8 @@ document.addEventListener('keydown', (event) => {
         triggerTime = new Date().getTime();
         triggerCount = triggerCount + 1;
         triggers.push(triggerTime);
+        console.log(triggers);
+        
     }
 },
     false
@@ -31,43 +34,34 @@ const firstTrigger = {
     stimulus: `
         <div class="centerbox" id="container">
         <p class="center-block-text" style="color:lightgrey;">
-        <b>Bitte melden Sie jetzt sich bei der Versuchsleitung.</b>
+        <b>Der Probedurchlauf ist abgeschlossen. 
+        Bitte melden Sie jetzt sich bei der Versuchsleitung.</b>
         </p>
     </div>`,
-  
     choices: [triggerKey]
-  };
-  
-  // Wait for N triggers, then continue
-  const collectTriggers = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus:`
-        <div class="centerbox" id="container">
-        <p class="center-block-text" style="color:lightgrey;">
-        <b>Bitte warten, Experiment startet bald...</b>
-        </p>
-    </div>`,
-    choices: [triggerKey],
-  
-    data: { displayType: 'wait_for_trigger' }
-  }
+};
 
-  // Loop function that ends display of collectTriggers when triggerCount > triggersToCollect
-  const triggerLoop = {
-    timeline: [collectTriggers],
-    loop_function: function(){
-      if (triggerCount < (triggersToCollect - 1)) {
-        return true;
-      } else {
-        return false;
-      }
+// Wait for N triggers, then continue
+const collectTriggers = {
+type: jsPsychHtmlKeyboardResponse,
+stimulus:`
+    <div class="centerbox" id="container">
+    <p class="center-block-text" style="color:lightgrey;">
+    <b>Bitte warten, Experiment startet bald...</b>
+    </p>
+</div>`,
+choices: [triggerKey],
+data: { displayType: 'wait_for_trigger' }
+}
+
+// Loop function that ends display of collectTriggers when triggerCount > triggersToCollect
+const triggerLoop = {
+timeline: [collectTriggers],
+loop_function: function(){
+    if (triggerCount < (triggersToCollect - 1)) {
+    return true;
+    } else {
+    return false;
     }
-  };
-  
-  var saveTriggers = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: "Trigger werden gespeichert ...",
-    trial_duration: 1000,
-  
-    data: { trial: 'triggers', triggers: triggers }
-  }
+}
+};

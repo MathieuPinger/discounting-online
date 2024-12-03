@@ -1,7 +1,20 @@
 /*
 Script 1
 */
+
+// Set Test Mode and fMRI mode
+// TestMode = 3 trials total
 const testMode = true;
+
+// fMRI mode = buttons for left and right = b/g
+const fmriMode = false;
+if (fmriMode) {
+  leftButton = "g";
+  rightButton = "b";
+} else {
+  leftButton = "q";
+  rightButton = "p";
+}
 
 // Initialize jsPsych
 const jsPsych = initJsPsych();
@@ -74,9 +87,11 @@ function run2FC(trials) {
     instructions1,
     instructions2,
     practiceProcedure,
-    finishInstructions,
+    firstTrigger,
+    triggerLoop,
     trialProcedure,
     debriefPart1,
+    debriefPart2,
   ];
 
   jsPsych.run(timeline);
@@ -90,6 +105,10 @@ function saveData() {
 
   // Add subject ID to data
   jsPsych.data.addProperties({ subject_id: subjectId });
+
+  // // Add trigger data
+  // let trigger_data = {triggers: triggers};
+  // jsPsych.data.write(trigger_data);
 
   // Get data and prepare files
   jsPsych.data.get().ignore('stimulus').localSave('csv',`${subjectId}_dpd_fmri.csv`)
@@ -496,7 +515,7 @@ const enterId = {
 const instructions1 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: instructionsText1,
-  choices: ["q", "p"],
+  choices: [leftButton, rightButton],
   margin_vertical: "100px",
   data: {displayType: 'instructions1'},
 };
@@ -504,7 +523,7 @@ const instructions1 = {
 const instructions2 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: instructionsText2,
-  choices: ["q", "p"],
+  choices: [leftButton, rightButton],
   margin_vertical: "100px",
   data: {displayType: 'instructions2'},
 };
@@ -514,7 +533,7 @@ const practiceBlock = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: jsPsych.timelineVariable("stimulus"),
   data: jsPsych.timelineVariable("data"),
-  choices: ["q", "p"],
+  choices: [leftButton, rightButton],
   on_finish: (data) => {
     data.timelineType = "test";
   },
@@ -666,7 +685,7 @@ const fourthDisplay = {
     );
   },
   trial_duration: 10000, // Allow up to 10 seconds for response
-  choices: ["q", "p"],
+  choices: [leftButton, rightButton],
   data: function () {
     const trial = jsPsych.evaluateTimelineVariable("data");
     return {
@@ -686,13 +705,13 @@ const fourthDisplay = {
     const randomize = data.randomize;
 
     if (
-      (response === "p" && randomize == 0) ||
-      (response === "q" && randomize == 1)
+      (response === rightButton && randomize == 0) ||
+      (response === leftButton && randomize == 1)
     ) {
       data.choice = "delayed";
     } else if (
-      (response === "q" && randomize == 0) ||
-      (response === "p" && randomize == 1)
+      (response === leftButton && randomize == 0) ||
+      (response === rightButton && randomize == 1)
     ) {
       data.choice = "immediate";
     } else {
@@ -712,8 +731,8 @@ const trialFeedback = {
   stimulus: () => {
     const lastData = jsPsych.data.getLastTrialData().values()[0];
     let feedbackStimulus;
-    if (lastData.response === "q" || lastData.response === "p") {
-      const feedbackSide = lastData.response === "q" ? "left" : "right";
+    if (lastData.response === leftButton || lastData.response === rightButton) {
+      const feedbackSide = lastData.response === leftButton ? "left" : "right";
       feedbackStimulus = constructStimulus(
         lastData.randomize,
         lastData.immOpt,
@@ -783,35 +802,35 @@ const practiceTrials = [
 
 const practiceProcedure = createProcedure(practiceTrials);
 
-// const practiceProcedure = {
-//     timeline: [practiceBlock, trialFeedback, fixation],
-//     timeline_variables: practiceTrials,
-//     randomize_order: false,
-//   };
-  
-  const finishInstructions = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `
-      <div class="instructions">
-        Der Probedurchlauf ist abgeschlossen. <br>
-        Bitte warten Sie nun auf die Anweisungen der Versuchsleitung.
-      </div>`,
-    choices: ["q", "p"],
-    margin_vertical: "100px",
-    data: { displayType: 'finishInstructions'}
-  };
-  
-  const debriefPart1 = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `
-      <p>Sie haben die Studie beendet. Der/die Studienleiter/in wird Sie bald kontaktieren.</p>
-      <!-- Additional content -->
-    `,
-    margin_vertical: "100px",
-    choices: "NO_KEYS",
-    on_start: function(data) {
-      data.displayType = 'debrief';
-      // Call saveData after data has been recorded
-      saveData();
-    },
-  };
+const debriefPart1 = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: `
+    <p>Sie haben die Studie beendet. Der/die Studienleiter/in wird Sie bald kontaktieren.</p>
+    <!-- Additional content -->
+  `,
+  margin_vertical: "100px",
+  choices: "NO_KEYS",
+  trial_duration: 500,
+  data: function () {
+    return {
+      displayType: 'triggersave',
+      triggers: triggers,
+    };
+  },
+};
+
+const debriefPart2 = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: `
+    <p>Sie haben die Studie beendet. Der/die Studienleiter/in wird Sie bald kontaktieren.</p>
+    <!-- Additional content -->
+  `,
+  margin_vertical: "100px",
+  choices: "NO_KEYS",
+  on_start: function() {
+    // data.displayType = 'debrief';
+    // data.triggers = triggers;
+    // Call saveData after data has been recorded
+    saveData();
+  },
+};
