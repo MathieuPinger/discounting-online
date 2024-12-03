@@ -370,7 +370,7 @@ function constructStimulus(
     <div class='option ${rando === 0 ? "leftOption" : "rightOption"} ${
     rando === 0 ? feedbackLeft : feedbackRight
   }'>
-      <font color='#005AB5'>
+      <font color='#4CA8FF'>
         ${immOptionContent}
       </font>
     </div>
@@ -380,7 +380,7 @@ function constructStimulus(
     <div class='option ${rando === 0 ? "rightOption" : "leftOption"} ${
     rando === 0 ? feedbackRight : feedbackLeft
   }'>
-      <font color='#DC3220'>
+      <font color='#FF4D4D'>
         ${delayedOptionContent}
       </font>
     </div>
@@ -480,7 +480,7 @@ const enterId = {
   ],
   button_label: "Weiter",
   data: {
-    task: 'enter_id'
+    displayType: 'enter_id'
   },
   on_finish: function(data) {
     // Capture the subject ID from the response
@@ -498,6 +498,7 @@ const instructions1 = {
   stimulus: instructionsText1,
   choices: ["q", "p"],
   margin_vertical: "100px",
+  data: {displayType: 'instructions1'},
 };
 
 const instructions2 = {
@@ -505,6 +506,7 @@ const instructions2 = {
   stimulus: instructionsText2,
   choices: ["q", "p"],
   margin_vertical: "100px",
+  data: {displayType: 'instructions2'},
 };
 
 // Practice and trial blocks
@@ -547,8 +549,17 @@ const firstDisplay = {
   },
   choices: "NO_KEYS",
   data: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    const displayType = trial.displayDelayFirst ? "delay" : "prob";
     return {
       timelineType: "firstDisplay",
+      displayType: displayType,
+      delay: trial.delay,
+      prob: trial.prob,
+      delOpt: trial.delOpt,
+      trialID: trial.trialID,
+      condition: trial.condition,
+      duration: trial.firstDisplayDuration,
     };
   },
 };
@@ -579,8 +590,17 @@ const secondDisplay = {
   },
   choices: "NO_KEYS",
   data: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    const displayType = trial.displayDelayFirst ? "prob" : "delay";
     return {
       timelineType: "secondDisplay",
+      displayType: displayType,
+      delay: trial.delay,
+      prob: trial.prob,
+      delOpt: trial.delOpt,
+      trialID: trial.trialID,
+      condition: trial.condition,
+      duration: trial.secondDisplayDuration,
     };
   },
 };
@@ -611,10 +631,16 @@ const thirdDisplay = {
   },
   choices: "NO_KEYS", // Do not allow responses yet
   data: function () {
-    const trial = jsPsych.timelineVariable();
+    const trial = jsPsych.evaluateTimelineVariable("data");
     return {
-      ...trial,
       timelineType: "thirdDisplay",
+      displayType: "all",
+      delay: trial.delay,
+      prob: trial.prob,
+      delOpt: trial.delOpt,
+      trialID: trial.trialID,
+      condition: trial.condition,
+      duration: trial.thirdDisplayDuration,
     };
   },
 };
@@ -646,6 +672,13 @@ const fourthDisplay = {
     return {
       ...trial,
       timelineType: "fourthDisplay",
+      displayType: "prompt",
+      delay: trial.delay,
+      prob: trial.prob,
+      delOpt: trial.delOpt,
+      trialID: trial.trialID,
+      condition: trial.condition,
+      duration: null, // Will be set in on_finish
     };
   },
   on_finish: function (data) {
@@ -665,8 +698,12 @@ const fourthDisplay = {
     } else {
       data.choice = "no_response";
     }
-    // Record the response time
-    data.rt = data.rt;
+    // Record the duration based on response time
+    if (data.rt !== null) {
+      data.duration = data.rt;
+    } else {
+      data.duration = 10000; // Maximum duration if no response
+    }
   },
 };
 
@@ -695,7 +732,7 @@ const trialFeedback = {
       feedbackStimulus = `
         <div class="centerbox" id="container">
           <p class="center-block-text" style="color:red;">
-            <b>Please make a selection in time!</b>
+            <b>Bitte entscheiden Sie sich für eine Option!</b>
           </p>
         </div>`;
     }
@@ -703,8 +740,18 @@ const trialFeedback = {
   },
   choices: "NO_KEYS",
   trial_duration: 1000,
-  on_finish: (data) => {
-    data.timelineType = "feedback";
+  data: function () {
+    const lastData = jsPsych.data.getLastTrialData().values()[0];
+    return {
+      timelineType: "feedback",
+      displayType: "feedback",
+      delay: lastData.delay,
+      prob: lastData.prob,
+      delOpt: lastData.delOpt,
+      trialID: lastData.trialID,
+      condition: lastData.condition,
+      duration: 1000,
+    };
   },
 };
 
@@ -716,8 +763,15 @@ const fixation = {
     const trial = jsPsych.evaluateTimelineVariable("data");
     return trial.fixationDuration;
   },
-  data: {
-    timelineType: "fixation",
+  data: function () {
+    const trial = jsPsych.evaluateTimelineVariable("data");
+    return {
+      timelineType: "fixation",
+      displayType: "fixation",
+      trialID: trial.trialID,
+      condition: trial.condition,
+      duration: trial.fixationDuration,
+    };
   },
 };
       
@@ -740,10 +794,11 @@ const practiceProcedure = createProcedure(practiceTrials);
     stimulus: `
       <div class="instructions">
         Der Probedurchlauf ist abgeschlossen. <br>
-        Sie können das Experiment starten, indem Sie auf Q oder P drücken.
+        Bitte warten Sie nun auf die Anweisungen der Versuchsleitung.
       </div>`,
     choices: ["q", "p"],
     margin_vertical: "100px",
+    data: { displayType: 'finishInstructions'}
   };
   
   const debriefPart1 = {
@@ -754,15 +809,9 @@ const practiceProcedure = createProcedure(practiceTrials);
     `,
     margin_vertical: "100px",
     choices: "NO_KEYS",
-    on_load: saveData,
-  };
-  
-  const blockIntro = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>Drücken Sie Q oder P, wenn Sie bereit sind, den nächsten Block zu starten.</p>`,
-    margin_vertical: "100px",
-    choices: ["q", "p"],
-    on_finish: (data) => {
-      data.timelineType = "blockIntro";
+    on_start: function(data) {
+      data.displayType = 'debrief';
+      // Call saveData after data has been recorded
+      saveData();
     },
   };

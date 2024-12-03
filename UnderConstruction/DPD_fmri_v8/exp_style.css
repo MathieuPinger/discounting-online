@@ -46,7 +46,7 @@ html, body, .jspsych-content-wrapper, .jspsych-display-element {
 
 /* Feedback highlight without affecting layout */
 .feedback-highlight {
-  outline: 5px solid green;
+  outline: 5px solid lightgreen;
   outline-offset: -5px; /* Adjust as needed */
 }
 
@@ -85,7 +85,7 @@ html, body, .jspsych-content-wrapper, .jspsych-display-element {
 /* Ensure that the feedback outline does not cause elements to shift */
 .option.feedback-highlight {
   /* Use outline instead of border */
-  outline: 5px solid green;
+  outline: 5px solid lightgreen;
   outline-offset: -5px;
 }
 
@@ -114,15 +114,15 @@ html, body, .jspsych-content-wrapper, .jspsych-display-element {
   border: 1px solid lightgrey;
 }
 
-/* Adjust immediate and delayed option styles */
+/* Immediate and delayed option styles */
 .immediate {
   font-weight: bold;
-  color: #005AB5;
+  color: #4CA8FF;
 }
 
 .delayed {
   font-weight: bold;
-  color: #DC3220;
+  color: #FF4D4D;
 }
 
 /* Responsive adjustments for smaller screens */
@@ -323,15 +323,4 @@ html, body, .jspsych-content-wrapper, .jspsych-display-element {
 
 .instructions {
   text-align: left;
-}
-
-/* Immediate and delayed option styles */
-.immediate {
-  font-weight: bold;
-  color: #005AB5;
-}
-
-.delayed {
-  font-weight: bold;
-  color: #DC3220;
 }
