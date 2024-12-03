@@ -71,7 +71,7 @@ function runExperiment() {
   console.log(trialTimeline);
 
   if (testMode) {
-    trialTimeline = createTimeline(pseudorandomTrials.slice(0, 2));
+    trialTimeline = createTimeline(pseudorandomTrials.slice(0, 10));
   } else {
     trialTimeline = createTimeline(pseudorandomTrials);
   }
