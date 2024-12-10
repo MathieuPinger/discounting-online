@@ -805,7 +805,7 @@ const practiceProcedure = createProcedure(practiceTrials);
 const debriefPart1 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `
-    <p>Sie haben die Studie beendet. Der/die Studienleiter/in wird Sie bald kontaktieren.</p>
+    <p>Sie haben das Experiment beendet. Der/die Studienleiter/in wird Sie bald kontaktieren.</p>
     <!-- Additional content -->
   `,
   margin_vertical: "100px",
