@@ -1,42 +1,49 @@
-// N-Back Experiment for fMRI
-// Mathieu Pinger, 10.12.2024
-
-// SET PARAMETERS BEFORE EACH EXPERIMENT:
-
 // fMRI mode = buttons for left and right = b/g
 const leftButton = "g";
 const rightButton = "b";
 
-// Initialize jsPsych
-const jsPsych = initJsPsych();
+const jsPsych = initJsPsych({
+  on_close: saveData,
+});
 
 // Set a fixed seed to ensure reproducible pseudorandomization
 Math.seedrandom('42');
 
+// Global counters for per-block success calculation
+let hitsCount = 0;
+let missesCount = 0;
+let noResponsesCount = 0;
+
+function resetBlockCounters() {
+  hitsCount = 0;
+  missesCount = 0;
+  noResponsesCount = 0;
+}
+
+function calculateSuccessRate() {
+  let total = hitsCount + missesCount + noResponsesCount;
+  if (total === 0) return 0;
+  return (hitsCount / total) * 100;
+}
+
 // Helper function to generate a fixed 2-back sequence for one block
 function generate2BackSequence(numTrials=30, numTargets=9) {
-  // Create a random sequence of digits 0-9
   let sequence = [];
   for (let i = 0; i < numTrials; i++) {
     sequence.push(Math.floor(Math.random() * 10));
   }
 
-  // Determine possible target positions (from trial 2 onwards)
   let possibleIndices = [];
   for (let i = 2; i < numTrials; i++) {
     possibleIndices.push(i);
   }
 
-  // Shuffle possibleIndices and pick where to put targets
   possibleIndices.sort(() => Math.random() - 0.5);
   let targetIndices = possibleIndices.slice(0, numTargets);
-
-  // Enforce targets: sequence[i] = sequence[i-2]
   targetIndices.forEach(i => {
     sequence[i] = sequence[i - 2];
   });
 
-  // Determine which trials are targets
   let isTarget = sequence.map((val, idx) => {
     return (idx >= 2 && sequence[idx] === sequence[idx-2]);
   });
@@ -46,7 +53,6 @@ function generate2BackSequence(numTrials=30, numTargets=9) {
 
 // Helper function to generate a 0-back sequence for one block
 function generate0BackSequence(numTrials=30, numTargets=9, targetNumber=5) {
-  // We want exactly numTargets instances of targetNumber and the rest non-target
   let indices = [...Array(numTrials).keys()];
   indices.sort(() => Math.random() - 0.5);
   let targetIndices = indices.slice(0, numTargets);
@@ -56,7 +62,6 @@ function generate0BackSequence(numTrials=30, numTargets=9, targetNumber=5) {
     if (targetIndices.includes(i)) {
       sequence[i] = targetNumber;
     } else {
-      // Pick a number different from the targetNumber
       let num;
       do {
         num = Math.floor(Math.random() * 10);
@@ -82,12 +87,7 @@ const enterId = {
     displayType: 'enter_id'
   },
   on_finish: function(data) {
-    // Capture the subject ID from the response
     subjectId = data.response.Q0;
-    console.log(subjectId);
-    
-
-    // Add subject ID to data properties for subsequent trials
     jsPsych.data.addProperties({ subject_id: subjectId });
   }
 }
@@ -112,7 +112,6 @@ auf welche Zahl Sie achten sollen (im Falle des 0-Back-Blocks). Versuchen Sie bi
 schnell und genau wie möglich zu reagieren.</p>
 `;
 
-// Instructions block
 const instructions = { 
   type: jsPsychHtmlKeyboardResponse,
   stimulus: instructionsText1,
@@ -203,11 +202,10 @@ let trainingNumTrials = 30;
 let trainingNumTargets = 9;
 let {sequence: trainingSequence, isTarget: trainingIsTarget} = generate2BackSequence(trainingNumTrials, trainingNumTargets);
 
-// For each trial in the training block, we create a two-trial sequence: presentation, then feedback.
+// Reset counters at the start of the training block
+resetBlockCounters();
 
-// For each trial in the training block, we create a two-trial sequence: presentation, then feedback.
 let trainingTimeline = [];
-
 for (let i = 0; i < trainingNumTrials; i++) {
   let targetVal = trainingIsTarget[i];
   let correctResponse = targetVal ? leftButton : rightButton;
@@ -217,45 +215,49 @@ for (let i = 0; i < trainingNumTrials; i++) {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `<div style="font-size:80px; font-weight:bold;">${trainingSequence[i]}</div>`,
     choices: [leftButton, rightButton],
-    stimulus_duration: 900,     // Stimulus disappears after 900 ms
-    trial_duration: 1000,       // Trial ends at 1000 ms if no response
+    stimulus_duration: 1400,     // Stimulus disappears after 900 ms
+    trial_duration: 1500,       // Trial ends at 1000 ms if no response
     response_ends_trial: true,  // If response before 900 ms, end immediately
     data: {
       target: targetVal,
       displayType: 'trainingTrial',
       blockType: '2-back-training',
-      stimNum: trainingSequence[i] // Store the stimulus number for feedback
+      stimNum: trainingSequence[i]
     },
     on_finish: function(data) {
-      // Determine correctness
       let correctResponse = data.target ? leftButton : rightButton;
       if (data.response === null) {
-        data.hit = 'miss';
+        data.hit = 'no_response';
+        noResponsesCount++;
       } else {
-        data.hit = (data.response === correctResponse) ? 'hit' : 'miss';
+        if (data.response === correctResponse) {
+          data.hit = 'hit';
+          hitsCount++;
+        } else {
+          data.hit = 'miss';
+          missesCount++;
+        }
       }
+      data.successRate = calculateSuccessRate();
     }
   };
 
   // Feedback trial
-  // Shows feedback for 500 ms, total trial_duration = 600 ms
-  // After 500 ms, stimulus disappears, leaving 100 ms blank before next trial
   let feedback = {
     type: jsPsychHtmlKeyboardResponse,
     choices: "NO_KEYS",
-    trial_duration: 600,      
-    stimulus_duration: 500,   // Feedback + number visible for 500 ms
+    trial_duration: 600,
+    stimulus_duration: 500,
     stimulus: function() {
       let last_data = jsPsych.data.getLastTrialData().values()[0];
       let numberShown = last_data.stimNum;
       let hit = last_data.hit;
       let response = last_data.response;
 
-      // Determine feedback text
       let feedbackText;
+      let feedbackColor = 'white';
       if (response === null) {
         feedbackText = "Zu langsam!";
-        feedbackColor = "white";
       } else if (hit === 'hit') {
         feedbackText = "Richtig!";
         feedbackColor = "green";
@@ -264,7 +266,6 @@ for (let i = 0; i < trainingNumTrials; i++) {
         feedbackColor = "red";
       }
 
-      // Position feedback above the number
       return `
       <div id="feedback-container" style="position: relative; display: inline-block;">
         <div id="feedback-text" 
@@ -293,7 +294,11 @@ function twoBackBreak(blockNumber) {
     `,
     choices: "NO_KEYS",
     trial_duration: 10000,
-    data: {displayType: 'break', blockType: '2-back', blockNumber: blockNumber}
+    data: {displayType: 'break', blockType: '2-back', blockNumber: blockNumber},
+    on_start: function() {
+      // Reset counters at the start of each 2-back block
+      resetBlockCounters();
+    }
   };
 }
 
@@ -309,84 +314,99 @@ function zeroBackBreak(blockNumber, targetNumber=5) {
     `,
     choices: "NO_KEYS",
     trial_duration: 10000,
-    data: {displayType: 'break', blockType: '0-back', blockNumber: blockNumber}
+    data: {displayType: 'break', blockType: '0-back', blockNumber: blockNumber},
+    on_start: function() {
+      // Reset counters at the start of each 0-back block
+      resetBlockCounters();
+    }
   };
 }
 
 // Create trial timelines for a single 2-back block
 function createTwoBackBlock(blockNumber) {
   let {sequence, isTarget} = generate2BackSequence(30, 9);
-  return sequence.map((num, i) => {
-    return {
+  let blockTimeline = [];
+
+  for (let i = 0; i < sequence.length; i++) {
+    let correctResponse = isTarget[i] ? leftButton : rightButton;
+    blockTimeline.push({
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: `<div style="font-size: 80px; font-weight: bold;">${num}</div>`,
+      stimulus: `<div style="font-size: 80px; font-weight: bold;">${sequence[i]}</div>`,
       choices: [leftButton, rightButton],
-      stimulus_duration: 900,
-      trial_duration: 1000,
+      stimulus_duration: 1400,
+      trial_duration: 1500,
       response_ends_trial: false,
       data: {
         target: isTarget[i],
         displayType: 'trial',
         blockType: '2-back',
         blockNumber: blockNumber,
-        number: num
+        number: sequence[i]
       },
       on_finish: function(data) {
-        let correctResponse = data.target ? leftButton : rightButton;
         if (data.response === null) {
-          data.hit = 'miss';
+          data.hit = 'no_response';
+          noResponsesCount++;
         } else {
-          data.hit = (data.response === correctResponse) ? 'hit' : 'miss';
+          if (data.response === correctResponse) {
+            data.hit = 'hit';
+            hitsCount++;
+          } else {
+            data.hit = 'miss';
+            missesCount++;
+          }
         }
+        data.successRate = calculateSuccessRate();
       }
-    };
-  });
+    });
+  }
+  return blockTimeline;
 }
 
-// Define the target numbers for each of the 0-back blocks
-let zeroBackTargets = [5, 6, 3, 4, 9, 2];
-
 // Create 0-back blocks using these targets
-for (let block = 0; block < 6; block++) {
-  let currentTarget = zeroBackTargets[block]; 
-  let {sequence, isTarget} = generate0BackSequence(30, 9, currentTarget);
-  let block_timeline = sequence.map((num, i) => {
-    return {
+function createZeroBackBlock(blockNumber, targetNumber) {
+  let {sequence, isTarget} = generate0BackSequence(30, 9, targetNumber);
+  let blockTimeline = [];
+
+  for (let i = 0; i < sequence.length; i++) {
+    let correctResponse = isTarget[i] ? leftButton : rightButton;
+    blockTimeline.push({
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: `<div style="font-size: 48px; font-weight: bold;">${num}</div>`,
+      stimulus: `<div style="font-size: 48px; font-weight: bold;">${sequence[i]}</div>`,
       choices: [leftButton, rightButton],
-      trial_duration: 1000,
+      stimulus_duration: 1400,
+      trial_duration: 1500,
       response_ends_trial: false,
       data: {
         target: isTarget[i],
         displayType: 'trial',
         blockType: '0-back',
-        blockNumber: block + 1,
-        number: num,
-        targetNumber: currentTarget
+        blockNumber: blockNumber,
+        number: sequence[i],
+        targetNumber: targetNumber
       },
       on_finish: function(data) {
-        let correctResponse = data.target ? leftButton : rightButton;
         if (data.response === null) {
-          data.hit = 'miss';
+          data.hit = 'no_response';
+          noResponsesCount++;
         } else {
-          data.hit = (data.response === correctResponse) ? 'hit' : 'miss';
+          if (data.response === correctResponse) {
+            data.hit = 'hit';
+            hitsCount++;
+          } else {
+            data.hit = 'miss';
+            missesCount++;
+          }
         }
+        data.successRate = calculateSuccessRate();
       }
-    };
-  });
-  zero_back_blocks.push(...block_timeline);
+    });
+  }
+  return blockTimeline;
 }
 
-// Build the full experiment timeline
-// We have 6 blocks of each type, alternating. So total 12 blocks:
-// Block 1: 2-back
-// Block 2: 0-back
-// Block 3: 2-back
-// Block 4: 0-back
-// ...
-// Block 11: 2-back
-// Block 12: 0-back
+// Define the target numbers for each of the 0-back blocks
+let zeroBackTargets = [5, 6, 3, 4, 9, 2];
 
 let experiment_timeline = [
   enterId,
@@ -395,26 +415,22 @@ let experiment_timeline = [
   ...demoTrials,
   demoInstructions2,
   trainingInstructions,
-  trainingTimeline,
+  ...trainingTimeline,
   firstTrigger,
   triggerLoop,
 ];
 for (let i = 1; i <= 6; i++) {
-  // Add a break before the 2-back block i
   experiment_timeline.push(twoBackBreak(i));
   experiment_timeline.push(...createTwoBackBlock(i));
 
-  // Add a break before the 0-back block i
-  experiment_timeline.push(zeroBackBreak(i, 5));
-  experiment_timeline.push(...createZeroBackBlock(i, 5));
+  experiment_timeline.push(zeroBackBreak(i, zeroBackTargets[i]));
+  experiment_timeline.push(...createZeroBackBlock(i, zeroBackTargets[i]));
 }
-
 
 const debriefPart1 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `
     <p>Sie haben das Experiment beendet. Der/die Studienleiter/in wird Sie bald kontaktieren.</p>
-    <!-- Additional content -->
   `,
   margin_vertical: "100px",
   choices: "NO_KEYS",
@@ -431,14 +447,10 @@ const debriefPart2 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `
     <p>Sie haben die Studie beendet. Der/die Studienleiter/in wird Sie bald kontaktieren.</p>
-    <!-- Additional content -->
   `,
   margin_vertical: "100px",
   choices: "NO_KEYS",
   on_start: function() {
-    // data.displayType = 'debrief';
-    // data.triggers = triggers;
-    // Call saveData after data has been recorded
     saveData();
   },
 };
@@ -451,18 +463,9 @@ let n_back_experiment = {
 jsPsych.run(n_back_experiment);
 
 function saveData() {
-  // Add start date and time to data
   const startDate = jsPsych.getStartTime().toLocaleDateString();
   const startTime = jsPsych.getStartTime().toLocaleTimeString();
   jsPsych.data.addProperties({ startDate, startTime });
-
-  // Add subject ID to data
   jsPsych.data.addProperties({ subject_id: subjectId });
-
-  // // Add trigger data
-  // let trigger_data = {triggers: triggers};
-  // jsPsych.data.write(trigger_data);
-
-  // Get data and prepare files
   jsPsych.data.get().ignore('stimulus').localSave('csv',`${subjectId}_dpd_fmri.csv`)
 }
