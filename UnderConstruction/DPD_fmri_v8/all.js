@@ -26,7 +26,7 @@ window.onload = runExperiment;
 
 function runExperiment() {
   // Fetch and process trial data
-  const data = trial_data;
+  const data = trial_data.run_B;
   const trialList = processTrialData(Object.values(data));
   console.log(trialList)
   // Sort trials
