@@ -17,7 +17,10 @@ if (fmriMode) {
 }
 
 // Initialize jsPsych
-const jsPsych = initJsPsych();
+const jsPsych = initJsPsych({
+  on_close: saveData,
+});
+
 // Seed the random number generator for pseudorandomization
 Math.seedrandom('42');
 
@@ -352,7 +355,7 @@ function constructStimulus(
 
   // Immediate option content
   const immOptionContent = `
-    <div class='option-row'><b>${immOpt}€</b></div>
+    <div class='option-row'><b>${immOpt} €</b></div>
     <div class='option-row'><b>Heute</b></div>
     <div class='option-row'><b>100%</b></div>
   `;
@@ -360,7 +363,7 @@ function constructStimulus(
   // Delayed option content
   let delayedOptionContent = "";
   if (showDelayedAmount) {
-    delayedOptionContent += `<div class='option-row'><b>${delOpt}€</b></div>`;
+    delayedOptionContent += `<div class='option-row'><b>${delOpt} €</b></div>`;
   } else {
     delayedOptionContent += `<div class='option-row'>&nbsp;</div>`;
   }
