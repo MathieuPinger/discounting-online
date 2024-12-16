@@ -123,8 +123,8 @@ function processTrialData(dataArray) {
   delete trial.p_occurence;
 
   // Round options to 2 decimal places
-  trial.immOpt = parseFloat(trial.immOpt).toFixed(2);
-  trial.delOpt = parseFloat(trial.delOpt).toFixed(2);
+  trial.immOpt = parseFloat(trial.immOpt).toFixed(2).replace('.', ',');
+  trial.delOpt = parseFloat(trial.delOpt).toFixed(2).replace('.', ',');
   // Correct rounding errors
   if (trial.immOpt === trial.delOpt) {
   trial.immOpt = (trial.delOpt - 0.01).toFixed(2);
