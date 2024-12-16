@@ -1,7 +1,9 @@
-// ---------------------- PARAMETER DEFINITIONS ---------------------- //
+// ---------------------- GLOBAL PARAMETER DEFINITIONS ---------------------- //
 const DEFAULT_STIMULUS_DURATION = 1400; // ms for all trials (demo, training, 2-back, 0-back)
 const DEFAULT_TRIAL_DURATION = 1500;    // ms for all trials
 const STIMULUS_STYLE = "font-size:80px; font-weight:bold;";
+const TRIALS_PER_BLOCK = 20;
+const TARGETS_PER_BLOCK = 7;
 
 // fMRI mode = buttons for left and right = b/g
 const leftButton = "g";
@@ -32,7 +34,7 @@ function calculateSuccessRate() {
 }
 
 // Helper function to generate a fixed 2-back sequence for one block
-function generate2BackSequence(numTrials=30, numTargets=9) {
+function generate2BackSequence(numTrials, numTargets) {
   let sequence = [];
   for (let i = 0; i < numTrials; i++) {
     sequence.push(Math.floor(Math.random() * 10));
@@ -54,7 +56,7 @@ function generate2BackSequence(numTrials=30, numTargets=9) {
 }
 
 // Helper function to generate a 0-back sequence for one block
-function generate0BackSequence(numTrials=30, numTargets=9, targetNumber=5) {
+function generate0BackSequence(numTrials, numTargets, targetNumber) {
   let indices = [...Array(numTrials).keys()];
   indices.sort(() => Math.random() - 0.5);
   let targetIndices = indices.slice(0, numTargets);
@@ -181,7 +183,7 @@ const demoInstructions2 = {
 const trainingInstructions = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `
-    <p>Jetzt folgt ein kurzer Trainingsblock mit 30 Durchgängen der 2-Back-Aufgabe.</p>
+    <p>Jetzt folgt ein kurzer Trainingsblock mit ${TRIALS_PER_BLOCK} Durchgängen der 2-Back-Aufgabe.</p>
     <p>In diesem Trainingsblock erhalten Sie jedoch direktes Feedback nach jedem Tastendruck.</p>
     <p>Das Feedback erscheint direkt über der präsentierten Zahl.</p>
     <p>Beachten Sie, dass Sie im echten Experiment kein Feedback erhalten werden – nur während des Trainings.</p>
@@ -192,8 +194,8 @@ const trainingInstructions = {
 };
 
 // Generate training sequence (2-back)
-let trainingNumTrials = 30;
-let trainingNumTargets = 9;
+let trainingNumTrials = 20;
+let trainingNumTargets = 6;
 let {sequence: trainingSequence, isTarget: trainingIsTarget} = generate2BackSequence(trainingNumTrials, trainingNumTargets);
 resetBlockCounters();
 
@@ -313,7 +315,7 @@ function zeroBackBreak(blockNumber, targetNumber=5) {
 
 // Create 2-back block trials
 function createTwoBackBlock(blockNumber) {
-  let {sequence, isTarget} = generate2BackSequence(30, 9);
+  let {sequence, isTarget} = generate2BackSequence(TRIALS_PER_BLOCK, TARGETS_PER_BLOCK);
   let blockTimeline = [];
 
   for (let i = 0; i < sequence.length; i++) {
@@ -354,7 +356,7 @@ function createTwoBackBlock(blockNumber) {
 
 // Create 0-back block trials
 function createZeroBackBlock(blockNumber, targetNumber) {
-  let {sequence, isTarget} = generate0BackSequence(30, 9, targetNumber);
+  let {sequence, isTarget} = generate0BackSequence(TRIALS_PER_BLOCK, TARGETS_PER_BLOCK, targetNumber);
   let blockTimeline = [];
 
   for (let i = 0; i < sequence.length; i++) {
