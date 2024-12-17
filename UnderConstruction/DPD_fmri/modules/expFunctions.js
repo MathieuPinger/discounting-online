@@ -1,3 +1,5 @@
+var jsPsych = initJsPsych();
+
 // fetch data
 async function fetchData(path) {
     // fetch json from server

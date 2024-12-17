@@ -8,7 +8,7 @@
 // ---------------------- GLOBAL PARAMETER DEFINITIONS ---------------------- //
 const DEFAULT_STIMULUS_DURATION = 1400; // ms for all trials (demo, training, 2-back, 0-back)
 const DEFAULT_TRIAL_DURATION = 1500;    // ms for all trials
-const STIMULUS_STYLE = "font-size:80px; font-weight:bold;";
+const STIMULUS_STYLE = "font-size:150px; font-weight:bold;";
 const TRIALS_PER_BLOCK = 20;
 const TARGETS_PER_BLOCK = 7;
 const zeroBackTargets = [5, 6, 3, 4, 9, 2];
@@ -172,7 +172,7 @@ let demoIsTarget = demoSequence.map((val, i, arr) => (i>=2 && arr[i]===arr[i-2])
 const demoInstructions1 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `
-    <p>Als nächstes sehen Sie ein kurzes Beispiel für eine 2-Back-Aufgabe mit 10 Ziffern.</p>
+    <p>Als nächstes sehen Sie ein kurzes Beispiel für eine <strong>2-Back</strong>-Aufgabe mit 10 Ziffern.</p>
     <p>In dieser Demonstration werden Ihnen die korrekten Antworten farblich angezeigt (nur zur Veranschaulichung).</p>
     <p>Drücken Sie eine beliebige Taste, um das Beispiel zu starten. Sie müssen nicht antworten.</p>
   `,
@@ -185,7 +185,7 @@ let demoTrials = demoSequence.map((num, i) => {
   let color = demoIsTarget[i] ? targetColor : nonTargetColor;
   return {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<div style="font-size:80px; font-weight:bold; color:${color};">${num}</div>`,
+    stimulus: `<div style="font-size:150px; font-weight:bold; color:${color};">${num}</div>`,
     choices: "NO_KEYS",
     trial_duration: DEFAULT_TRIAL_DURATION,
     stimulus_duration: DEFAULT_STIMULUS_DURATION,
@@ -199,7 +199,7 @@ const demoInstructions2 = {
     let html = `<p>Hier sehen Sie die komplette Folge noch einmal:</p><p>`;
     for (let i = 0; i < demoSequence.length; i++) {
       let color = demoIsTarget[i] ? targetColor : nonTargetColor;
-      html += `<span style="font-size:36px; font-weight:bold; color:${color}; margin: 0 5px;">${demoSequence[i]}</span>`;
+      html += `<span style="font-size:100px; font-weight:bold; color:${color}; margin: 0 5px;">${demoSequence[i]}</span>`;
     }
     html += `</p><p><span style="color:${targetColor};">Hellrote</span> Ziffern sind Targets (nach zwei Durchgängen wiederholt).</p>`;
     html += `<p>Drücken Sie eine beliebige Taste, um mit einem kurzen Trainingsblock fortzufahren.</p>`;
@@ -213,7 +213,7 @@ const trainingInstructions = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function() {
     stim = `
-    <p>Jetzt folgt ein kurzer Trainingsblock (20 Durchgänge) der 2-Back-Aufgabe.</p>
+    <p>Jetzt folgt ein kurzer Trainingsblock (20 Durchgänge) der <strong>2-Back</strong>-Aufgabe.</p>
     <p>In diesem Trainingsblock erhalten Sie ein Feedback nach jedem Tastendruck.</p>
     <p>Das Feedback erscheint direkt über der präsentierten Zahl.</p>
     <p>Beachten Sie, dass Sie im echten Experiment kein Feedback erhalten werden – nur während des Trainings.</p>
@@ -295,7 +295,7 @@ for (let i = 0; i < trainingNumTrials; i++) {
       <div id="feedback-container" style="position: relative; display: inline-block;">
         <div id="feedback-text" 
              style="position: absolute; top: -100px; left: 50%; transform: translateX(-50%); 
-                    width: auto; text-align: center; font-weight: bold; font-size:36px; color: ${feedbackColor};">
+                    width: 500px; text-align: center; font-weight: bold; white-space: nowrap; font-size:80px; color: ${feedbackColor};">
           ${feedbackText}
         </div>
         <div style="${STIMULUS_STYLE}">${numberShown}</div>
@@ -313,13 +313,12 @@ function twoBackBreak(blockNumber) {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
       return `
-      <p>Nächster Block: 2-back (Block ${blockNumber+1}).</p>
-      <p>Bei 2-Back: Wenn Zahl = Zahl vor zwei Durchgängen, dann ${getTargetButtonText()}, sonst ${getNonTargetButtonText()}.</p>
-      <p><i>Der nächste Block startet in Kürze...</i></p>
+      <p>Nächster Block: <strong>2-back</strong> (Block ${blockNumber+1}).</p>
+      <p><i>Startet in Kürze...</i></p>
       `
     },
     choices: "NO_KEYS",
-    trial_duration: 10000,
+    trial_duration: 5000,
     data: {displayType: 'break', blockType: '2-back', blockNumber: blockNumber}
   };
 }
@@ -330,13 +329,12 @@ function zeroBackBreak(blockNumber, targetNumber=5) {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
       return `
-      <p>Nächster Block: 0-back (Block ${blockNumber+1}). Zielzahl: <b>${targetNumber}</b>.</p>
-      <p>Bei 0-Back: Wenn Zahl = Zielzahl dann ${getTargetButtonText()}, sonst ${getNonTargetButtonText()}.</p>
-      <p><i>Der nächste Block startet in Kürze...</i></p>
+      <p>Nächster Block: <strong>0-back</strong> (Block ${blockNumber+1}). Zielzahl: <strong>${targetNumber}</strong>.</p>
+      <p><i>Startet in Kürze...</i></p>
       `
     },
     choices: "NO_KEYS",
-    trial_duration: 10000,
+    trial_duration: 5000,
     data: {displayType: 'break', blockType: '0-back', blockNumber: blockNumber}
   };
 }
@@ -489,5 +487,5 @@ function saveData() {
   const startTime = jsPsych.getStartTime().toLocaleTimeString();
   jsPsych.data.addProperties({ startDate, startTime });
   jsPsych.data.addProperties({ subject_id: subjectId });
-  jsPsych.data.get().ignore('stimulus').localSave('csv', `${subjectId}_dpd_fmri.csv`);
+  jsPsych.data.get().ignore('stimulus').localSave('csv', `${subjectId}_nback_fmri.csv`);
 }

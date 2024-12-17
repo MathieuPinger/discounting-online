@@ -91,7 +91,7 @@ html, body, .jspsych-content-wrapper, .jspsych-display-element {
 
 /* Adjust text sizes */
 .instructions, .center-block-text, p, li, .option-row {
-  font-size: 1.5em;
+  font-size: 2.5em;
 }
 
 /* Ensure options are displayed side by side */

@@ -35,7 +35,7 @@ const firstTrigger = {
         <div class="centerbox" id="container">
         <p class="center-block-text" style="color:lightgrey;">
         <b>Der Probedurchlauf ist abgeschlossen. 
-        Bitte melden Sie jetzt sich bei der Versuchsleitung.</b>
+        Die Versuchsleitung meldet sich gleich bei Ihnen.</b>
         </p>
     </div>`,
     choices: [triggerKey]
