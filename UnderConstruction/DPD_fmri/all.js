@@ -4,10 +4,10 @@ Script 1
 
 // Set Test Mode and fMRI mode
 // TestMode = 3 trials total
-const testMode = true;
+const testMode = false;
 
 // fMRI mode = buttons for left and right = b/g
-const fmriMode = false;
+const fmriMode = true;
 if (fmriMode) {
   leftButton = "g";
   rightButton = "b";
@@ -74,7 +74,7 @@ function runExperiment() {
   console.log(trialTimeline);
 
   if (testMode) {
-    trialTimeline = createTimeline(pseudorandomTrials.slice(0, 10));
+    trialTimeline = createTimeline(pseudorandomTrials.slice(0, 144));
   } else {
     trialTimeline = createTimeline(pseudorandomTrials);
   }
@@ -124,6 +124,11 @@ function processTrialData(dataArray) {
   // replace p_occurence with prob
   trial.prob = trial.p_occurence;
   delete trial.p_occurence;
+
+  // debug for Testmode: if prob = 0, it should be prob = 1
+  if (trial.prob == 0) {
+    trial.prob = 1
+  }
 
   // Round options to 2 decimal places
   trial.immOpt = parseFloat(trial.immOpt).toFixed(2).replace('.', ',');

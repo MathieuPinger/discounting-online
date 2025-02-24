@@ -12,41 +12,45 @@ const STIMULUS_STYLE = "font-size:150px; font-weight:bold;";
 const TRIALS_PER_BLOCK = 20;
 const TARGETS_PER_BLOCK = 7;
 const zeroBackTargets = [5, 6, 3, 4, 9, 2];
+Math.seedrandom('42'); // Set a fixed seed for reproducible pseudorandomization
 
+// initiate dynamic variables
 let subjectId = null; 
 let targetButton = "g";    // will be updated after ID input based on rando_list
 let nonTargetButton = "b"; // will be updated after ID input
 let starting_task = "2back"; // will be updated after ID input
-
-const jsPsych = initJsPsych({
-  on_close: saveData,
-});
-
-// Set a fixed seed for reproducible pseudorandomization
-Math.seedrandom('42');
 
 // Global counters for per-block success calculation
 let hitsCount = 0;
 let missesCount = 0;
 let noResponsesCount = 0;
 
-function resetBlockCounters() {
-  hitsCount = 0;
-  missesCount = 0;
-  noResponsesCount = 0;
-}
+// ---------------------- INITIATE JSPSYCH -------------------------------------//
+const jsPsych = initJsPsych({
+  on_close: saveData,
+});
 
+// ---------------------- Helper Functions -------------------------------------//
+// function to calculate per-block success
 function calculateSuccessRate() {
   let total = hitsCount + missesCount + noResponsesCount;
   if (total === 0) return 0;
   return (hitsCount / total) * 100;
 }
 
-// Generate a 2-back sequence
+// function to reset counters for per-block success calculation
+function resetBlockCounters() {
+  hitsCount = 0;
+  missesCount = 0;
+  noResponsesCount = 0;
+}
+
+// Function that generates a 2-back sequence with i = numTrials trials and numTargets targets
+// calls TRIALS_PER_BLOCK and TARGETS_PER_BLOCK
 function generate2BackSequence(numTrials, numTargets) {
   let sequence = [];
   for (let i = 0; i < numTrials; i++) {
-    sequence.push(Math.floor(Math.random() * 10));
+    sequence.push(Math.floor(Math.random() * 10)); // generates pseudo-random sequence of numbers
   }
 
   let possibleIndices = [];
@@ -60,6 +64,7 @@ function generate2BackSequence(numTrials, numTargets) {
     sequence[i] = sequence[i - 2];
   });
 
+  // create logical array to indicate whether a number is a 2-back target
   let isTarget = sequence.map((val, idx) => (idx >= 2 && sequence[idx] === sequence[idx-2]));
   return {sequence, isTarget};
 }
@@ -85,36 +90,6 @@ function generate0BackSequence(numTrials, numTargets, targetNumber) {
 
   let isTarget = sequence.map(val => (val === targetNumber));
   return {sequence, isTarget};
-}
-
-// Determine correct text based on targetButton
-function getTargetButtonText() {
-  // If targetButton = 'b', participants need to press the right button for target
-  // If targetButton = 'g', participants need to press the left button for target
-  return targetButton === 'b' ? "rechte Taste" : "linke Taste";
-}
-
-function getNonTargetButtonText() {
-  return targetButton === 'b' ? "linke Taste" : "rechte Taste";
-}
-
-// Dynamically updated main instructions text
-function getMainInstructions() {
-  let stim = `
-<p>In diesem Experiment werden Ihnen nacheinander Ziffern von 0 bis 9 präsentiert. 
-Sie werden in kurzen Blöcken zwei Arten von Aufgaben bearbeiten:</p>
-
-<p><strong>2-Back-Aufgabe:</strong> Prüfen Sie, ob die aktuell präsentierte Zahl mit der Zahl von vor zwei Durchgängen übereinstimmt. 
-Wenn ja, drücken Sie bitte die <strong>${getTargetButtonText()}</strong>, ansonsten die <strong>${getNonTargetButtonText()}</strong>.</p>
-
-<p><strong>0-Back-Aufgabe:</strong> Zu Beginn des Blocks wird Ihnen eine Zielzahl genannt. 
-Bei jedem Erscheinen dieser Zielzahl drücken Sie die <strong>${getTargetButtonText()}</strong>, 
-und bei allen anderen Zahlen die <strong>${getNonTargetButtonText()}</strong>.</p>
-
-<p>Versuchen Sie bitte so schnell und genau wie möglich zu reagieren.</p>
-`;
-console.log(stim);
-return stim
 }
 
 // After participant enters ID, determine buttons and starting task from rando_list
@@ -151,23 +126,50 @@ const enterId = {
   }
 };
 
+
+// Determine correct text based on targetButton
+function getTargetButtonText() {
+  // If targetButton = 'b', participants need to press the right button for target
+  // If targetButton = 'g', participants need to press the left button for target
+  return targetButton === 'b' ? "rechte Taste" : "linke Taste";
+}
+
+function getNonTargetButtonText() {
+  return targetButton === 'b' ? "linke Taste" : "rechte Taste";
+}
+
 const instructions = { 
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: getMainInstructions(),
-  choices: function() {
-    return [targetButton, nonTargetButton];
+  stimulus: function() {
+    stim = `
+      <p>In diesem Experiment werden Ihnen nacheinander Ziffern von 0 bis 9 präsentiert. 
+      Sie werden in kurzen Blöcken zwei Arten von Aufgaben bearbeiten:</p>
+
+      <p><strong>2-Back-Aufgabe:</strong> Prüfen Sie, ob die aktuell präsentierte Zahl mit der Zahl von vor zwei Durchgängen übereinstimmt. 
+      Wenn ja, drücken Sie bitte die <strong>${getTargetButtonText()}</strong>, ansonsten die <strong>${getNonTargetButtonText()}</strong>.</p>
+
+      <p><strong>0-Back-Aufgabe:</strong> Zu Beginn des Blocks wird Ihnen eine Zielzahl genannt. 
+      Bei jedem Erscheinen dieser Zielzahl drücken Sie die <strong>${getTargetButtonText()}</strong>, 
+      und bei allen anderen Zahlen die <strong>${getNonTargetButtonText()}</strong>.</p>
+
+      <p>Versuchen Sie bitte so schnell und genau wie möglich zu reagieren.</p>
+    `;
+    return stim
   },
+  choices: [targetButton, nonTargetButton],
   margin_vertical: "100px",
   data: {displayType: 'instructions1'}
 };
 
-// Colors for demo
-const nonTargetColor = "#87CEFA"; 
-const targetColor = "#F08080";    
-
-// Demonstration sequence
-const demoSequence = [4, 2, 3, 2, 3, 5, 8, 9, 0, 9];
-let demoIsTarget = demoSequence.map((val, i, arr) => (i>=2 && arr[i]===arr[i-2]));
+// const instructions = { 
+//   type: jsPsychHtmlKeyboardResponse,
+//   stimulus: getMainInstructions(),
+//   choices: function() {
+//     return [targetButton, nonTargetButton];
+//   },
+//   margin_vertical: "100px",
+//   data: {displayType: 'instructions1'}
+// };
 
 const demoInstructions1 = {
   type: jsPsychHtmlKeyboardResponse,
@@ -181,6 +183,10 @@ const demoInstructions1 = {
 };
 
 // Demo trials
+const nonTargetColor = "#87CEFA"; 
+const targetColor = "#F08080";    
+const demoSequence = [4, 2, 3, 2, 3, 5, 8, 9, 0, 9];
+let demoIsTarget = demoSequence.map((val, i, arr) => (i>=2 && arr[i]===arr[i-2]));
 let demoTrials = demoSequence.map((num, i) => {
   let color = demoIsTarget[i] ? targetColor : nonTargetColor;
   return {
@@ -235,7 +241,6 @@ resetBlockCounters();
 let trainingTimeline = [];
 for (let i = 0; i < trainingNumTrials; i++) {
   let targetVal = trainingIsTarget[i];
-  let correctResponse = targetVal ? targetButton : nonTargetButton;
 
   let presentation = {
     type: jsPsychHtmlKeyboardResponse,
@@ -343,7 +348,6 @@ function createTwoBackBlock(blockNumber) {
   let {sequence, isTarget} = generate2BackSequence(TRIALS_PER_BLOCK, TARGETS_PER_BLOCK);
   let blockTimeline = [];
   for (let i = 0; i < sequence.length; i++) {
-    let correctResponse = isTarget[i] ? targetButton : nonTargetButton;
     blockTimeline.push({
       type: jsPsychHtmlKeyboardResponse,
       stimulus: `<div style="${STIMULUS_STYLE}">${sequence[i]}</div>`,
@@ -359,6 +363,7 @@ function createTwoBackBlock(blockNumber) {
         number: sequence[i]
       },
       on_finish: function(data) {
+        let correctResponse = data.target ? targetButton : nonTargetButton;
         if (data.response === null) {
           data.hit = 'no_response';
           noResponsesCount++;
@@ -382,7 +387,6 @@ function createZeroBackBlock(blockNumber, targetNumber) {
   let {sequence, isTarget} = generate0BackSequence(TRIALS_PER_BLOCK, TARGETS_PER_BLOCK, targetNumber);
   let blockTimeline = [];
   for (let i = 0; i < sequence.length; i++) {
-    let correctResponse = isTarget[i] ? targetButton : nonTargetButton;
     blockTimeline.push({
       type: jsPsychHtmlKeyboardResponse,
       stimulus: `<div style="${STIMULUS_STYLE}">${sequence[i]}</div>`,
@@ -399,6 +403,7 @@ function createZeroBackBlock(blockNumber, targetNumber) {
         targetNumber: targetNumber
       },
       on_finish: function(data) {
+        let correctResponse = data.target ? targetButton : nonTargetButton;
         if (data.response === null) {
           data.hit = 'no_response';
           noResponsesCount++;
