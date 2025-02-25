@@ -208,7 +208,7 @@ const demoInstructions2 = {
       html += `<span style="font-size:100px; font-weight:bold; color:${color}; margin: 0 5px;">${demoSequence[i]}</span>`;
     }
     html += `</p><p><span style="color:${targetColor};">Hellrote</span> Ziffern sind Targets (nach zwei Durchgängen wiederholt).</p>`;
-    html += `<p>Drücken Sie eine beliebige Taste, um mit einem kurzen Trainingsblock fortzufahren.</p>`;
+    html += `<p>Drücken Sie eine beliebige Taste, um fortzufahren.</p>`;
     return html;
   })(),
   choices: "ALL_KEYS",
@@ -253,7 +253,7 @@ for (let i = 0; i < trainingNumTrials; i++) {
       target: targetVal,
       displayType: 'trainingTrial',
       blockType: '2-back-training',
-      stimNum: trainingSequence[i]
+      number: trainingSequence[i]
     },
     on_finish: function(data) {
       let correctResponse = data.target ? targetButton : nonTargetButton;
@@ -280,7 +280,7 @@ for (let i = 0; i < trainingNumTrials; i++) {
     stimulus_duration: 500,
     stimulus: function() {
       let last_data = jsPsych.data.getLastTrialData().values()[0];
-      let numberShown = last_data.stimNum;
+      let numberShown = last_data.number;
       let hit = last_data.hit;
       let response = last_data.response;
 
@@ -324,7 +324,12 @@ function twoBackBreak(blockNumber) {
     },
     choices: "NO_KEYS",
     trial_duration: 5000,
-    data: {displayType: 'break', blockType: '2-back', blockNumber: blockNumber}
+    data: {displayType: 'break', blockType: '2-back', blockNumber: blockNumber},
+    on_finish: function() {
+        hitsCount = 0;
+        missesCount = 0;
+        noResponsesCount = 0;
+    }
   };
 }
 
@@ -340,7 +345,12 @@ function zeroBackBreak(blockNumber, targetNumber=5) {
     },
     choices: "NO_KEYS",
     trial_duration: 5000,
-    data: {displayType: 'break', blockType: '0-back', blockNumber: blockNumber}
+    data: {displayType: 'break', blockType: '0-back', blockNumber: blockNumber},
+    on_finish: function() {
+      hitsCount = 0;
+      missesCount = 0;
+      noResponsesCount = 0;
+    }
   };
 }
 
@@ -398,7 +408,7 @@ function createZeroBackBlock(blockNumber, targetNumber) {
         target: isTarget[i],
         displayType: 'trial',
         blockType: '0-back',
-        blockNumber: blockNumber,
+        blockNumber : blockNumber,
         number: sequence[i],
         targetNumber: targetNumber
       },
